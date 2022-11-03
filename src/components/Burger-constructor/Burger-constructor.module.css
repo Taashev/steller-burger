@@ -1,0 +1,26 @@
+.constructor {
+	width: 100%;
+	max-width: 600px;
+	display: flex;
+	flex-direction: column;
+}
+
+.footer {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	gap: calc(var(--offset-base-size) * 10);
+}
+
+.total {
+	display: flex;
+	align-items: center;
+}
+
+.total__item {
+}
+
+.total svg {
+	width: 33px;
+	height: 33px;
+}
