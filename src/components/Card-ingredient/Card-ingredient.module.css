@@ -1,0 +1,38 @@
+.card {
+	width: 100%;
+	max-width: 272px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.card__title {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.card__img {
+	width: 100%;
+	max-width: 240px;
+	display: block;
+}
+
+.card__wrapper {
+	display: flex;
+	align-items: center;
+	gap: calc(var(--offset-base-size) * 2);
+}
+
+.card__price {
+}
+
+.card__name {
+	margin: 0;
+	text-align: center;
+}

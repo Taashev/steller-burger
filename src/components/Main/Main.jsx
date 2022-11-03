@@ -1,5 +1,5 @@
-import { BurgerIngredients } from '../Burger-ingredients/Burger-ingredients';
 import stylesMain from './Main.module.css';
+import { BurgerIngredients } from '../Burger-ingredients/Burger-ingredients';
 
 export function Main() {
 	return (

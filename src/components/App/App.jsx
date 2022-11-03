@@ -1,4 +1,3 @@
-import React from 'react';
 import stylesApp from './App.module.css';
 import { AppHeader } from '../App-header/App-header';
 import { Main } from '../Main/Main';
