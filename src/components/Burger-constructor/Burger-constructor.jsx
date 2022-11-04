@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { ingredientPropTypes } from '../../utils/template-prop-types';
 import styles from './Burger-constructor.module.css';
 import SimpleBar from 'simplebar-react';
 import { BurgerConstructorElement } from '../Burger-constructor-element/Burger-constructor-element';
@@ -53,4 +55,10 @@ export function BurgerConstructor({ data }) {
 			</div>
 		</section>
 	);
+};
+
+BurgerConstructor.propTypes = {
+	data: PropTypes.arrayOf(
+		ingredientPropTypes
+	).isRequired,
 };

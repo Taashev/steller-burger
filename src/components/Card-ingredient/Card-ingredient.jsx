@@ -1,7 +1,9 @@
+import { ingredientPropTypes } from '../../utils/template-prop-types';
 import stylesCard from './Card-ingredient.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function CardIngredient({ name, image, image_mobile, price, counter }) {
+export function CardIngredient({ data }) {
+	const { name, image, image_mobile, price, counter } = data;
 
 	return (
 		<article className={ stylesCard.card }>
@@ -18,4 +20,8 @@ export function CardIngredient({ name, image, image_mobile, price, counter }) {
 			<p className={ stylesCard.card__name }>{ name }</p>
 		</article>
 	);
+};
+
+CardIngredient.propTypes = {
+	data: ingredientPropTypes,
 };

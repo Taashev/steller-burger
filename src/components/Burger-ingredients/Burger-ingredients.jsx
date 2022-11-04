@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { ingredientPropTypes } from '../../utils/template-prop-types';
 import stylesBurgerIngredients from './Burger-ingredients.module.css';
 import { Tabs } from '../Tabs/Tabs';
 import { ContainerIngredients } from '../Container-ingredients/Container-ingredients';
@@ -16,24 +18,30 @@ export function BurgerIngredients({ data }) {
 					{
 						data
 							.filter((i) => i.type === 'bun')
-							.map((i) => <CardIngredient key={ i._id } { ...i } counter="1" />)
+							.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
 					}
 				</ContainerIngredients>
 				<ContainerIngredients title="Соусы">
 					{
 						data
 							.filter((i) => i.type === 'sauce')
-							.map((i) => <CardIngredient key={ i._id } { ...i } counter="1" />)
+							.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
 					}
 				</ContainerIngredients>
 				<ContainerIngredients title="Начинки">
 					{
 						data
 							.filter((i) => i.type === 'main')
-							.map((i) => <CardIngredient key={ i._id } { ...i } counter="1" />)
+							.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
 					}
 				</ContainerIngredients>
 			</SimpleBar>
 		</section>
 	);
+};
+
+BurgerIngredients.propTypes = {
+	data: PropTypes.arrayOf(
+		ingredientPropTypes
+	).isRequired,
 };
