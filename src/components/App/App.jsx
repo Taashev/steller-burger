@@ -7,7 +7,7 @@ function App() {
   return (
     <div className={`text text_type_main-default ${ stylesApp.app }`}>
 			<AppHeader />
-			<Main { ...data } />
+			<Main data={ data } />
     </div>
   );
 };

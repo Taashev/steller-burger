@@ -5,6 +5,26 @@
 	flex-direction: column;
 }
 
+.constructor__wrapper,
+.constructor__list {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--offset-base-size) * 4);
+}
+
+.constructor__list {
+	margin: 0;
+	padding: 0 calc(var(--offset-base-size) * 4) 0 0;
+	list-style: none;
+}
+
+.constructor__element_top,
+.constructor__element_bottom {
+	width: 100%;
+	max-width: 536px;
+	margin-left: auto;
+}
+
 .footer {
 	display: flex;
 	justify-content: end;

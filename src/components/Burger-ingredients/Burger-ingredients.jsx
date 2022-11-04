@@ -3,9 +3,8 @@ import { Tabs } from '../Tabs/Tabs';
 import { ContainerIngredients } from '../Container-ingredients/Container-ingredients';
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
 import SimpleBar from 'simplebar-react';
-import { data } from '../../utils/data';
 
-export function BurgerIngredients() {
+export function BurgerIngredients({ data }) {
 	return (
 		<section className={`pt-10 ${ stylesBurgerIngredients.burgerIngredients }`}>
 			<h1 className="text text_type_main-large mb-5">
