@@ -15,24 +15,19 @@ export function BurgerIngredients({ data }) {
 			<Tabs />
 			<SimpleBar style={{ height: 'calc(100vh - 350px)' }}>
 				<ContainerIngredients title="Булки">
-					{
-						data
-							.filter((i) => i.type === 'bun')
-							.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
-					}
+					{data
+						.filter((i) => i.type === 'bun')
+						.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)}
 				</ContainerIngredients>
 				<ContainerIngredients title="Соусы">
-					{
-						data
-							.filter((i) => i.type === 'sauce')
-							.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
-					}
+					{data
+						.filter((i) => i.type === 'sauce')
+						.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)}
 				</ContainerIngredients>
 				<ContainerIngredients title="Начинки">
-					{
-						data
-							.filter((i) => i.type === 'main')
-							.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
+					{data
+						.filter((i) => i.type === 'main')
+						.map((i) => <CardIngredient key={ i._id } data={i} counter={1} />)
 					}
 				</ContainerIngredients>
 			</SimpleBar>
@@ -42,6 +37,6 @@ export function BurgerIngredients({ data }) {
 
 BurgerIngredients.propTypes = {
 	data: PropTypes.arrayOf(
-		ingredientPropTypes
+		ingredientPropTypes.isRequired
 	).isRequired,
 };

@@ -17,6 +17,6 @@ export function Main({ data }) {
 
 Main.propTypes = {
 	data: PropTypes.arrayOf(
-		ingredientPropTypes
+		ingredientPropTypes.isRequired
 	).isRequired,
 };
