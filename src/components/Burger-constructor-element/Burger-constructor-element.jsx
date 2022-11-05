@@ -1,15 +1,21 @@
 import styles from './Burger-constructor-element.module.css';
+import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function BurgerConstructorElement({ text, price, image }) {
+export function BurgerConstructorElement({ ingredient }) {
+	const {name, price, image} = ingredient;
+	
 	return (
 		<li className={`${styles.constructor__element}`}>
 			<DragIcon type="primary" />
 			<ConstructorElement
-				text={text}
+				text={name}
         price={price}
-        thumbnail={image}
-			/>
+        thumbnail={image} />
 		</li>
 	);
+};
+
+BurgerConstructorElement.propTypes = {
+	ingredient: ingredientPropTypes.isRequired,
 };

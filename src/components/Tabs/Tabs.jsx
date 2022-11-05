@@ -3,17 +3,24 @@ import stylesTabs from './Tabs.module.css';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 
 export function Tabs() {
-	const [current, setCurrent] = useState('one');
+	const [current, setCurrent] = useState('bun');
+
+	const setTab = (tab) => {
+		setCurrent(tab);
+		const element = document.querySelector(`#${tab}`);
+
+		if (element) element.scrollIntoView({ behavior: 'smooth' });
+	};
 
 	return (
-		<div className={`mb-10 ${ stylesTabs.tabs }`}>
-			<Tab value="one" active={current === 'one'} onClick={setCurrent}>
+		<div className={`mb-10 ${stylesTabs.tabs}`}>
+			<Tab value="bun" active={current === 'bun'} onClick={setTab}>
 				Булки
 			</Tab>
-			<Tab value="two" active={current === 'two'} onClick={setCurrent}>
+			<Tab value="sauce" active={current === 'sauce'} onClick={setTab}>
 				Соусы
 			</Tab>
-			<Tab value="three" active={current === 'three'} onClick={setCurrent}>
+			<Tab value="main" active={current === 'main'} onClick={setTab}>
 				Начинки
 			</Tab>
 		</div>
