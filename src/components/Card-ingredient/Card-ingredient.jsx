@@ -2,11 +2,16 @@ import stylesCard from './Card-ingredient.module.css';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function CardIngredient({ data }) {
+export function CardIngredient({ data, openIngredientDetails, setIngredient }) {
 	const { name, image, image_mobile, price, counter } = data;
 
+	function handleIngredient() {
+		setIngredient(data);
+		openIngredientDetails();
+	};
+
 	return (
-		<article className={stylesCard.card}>
+		<article className={stylesCard.card} onClick={handleIngredient}>
 			<h2 className={stylesCard.card__title}>{name}</h2>
 			{ counter && <Counter count={counter} size="default" /> }
 			<picture>

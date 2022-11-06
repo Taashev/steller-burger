@@ -6,7 +6,7 @@ import { Tabs } from '../Tabs/Tabs';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { IngredientCategory } from '../Ingredient-category/Ingredient-category';
 
-export function BurgerIngredients({ data }) {
+export function BurgerIngredients({ data, openIngredientDetails, setIngredient }) {
 	const bun = useMemo(() => data.filter((ingredient) => ingredient.type === 'bun'), [data]);
 	const main = useMemo(() => data.filter((ingredient) => ingredient.type === 'main'), [data]);
 	const sauce = useMemo(() => data.filter((ingredient) => ingredient.type === 'sauce'), [data]);
@@ -18,9 +18,24 @@ export function BurgerIngredients({ data }) {
 			</h1>
 			<Tabs />
 			<SimpleBar style={{height: 'calc(100vh - 350px)'}}>
-				<IngredientCategory id="bun" title="Булки" ingredients={bun} />
-				<IngredientCategory id="sauce" title="Соусы" ingredients={sauce} />
-				<IngredientCategory id="main" title="Начинки" ingredients={main} />
+				<IngredientCategory 
+					id="bun"
+					title="Булки"
+					ingredients={bun}
+					openIngredientDetails={openIngredientDetails}
+					setIngredient={setIngredient} />
+				<IngredientCategory 
+					id="sauce"
+					title="Соусы"
+					ingredients={sauce}
+					openIngredientDetails={openIngredientDetails}
+					setIngredient={setIngredient} />
+				<IngredientCategory 
+					id="main"
+					title="Начинки"
+					ingredients={main}
+					openIngredientDetails={openIngredientDetails}
+					setIngredient={setIngredient} />
 			</SimpleBar>
 		</section>
 	);
