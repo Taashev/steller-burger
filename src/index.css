@@ -1,0 +1,16 @@
+/* simple bar */
+.simplebar-track {
+	background: var(--background-element);
+}
+
+.simplebar-track.simplebar-vertical {
+	width: 8px!important;
+}
+
+.simplebar-scrollbar {
+	background: var(--text-inactive-color);
+}
+
+.simplebar-scrollbar::before {
+	display: none;
+}

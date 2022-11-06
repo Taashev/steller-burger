@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import '@ya.praktikum/react-developer-burger-ui-components';
+import 'simplebar-react/dist/simplebar.min.css';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
