@@ -1,12 +1,13 @@
+import { createPortal } from 'react-dom';
 import stylesModalOverlay from './Modal-overlay.module.css';
-import { Modal } from '../Modal/Modal';
 
-export function ModalOverlay() {
-	return (
+export function ModalOverlay({ children }) {
+	const modalContainer = document.querySelector('#modal');
+
+	return createPortal(
 		<div className={`${stylesModalOverlay.overlay}`}>
-			<Modal>
-				
-			</Modal>
-		</div>
+			{children}
+		</div>,
+		modalContainer
 	);
 };

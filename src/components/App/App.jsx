@@ -3,11 +3,15 @@ import stylesApp from './App.module.css';
 import { getIngredients } from '../../utils/Api';
 import { AppHeader } from '../App-header/App-header';
 import { Main } from '../Main/Main';
-import { ModalOverlay } from '../Modal-overlay/Modal-overlay';
+
+import { IngredientDetails } from '../IngredientDetails/Ingredient-details';
+import { OrderDetails } from '../OrderDetails/Order-details';
 
 function App() {
 	const [ingredients, setIngredients] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isOrderDetailsModal, setIsOrderDetailsModal] = useState(false);
+	const [isIngredientsDetailsModal, setIsIngredientsDetailsModal] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -28,9 +32,10 @@ function App() {
 						<>
 							<AppHeader />
 							<Main data={ingredients} />
-							<ModalOverlay />
 						</>
 			}
+			{isIngredientsDetailsModal && <IngredientDetails />}
+			{isOrderDetailsModal && <OrderDetails />}
     </div>
   );
 };

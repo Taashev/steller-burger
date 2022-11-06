@@ -9,10 +9,13 @@ export function BurgerConstructor({ data }) {
 	const bun = data.find(
 		(ingredient) => ingredient.type === 'bun'
 	);
-
 	const ingredients = data.filter(
 		(ingredient) => ingredient.type !== 'bun'
 	);
+
+	function handleOrder() {
+
+	};
 
 	return (
 		<section className={`pt-25 pl-4 ${styles.constructor}`}>
@@ -47,7 +50,7 @@ export function BurgerConstructor({ data }) {
 					<span className={`mr-2 ${styles.total__item}`}>0</span>
 					<CurrencyIcon type="primary" />
 				</div>
-				<Button type="primary" size="large" htmlType="button">
+				<Button type="primary" size="large" htmlType="button" onClick={handleOrder}>
 					Оформить заказ
 				</Button>
 			</div>
