@@ -37,10 +37,12 @@
 	align-items: center;
 }
 
-.total__item {
-}
-
 .total svg {
 	width: 33px;
 	height: 33px;
+}
+
+.simplebar {
+	height: calc(100vh - 570px);
+	max-height: 660px;
 }

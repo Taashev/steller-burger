@@ -34,7 +34,7 @@ export function BurgerConstructor({
 							price={bun.price}
 							thumbnail={bun.image} />
 					</div>
-					<SimpleBar style={{height: 'calc(100vh - 570px)', maxHeight: '660px'}}>
+					<SimpleBar className={styles.simplebar}>
 						<ul className={`${styles.constructor__list}`}>
 							{ingredients.map(
 								(ingredient) =>

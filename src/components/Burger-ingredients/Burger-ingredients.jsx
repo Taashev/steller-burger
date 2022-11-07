@@ -25,7 +25,7 @@ export function BurgerIngredients({
 					Соберите бургер
 				</h1>
 				<Tabs />
-				<SimpleBar style={{height: 'calc(100vh - 350px)'}}>
+				<SimpleBar className={`${stylesBurgerIngredients.simplebar}`}>
 					<IngredientCategory 
 						id="bun"
 						title="Булки"
