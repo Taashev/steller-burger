@@ -15,5 +15,5 @@ export function OrderDetails({ orderId }) {
 };
 
 OrderDetails.propTypes = {
-	orderId: PropTypes.number.isRequired
+	orderId: PropTypes.number.isRequired,
 };

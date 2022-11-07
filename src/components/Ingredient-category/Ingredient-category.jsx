@@ -28,4 +28,6 @@ IngredientCategory.propTypes = {
 	ingredients: PropTypes.arrayOf(
 		ingredientPropTypes.isRequired
 	).isRequired,
+	id: PropTypes.string.isRequired,
+	setIngredient: PropTypes.func,
 };

@@ -16,12 +16,12 @@ export function Main({
 	return (
 		<main className={stylesMain.main}>
 			<div className={stylesMain.container}>
-				<BurgerIngredients 
+				<BurgerIngredients
 					data={data}
 					ingredient={ingredient}
 					setIngredient={setIngredient}
 					closeIngredientModal={closeIngredientModal} />
-				<BurgerConstructor 
+				<BurgerConstructor
 					data={data}
 					openOrderDetails={openOrderDetails}
 					isOrderDetailsModal={isOrderDetailsModal}
@@ -34,5 +34,11 @@ export function Main({
 Main.propTypes = {
 	data: PropTypes.arrayOf(
 		ingredientPropTypes.isRequired
-	).isRequired
+	).isRequired,
+	openOrderDetails: PropTypes.func,
+	ingredient: PropTypes.object,
+	setIngredient: PropTypes.func,
+	closeIngredientModal: PropTypes.func,
+	isOrderDetailsModal: PropTypes.bool,
+	closeOrderModal: PropTypes.func,
 };

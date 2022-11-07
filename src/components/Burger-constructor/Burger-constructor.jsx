@@ -63,7 +63,9 @@ export function BurgerConstructor({
 			</section>
 			{
 				isOrderDetailsModal &&
-					<Modal component={OrderDetails} onClose={closeOrderModal} orderId={orderId} />
+					<Modal onClose={closeOrderModal}>
+						<OrderDetails orderId={orderId} />
+					</Modal>
 			}
 		</>
 	);
@@ -73,4 +75,7 @@ BurgerConstructor.propTypes = {
 	data: PropTypes.arrayOf(
 		ingredientPropTypes.isRequired
 	).isRequired,
+	openOrderDetails: PropTypes.func,
+	isOrderDetailsModal: PropTypes.bool,
+	closeOrderModal: PropTypes.func,
 };

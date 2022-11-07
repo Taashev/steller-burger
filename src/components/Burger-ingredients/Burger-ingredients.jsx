@@ -45,11 +45,9 @@ export function BurgerIngredients({
 			</section>
 			{
 				ingredient &&
-					<Modal 
-						component={IngredientDetails}
-						onClose={closeIngredientModal}
-						title={"Детали ингредиента"}
-						ingredient={ingredient} />
+					<Modal  onClose={closeIngredientModal} title={"Детали ингредиента"}>
+						<IngredientDetails ingredient={ingredient} />
+					</Modal>
 			}
 		</>
 	);
@@ -59,4 +57,7 @@ BurgerIngredients.propTypes = {
 	data: PropTypes.arrayOf(
 		ingredientPropTypes.isRequired
 	).isRequired,
+	ingredient: PropTypes.object,
+	setIngredient: PropTypes.func,
+	closeIngredientModal: PropTypes.func,
 };

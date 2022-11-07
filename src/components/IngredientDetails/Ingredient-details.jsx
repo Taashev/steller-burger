@@ -43,4 +43,4 @@ export function IngredientDetails({ ingredient }) {
 
 IngredientDetails.propTypes = {
   ingredient: ingredientPropTypes.isRequired,
-}.isRequired;
+};

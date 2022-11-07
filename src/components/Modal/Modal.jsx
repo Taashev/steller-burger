@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 import stylesModal from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../Modal-overlay/Modal-overlay';
 
-export function Modal({ component: Component, title='', children, onClose, ...props }) {
+export function Modal({ children, title='', onClose }) {
 	const modalContainer = document.querySelector('#modal');
 
 	function closeEscModale(e) {
@@ -28,10 +29,16 @@ export function Modal({ component: Component, title='', children, onClose, ...pr
 						<CloseIcon type="primary" />
 					</button>
 				</header>
-				{<Component {...props} />}
+				{children}
 			</div>
 			<ModalOverlay onClose={onClose} />
 		</>,
 		modalContainer
 	);
+};
+
+Modal.propTypes = {
+	children: PropTypes.element.isRequired,
+	title: PropTypes.string,
+	onClose: PropTypes.func,
 };
