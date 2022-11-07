@@ -2,12 +2,11 @@ import stylesCard from './Card-ingredient.module.css';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function CardIngredient({ data, openIngredientDetails, setIngredient }) {
+export function CardIngredient({ data, setIngredient }) {
 	const { name, image, image_mobile, price, counter } = data;
 
 	function handleIngredient() {
 		setIngredient(data);
-		openIngredientDetails();
 	};
 
 	return (

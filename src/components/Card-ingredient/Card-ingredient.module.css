@@ -30,9 +30,6 @@
 	gap: calc(var(--offset-base-size) * 2);
 }
 
-.card__price {
-}
-
 .card__name {
 	margin: 0;
 	text-align: center;

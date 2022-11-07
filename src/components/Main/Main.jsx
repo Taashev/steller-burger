@@ -4,17 +4,28 @@ import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { BurgerIngredients } from '../Burger-ingredients/Burger-ingredients';
 import { BurgerConstructor } from '../Burger-constructor/Burger-constructor';
 
-export function Main({ data, openOrderDetails, openIngredientDetails, setIngredient }) {
+export function Main({
+	data,
+	openOrderDetails,
+	ingredient,
+	setIngredient,
+	closeIngredientModal,
+	isOrderDetailsModal,
+	closeOrderModal,
+}) {
 	return (
 		<main className={stylesMain.main}>
 			<div className={stylesMain.container}>
 				<BurgerIngredients 
 					data={data}
-					openIngredientDetails={openIngredientDetails}
-					setIngredient={setIngredient} />
+					ingredient={ingredient}
+					setIngredient={setIngredient}
+					closeIngredientModal={closeIngredientModal} />
 				<BurgerConstructor 
 					data={data}
-					openOrderDetails={openOrderDetails} />
+					openOrderDetails={openOrderDetails}
+					isOrderDetailsModal={isOrderDetailsModal}
+					closeOrderModal={closeOrderModal} />
 			</div>
 		</main>
 	);

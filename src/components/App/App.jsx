@@ -5,37 +5,22 @@ import { getIngredients } from '../../utils/Api';
 import { AppHeader } from '../App-header/App-header';
 import { Main } from '../Main/Main';
 
-import { Modal } from '../Modal/Modal';
-import { IngredientDetails } from '../IngredientDetails/Ingredient-details';
-import { OrderDetails } from '../OrderDetails/Order-details';
-
 function App() {
 	const [ingredients, setIngredients] = useState([]);
-	const [ingredient, setIngredient] = useState({});
+	const [ingredient, setIngredient] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isOrderDetailsModal, setIsOrderDetailsModal] = useState(false);
-	const [isIngredientsDetailsModal, setIsIngredientsDetailsModal] = useState(false);
 
 	function openOrderDetails() {
 		setIsOrderDetailsModal(true);
 	};
 
-	function openIngredientDetails() {
-		setIsIngredientsDetailsModal(true);
-	};
-
-	function closeModal() {
+	function closeOrderModal() {
 		setIsOrderDetailsModal(false);
-		setIsIngredientsDetailsModal(false);
-		setIngredient({});
 	};
-
-	function closeOverlayModal(e) {
-		if (e.target === e.currentTarget) closeModal();
-	};
-
-	function closeEscModale(e) {
-		if (e.key === 'Escape') closeModal();
+	
+	function closeIngredientModal() {
+		setIngredient(null);
 	}
 
 	useEffect(() => {
@@ -56,21 +41,12 @@ function App() {
 							<AppHeader />
 							<Main
 								data={ingredients}
+								ingredient={ingredient}
 								openOrderDetails={openOrderDetails}
-								openIngredientDetails={openIngredientDetails}
-								setIngredient={setIngredient} />
-							{
-								isIngredientsDetailsModal &&
-								<Modal onClose={closeModal} onCloseOverlay={closeOverlayModal} onCloseEsc={closeEscModale}>
-									<IngredientDetails data={ingredient} />
-								</Modal>
-							}
-							{
-								isOrderDetailsModal &&
-								<Modal onClose={closeModal} onCloseOverlay={closeOverlayModal}>
-									<OrderDetails />
-								</Modal>
-							}
+								closeIngredientModal={closeIngredientModal}
+								setIngredient={setIngredient}
+								isOrderDetailsModal={isOrderDetailsModal}
+								closeOrderModal={closeOrderModal} />
 						</>
 			}
     </div>

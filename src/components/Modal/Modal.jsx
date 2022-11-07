@@ -1,10 +1,24 @@
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import stylesModal from './Modal.module.css';
-import { ModalOverlay } from '../Modal-overlay/Modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ModalOverlay } from '../Modal-overlay/Modal-overlay';
 
-export function Modal({ title='', children, onClose, onCloseOverlay, onCloseEsc }) {
-	return (
-		<ModalOverlay onCloseOverlay={onCloseOverlay} onCloseEsc={onCloseEsc}>
+export function Modal({ component: Component, title='', children, onClose, ...props }) {
+	const modalContainer = document.querySelector('#modal');
+
+	function closeEscModale(e) {
+		if (e.key === 'Escape') onClose();
+	};
+
+	useEffect(() => {
+		document.addEventListener('keydown', closeEscModale);
+
+		return () => document.removeEventListener('keydown', closeEscModale);
+	}, []);
+
+	return createPortal(
+		<>
 			<div className={`pt-10 pr-10 pb-15 pl-10 text text_type_main-default ${stylesModal.modal}`}>
 				<header className={`${stylesModal.header}`}>
 					<h2 className={`text_type_main-large ${stylesModal.title}`}>
@@ -14,8 +28,10 @@ export function Modal({ title='', children, onClose, onCloseOverlay, onCloseEsc 
 						<CloseIcon type="primary" />
 					</button>
 				</header>
-				{children}
+				{<Component {...props} />}
 			</div>
-		</ModalOverlay>
+			<ModalOverlay onClose={onClose} />
+		</>,
+		modalContainer
 	);
 };
