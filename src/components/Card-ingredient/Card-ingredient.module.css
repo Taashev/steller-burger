@@ -5,6 +5,7 @@
 	flex-direction: column;
 	align-items: center;
 	position: relative;
+	cursor: pointer;
 }
 
 .card__title {
@@ -27,9 +28,6 @@
 	display: flex;
 	align-items: center;
 	gap: calc(var(--offset-base-size) * 2);
-}
-
-.card__price {
 }
 
 .card__name {

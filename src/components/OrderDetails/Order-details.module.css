@@ -1,0 +1,15 @@
+.order-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box
+}
+
+.order-details__img {
+	width: 107px;
+	height: 102px;
+}
+
+.order-details__text {
+	color: var(--text-inactive-color);
+}
