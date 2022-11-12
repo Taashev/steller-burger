@@ -1,7 +1,13 @@
+import { memo } from 'react';
 import stylesHeader from './App-header.module.css';
-import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+	BurgerIcon,
+	ListIcon,
+	Logo,
+	ProfileIcon
+} from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function AppHeader() {
+export const AppHeader = memo(_ => {
 	return (
 		<header className={`p-4 ${ stylesHeader.header }`}>
 			<div className={ stylesHeader.container }>
@@ -33,4 +39,4 @@ export function AppHeader() {
 			</div>
 		</header>
 	);
-};
+});
