@@ -32,7 +32,7 @@
 	gap: calc(var(--offset-base-size) * 10);
 }
 
-.total {
+.total-price {
 	display: flex;
 	align-items: center;
 }
@@ -43,6 +43,6 @@
 }
 
 .simplebar {
-	height: calc(100vh - 570px);
-	max-height: 660px;
+	height: min-content;
+	max-height: calc(100vh - 570px);
 }

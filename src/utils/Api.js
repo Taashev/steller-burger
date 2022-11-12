@@ -13,3 +13,16 @@ export function getIngredients() {
 	return fetch(`${BASE_URL}/api/ingredients`)
 		.then(checkResponse)
 };
+
+export function setOrder(order) {
+	return fetch(`${BASE_URL}/api/orders`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			"ingredients": order
+		}),
+	})
+		.then(checkResponse)
+};

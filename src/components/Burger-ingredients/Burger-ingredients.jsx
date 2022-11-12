@@ -1,22 +1,24 @@
-import { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import SimpleBar from 'simplebar-react';
+import { useState, useContext, useMemo } from 'react';
 import stylesBurgerIngredients from './Burger-ingredients.module.css';
+import SimpleBar from 'simplebar-react';
+
 import { Tabs } from '../Tabs/Tabs';
-import { ingredientPropTypes } from '../../utils/template-prop-types';
-import { IngredientCategory } from '../Ingredient-category/Ingredient-category';
 import { Modal } from '../Modal/Modal';
 import { IngredientDetails } from '../IngredientDetails/Ingredient-details';
+import { IngredientCategory } from '../Ingredient-category/Ingredient-category';
+import { IngredientsContext } from '../../contexts/appContext';
 
-export function BurgerIngredients({
-	data,
-	ingredient,
-	setIngredient,
-	closeIngredientModal,
-}) {
-	const bun = useMemo(() => data.filter((ingredient) => ingredient.type === 'bun'), [data]);
-	const main = useMemo(() => data.filter((ingredient) => ingredient.type === 'main'), [data]);
-	const sauce = useMemo(() => data.filter((ingredient) => ingredient.type === 'sauce'), [data]);
+export function BurgerIngredients() {
+	const { ingredients } = useContext(IngredientsContext);
+
+	const [ ingredient, setIngredient ] = useState(null);
+
+	const bun = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'bun'), [ingredients]);
+	const main = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'main'), [ingredients]);
+	const sauce = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'sauce'), [ingredients]);
+
+	// close ingredient modal
+	function closeIngredientModal() { setIngredient(null) };
 
 	return (
 		<>
@@ -51,13 +53,4 @@ export function BurgerIngredients({
 			}
 		</>
 	);
-};
-
-BurgerIngredients.propTypes = {
-	data: PropTypes.arrayOf(
-		ingredientPropTypes.isRequired
-	).isRequired,
-	ingredient: PropTypes.object,
-	setIngredient: PropTypes.func,
-	closeIngredientModal: PropTypes.func,
 };

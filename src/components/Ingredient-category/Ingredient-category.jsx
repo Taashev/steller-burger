@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
-import { ingredientPropTypes } from '../../utils/template-prop-types';
 import stylesIngredients from './Ingredient-category.module.css';
+import PropTypes from 'prop-types';
+
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
+import { ingredientPropTypes } from '../../utils/template-prop-types';
 
 export function IngredientCategory({ title, ingredients, id=null, setIngredient }) {
 	return (
@@ -14,8 +15,8 @@ export function IngredientCategory({ title, ingredients, id=null, setIngredient 
 					(ingredient) => 
 						<CardIngredient
 							key={ingredient._id}
-							data={ingredient}
-							counter={1}
+							ingredient={ingredient}
+							counter={null}
 							setIngredient={setIngredient} />
 				)}
 			</div>
