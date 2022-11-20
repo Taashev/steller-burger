@@ -103,7 +103,7 @@ export function constructorReducer(
 				...state,
 				constructorIngredients: [
 					...state.constructorIngredients.filter(
-						(i) => i._id !== action.id
+						({id}) => id !== action.id
 					),
 				],
 			};

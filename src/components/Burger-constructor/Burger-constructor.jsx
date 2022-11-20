@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { useDrop } from 'react-dnd/dist/hooks';
+import { v1 } from 'uuid';
 import SimpleBar from 'simplebar-react';
 import styles from './Burger-constructor.module.css';
 
@@ -11,13 +13,33 @@ import { BurgerConstructorElement }
 	from '../Burger-constructor-element/Burger-constructor-element';
 
 export function BurgerConstructor() {
+	// dnd drop
+	const [, dropRef] = useDrop({
+		accept: 'ingredient',
+		drop(ingredient) {
+			ingredient.type === 'bun'
+				? dispatch({
+						type: 'ADD_CONSTRUCTOR_BUN',
+						bun: ingredient,
+					})
+				: dispatch({
+						type: 'ADD_CONSTRUCTOR_INGREDIENT',
+						ingredient: {
+							ingredient,
+							id: v1(),
+						},
+					});
+		},
+	});
+
+	// dispatch
 	const dispatch = useDispatch();
 
+	// store
 	const {
 		constructorBun,
-		constructorIngredients
+		constructorIngredients,
 	} = useSelector((store) => store.constructorReducer);
-
 	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
 	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
 
@@ -34,7 +56,7 @@ export function BurgerConstructor() {
 
 		if (constructorBun) {
 			ingredients.push(constructorBun._id);
-			constructorIngredients.forEach((i) => ingredients.push(i._id));
+			constructorIngredients.forEach(({ingredient}) => ingredients.push(ingredient._id));
 	
 			dispatch(setOrder(ingredients));
 		} else {
@@ -51,15 +73,15 @@ export function BurgerConstructor() {
 
 	// handle ingredients component
 	const handleIngredientsComponent = constructorIngredients.length > 0
-		? constructorIngredients.map((ingredient) =>
-				<BurgerConstructorElement key={ingredient._id} ingredient={ingredient} />
+		? constructorIngredients.map(({id, ingredient}) =>
+				<BurgerConstructorElement key={id} ingredient={ingredient} id={id} />
 			)
 		: 'Выберите инредиенты';
 
 	return (
 		<>
 			<section className={`pt-25 pl-4 ${styles.constructor}`}>
-				<div className={`${styles.constructor__wrapper}`}>
+				<div className={`${styles.constructor__wrapper}`} ref={dropRef}>
 					<div className={`pr-4 ${styles.constructor__element_top}`}>
 						{ handleBunComponent('top') }
 					</div>

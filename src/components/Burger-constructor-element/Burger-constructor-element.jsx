@@ -8,9 +8,9 @@ import { REMOVE_CONSTRUCTOR_INGREDIENT } from '../../services/actions/constructo
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function BurgerConstructorElement({ ingredient, type }) {
+export function BurgerConstructorElement({ ingredient, type, id }) {
 	const dispatch = useDispatch();
-	const { name, price, image, _id } = ingredient;
+	const { name, price, image } = ingredient;
 
 	// component did update price
 	useEffect(() => {
@@ -23,7 +23,7 @@ export function BurgerConstructorElement({ ingredient, type }) {
 	function removeIngredient() {
 		dispatch({
 			type: REMOVE_CONSTRUCTOR_INGREDIENT,
-			id: _id,
+			id: id,
 		});
 	};
 

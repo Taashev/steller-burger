@@ -15,8 +15,7 @@ export function IngredientCategory({ title, ingredients, id, refCatefory }) {
 					(ingredient) => 
 						<CardIngredient
 							key={ingredient._id}
-							ingredient={ingredient}
-							counter={null} />
+							ingredient={ingredient} />
 				)}
 			</div>
 		</div>
