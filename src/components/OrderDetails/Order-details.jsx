@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux';
 import styles from './Order-details.module.css';
 import img from '../../images/svg/graphics.svg';
 
-export function OrderDetails({ orderId }) {
+export function OrderDetails() {
+	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
+
 	return (
 		<div className={`pt-4 pb-15 ${styles['order-details']}`}>
 			<div className={`text_type_digits-large mb-8`}>{ orderId }</div>
@@ -12,8 +14,4 @@ export function OrderDetails({ orderId }) {
 			<span className={`mt-2 ${styles['order-details__text']}`}>Дождитесь готовности на орбитальной станции</span>
 		</div>
 	);
-};
-
-OrderDetails.propTypes = {
-	orderId: PropTypes.number.isRequired,
 };

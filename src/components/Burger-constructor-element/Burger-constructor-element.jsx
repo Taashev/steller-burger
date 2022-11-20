@@ -1,24 +1,31 @@
-import { useContext, useEffect } from 'react';
-import styles from './Burger-constructor-element.module.css';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import styles from './Burger-constructor-element.module.css';
 
-import { TotalPriceContext } from '../../contexts/appContext';
+import { SET, REMOVE } from '../../services/actions/totalPrice';
+import { REMOVE_CONSTRUCTOR_INGREDIENT } from '../../services/actions/constructorIngredients';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function BurgerConstructorElement({ ingredient=null, type }) {
-	const { totalPriceDispatch } = useContext(TotalPriceContext);
+export function BurgerConstructorElement({ ingredient, type }) {
+	const dispatch = useDispatch();
+	const { name, price, image, _id } = ingredient;
 
-	const { name, price, image } = ingredient;
-
-	// component did mount
+	// component did update price
 	useEffect(() => {
-		totalPriceDispatch({ type: 'set', payload: price });
+		dispatch({ type: SET, payload: price });
 
-		return () => totalPriceDispatch({ type: 'remove', payload: price });
-	// TODO: dependencies array.length === 0
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		return () => dispatch({ type: REMOVE, payload: price });
+	}, [dispatch, price]);
+
+	// remove ingredient
+	function removeIngredient() {
+		dispatch({
+			type: REMOVE_CONSTRUCTOR_INGREDIENT,
+			id: _id,
+		});
+	};
 
 	return (
 		<>
@@ -37,7 +44,8 @@ export function BurgerConstructorElement({ ingredient=null, type }) {
 							<ConstructorElement
 								text={name}
 								price={price}
-								thumbnail={image} />
+								thumbnail={image}
+								handleClose={removeIngredient} />
 						</li>
 				}
 		</>

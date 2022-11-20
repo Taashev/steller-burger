@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 
-export function IngredientCategory({ title, ingredients, id=null, setIngredient }) {
+export function IngredientCategory({ title, ingredients, id, refCatefory }) {
 	return (
-		<div className={`${stylesIngredients.ingredients}`} id={id}>
+		<div className={`${stylesIngredients.ingredients}`} id={id} ref={refCatefory}>
 			<h2 className={`text_type_main-medium mb-6 ${stylesIngredients.title}`}>
 				{title}
 			</h2>
@@ -16,8 +16,7 @@ export function IngredientCategory({ title, ingredients, id=null, setIngredient 
 						<CardIngredient
 							key={ingredient._id}
 							ingredient={ingredient}
-							counter={null}
-							setIngredient={setIngredient} />
+							counter={null} />
 				)}
 			</div>
 		</div>
@@ -29,6 +28,5 @@ IngredientCategory.propTypes = {
 	ingredients: PropTypes.arrayOf(
 		ingredientPropTypes.isRequired
 	).isRequired,
-	id: PropTypes.string.isRequired,
-	setIngredient: PropTypes.func,
+	id: PropTypes.string,
 };

@@ -16,6 +16,8 @@ export function Modal({ children, title='', onClose }) {
 		document.addEventListener('keydown', closeEscModale);
 
 		return () => document.removeEventListener('keydown', closeEscModale);
+	// TODO: dependencies array.length === 0
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return createPortal(
@@ -40,5 +42,4 @@ export function Modal({ children, title='', onClose }) {
 Modal.propTypes = {
 	children: PropTypes.element.isRequired,
 	title: PropTypes.string,
-	onClose: PropTypes.func,
 };

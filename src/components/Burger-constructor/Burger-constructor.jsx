@@ -1,76 +1,81 @@
-import { useState, useContext } from 'react';
-import styles from './Burger-constructor.module.css';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import SimpleBar from 'simplebar-react';
+import styles from './Burger-constructor.module.css';
 
+import { setOrder, CLEAR_ORDER_DETAILS } from '../../services/actions/orderDetails';
 import { Modal } from '../Modal/Modal';
-import { setOrder } from '../../utils/Api';
 import { OrderDetails } from '../OrderDetails/Order-details';
-import { BurgerConstructorContext, TotalPriceContext } from '../../contexts/appContext';
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { BurgerConstructorElement } from '../Burger-constructor-element/Burger-constructor-element';
+import { CurrencyIcon, Button } 
+	from '@ya.praktikum/react-developer-burger-ui-components';
+import { BurgerConstructorElement } 
+	from '../Burger-constructor-element/Burger-constructor-element';
 
 export function BurgerConstructor() {
-	const { burgerConstructor } = useContext(BurgerConstructorContext);
-	const { totalPriceState } = useContext(TotalPriceContext);
+	const dispatch = useDispatch();
 
-	const [ orderId, setOrderId ] = useState(null);
-	const [ isOrderDetailsModal, setIsOrderDetailsModal ] = useState(false);
+	const {
+		constructorBun,
+		constructorIngredients
+	} = useSelector((store) => store.constructorReducer);
 
-	const bun = burgerConstructor?.find((ingredient) => ingredient.type === 'bun');
-	const ingredientElements = burgerConstructor?.filter((ingredient) => ingredient.type !== 'bun');
+	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
+	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
 
 	// close order modal
 	function closeOrderModal() {
-		setIsOrderDetailsModal(false);
+		dispatch({
+			type: CLEAR_ORDER_DETAILS,
+		});
 	};
 	
 	// handle order
 	function handleOrder() {
 		const ingredients = [];
-		ingredients.push(bun._id);
-		ingredientElements.forEach((i) => ingredients.push(i._id));
-		
-		setOrder(ingredients)
-			.then((res) => {
-				setOrderId(res.order.number);
-				setIsOrderDetailsModal(true);
-			})
-			.catch((err) => console.log(err))
+
+		if (constructorBun) {
+			ingredients.push(constructorBun._id);
+			constructorIngredients.forEach((i) => ingredients.push(i._id));
+	
+			dispatch(setOrder(ingredients));
+		} else {
+			alert('Выберите булочку')
+		}
 	};
+
+	// handle bun component
+	function handleBunComponent(position) {
+		return constructorBun
+			? <BurgerConstructorElement type={position} ingredient={constructorBun} />
+			: 'Выберите булочку';
+	};
+
+	// handle ingredients component
+	const handleIngredientsComponent = constructorIngredients.length > 0
+		? constructorIngredients.map((ingredient) =>
+				<BurgerConstructorElement key={ingredient._id} ingredient={ingredient} />
+			)
+		: 'Выберите инредиенты';
 
 	return (
 		<>
 			<section className={`pt-25 pl-4 ${styles.constructor}`}>
 				<div className={`${styles.constructor__wrapper}`}>
 					<div className={`pr-4 ${styles.constructor__element_top}`}>
-						{
-							burgerConstructor &&
-								<BurgerConstructorElement type="top" ingredient={bun} />
-						}
+						{ handleBunComponent('top') }
 					</div>
 					<SimpleBar className={styles.simplebar}>
 						<ul className={`${styles.constructor__list}`}>
-							{
-								burgerConstructor &&
-									//!TODO: метод slice временно для тестирования отрисовки компонентов
-									ingredientElements.slice(0, 1).map(
-										(ingredient) =>
-											<BurgerConstructorElement key={ingredient._id} ingredient={ingredient} />
-									)
-							}
+							{ handleIngredientsComponent }
 						</ul>
 					</SimpleBar>
 					<div className={`pr-4 ${styles.constructor__element_bottom}`}>
-						{
-							burgerConstructor &&
-								<BurgerConstructorElement type="bottom" ingredient={bun} />
-						}
+						{ handleBunComponent('bottom') }
 					</div>
 				</div>
 				<div className={`mt-10 pr-4 ${styles.footer}`}>
 					<div className={`text_type_digits-medium ${styles['total-price']}`}>
 						<span className={`mr-2`}>
-							{ totalPriceState.price }
+							{ totalPrice }
 						</span>
 						<CurrencyIcon type="primary" />
 					</div>
@@ -80,9 +85,9 @@ export function BurgerConstructor() {
 				</div>
 			</section>
 			{
-				isOrderDetailsModal &&
+				orderId &&
 					<Modal onClose={closeOrderModal}>
-						<OrderDetails orderId={orderId} />
+						<OrderDetails />
 					</Modal>
 			}
 		</>

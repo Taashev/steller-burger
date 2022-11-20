@@ -1,13 +1,31 @@
 import stylesCard from './Card-ingredient.module.css';
+import { useDispatch } from 'react-redux';
+import { GET_INGREDIENT } from '../../services/actions/ingredientDetails';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export function CardIngredient({ ingredient, setIngredient, counter }) {
+export function CardIngredient({ ingredient, counter }) {
 	const { name, image, image_mobile, price } = ingredient;
+	
+	const dispatch = useDispatch();
 
 	// handle ingredient
 	function handleIngredient() {
-		setIngredient(ingredient);
+		// dispatch({
+		// 	type: GET_INGREDIENT,
+		// 	ingredientDetails: ingredient,
+		// });
+
+		//!
+		ingredient.type === 'bun'
+			? dispatch({
+					type: 'ADD_CONSTRUCTOR_BUN',
+					bun: ingredient,
+				})
+			: dispatch({
+					type: 'ADD_CONSTRUCTOR_INGREDIENT',
+					ingredient: ingredient,
+				})
 	};
 
 	return (
