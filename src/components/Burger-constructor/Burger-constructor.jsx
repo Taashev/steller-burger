@@ -1,9 +1,12 @@
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useDrop } from 'react-dnd/dist/hooks';
 import { v1 } from 'uuid';
 import SimpleBar from 'simplebar-react';
 import styles from './Burger-constructor.module.css';
 
+import { ADD_CONSTRUCTOR_BUN, ADD_CONSTRUCTOR_INGREDIENT, UPDATE_CONSTRUCTOR_INGREDIENT } 
+	from '../../services/actions/constructorIngredients';
 import { setOrder, CLEAR_ORDER_DETAILS } from '../../services/actions/orderDetails';
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/Order-details';
@@ -13,25 +16,6 @@ import { BurgerConstructorElement }
 	from '../Burger-constructor-element/Burger-constructor-element';
 
 export function BurgerConstructor() {
-	// dnd drop
-	const [, dropRef] = useDrop({
-		accept: 'ingredient',
-		drop(ingredient) {
-			ingredient.type === 'bun'
-				? dispatch({
-						type: 'ADD_CONSTRUCTOR_BUN',
-						bun: ingredient,
-					})
-				: dispatch({
-						type: 'ADD_CONSTRUCTOR_INGREDIENT',
-						ingredient: {
-							ingredient,
-							id: v1(),
-						},
-					});
-		},
-	});
-
 	// dispatch
 	const dispatch = useDispatch();
 
@@ -42,6 +26,26 @@ export function BurgerConstructor() {
 	} = useSelector((store) => store.constructorReducer);
 	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
 	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
+
+	// dnd drop ingredient
+	const [, dropIngredientRef] = useDrop({
+		accept: 'ingredient',
+		drop(ingredient) {
+			ingredient.type === 'bun'
+				? dispatch({ type: ADD_CONSTRUCTOR_BUN, bun: ingredient })
+				: dispatch({ type: ADD_CONSTRUCTOR_INGREDIENT, ingredient: { ingredient, id: v1() } });
+		},
+	});
+
+	const handlerUpdateConstructor = useCallback((dragIndex, hoverIndex) => {
+      const dragCard = constructorIngredients[dragIndex];
+      const newCards = [...constructorIngredients];
+      newCards.splice(dragIndex, 1);
+      newCards.splice(hoverIndex, 0, dragCard);
+
+      dispatch({ type: UPDATE_CONSTRUCTOR_INGREDIENT, constructorIngredients: newCards });
+    }, [constructorIngredients, dispatch]);
+
 
 	// close order modal
 	function closeOrderModal() {
@@ -73,15 +77,21 @@ export function BurgerConstructor() {
 
 	// handle ingredients component
 	const handleIngredientsComponent = constructorIngredients.length > 0
-		? constructorIngredients.map(({id, ingredient}) =>
-				<BurgerConstructorElement key={id} ingredient={ingredient} id={id} />
-			)
+		? constructorIngredients.map(({id, ingredient}, index) => {
+				return <BurgerConstructorElement
+					key={id}
+					id={id}
+					index={index}
+					ingredient={ingredient}
+					onUpdateConstructor={handlerUpdateConstructor} />
+			})
 		: 'Выберите инредиенты';
+		//!TODO: заглушки "Выберите ингредиенты это временное решение..."
 
 	return (
 		<>
 			<section className={`pt-25 pl-4 ${styles.constructor}`}>
-				<div className={`${styles.constructor__wrapper}`} ref={dropRef}>
+				<div className={`${styles.constructor__wrapper}`} ref={dropIngredientRef}>
 					<div className={`pr-4 ${styles.constructor__element_top}`}>
 						{ handleBunComponent('top') }
 					</div>

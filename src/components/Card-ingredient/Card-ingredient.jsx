@@ -8,7 +8,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 
 export function CardIngredient({ ingredient }) {
 	// props
-	const { name, image, image_mobile, price, _id } = ingredient;
+	const { name, image, image_mobile, price } = ingredient;
 
 	// dispatch
 	const dispatch = useDispatch();

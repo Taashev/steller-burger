@@ -47,7 +47,7 @@ export function BurgerIngredients() {
 	function onScroll() {
 		const simpleBarTop = simpleBarRef.current.getBoundingClientRect().top;
 		const bunBottom = bunCategoryRef.current.getBoundingClientRect().bottom - 100;
-		const mainTop = mainCategoryRef.current.getBoundingClientRect().top;
+		const mainTop = mainCategoryRef.current.getBoundingClientRect().top - 100;
 		const sauceTop = sauceCategoryRef.current.getBoundingClientRect().top;
 
 		if (bunBottom > simpleBarTop) setCurrentTab('bun');

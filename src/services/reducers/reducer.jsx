@@ -9,6 +9,7 @@ import {
 import {
 	ADD_CONSTRUCTOR_BUN,
 	ADD_CONSTRUCTOR_INGREDIENT,
+	UPDATE_CONSTRUCTOR_INGREDIENT,
 	REMOVE_CONSTRUCTOR_INGREDIENT,
 	CLEAR_CONSTRUCTOR,
 } from '../actions/constructorIngredients';
@@ -96,6 +97,13 @@ export function constructorReducer(
 				constructorIngredients: [
 					...state.constructorIngredients,
 					action.ingredient,
+				],
+			};
+		case UPDATE_CONSTRUCTOR_INGREDIENT:
+			return {
+				...state,
+				constructorIngredients: [
+					...action.constructorIngredients,
 				],
 			};
 		case REMOVE_CONSTRUCTOR_INGREDIENT:
