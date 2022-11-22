@@ -1,7 +1,7 @@
+import { useSelector } from 'react-redux';
 import styles from './Ingredient-details.module.css';
-import { ingredientPropTypes } from '../../utils/template-prop-types';
 
-export function IngredientDetails({ ingredient }) {
+export function IngredientDetails() {
 	const {
 		calories,
 		carbohydrates,
@@ -10,7 +10,9 @@ export function IngredientDetails({ ingredient }) {
 		image__mobile,
 		name,
 		proteins,
-	} = ingredient;
+	} = useSelector((store) => 
+		store.ingredientDetailsReducer.ingredientDetails
+	);
 
   return (
     <div className={`${styles.details}`}>
@@ -39,8 +41,4 @@ export function IngredientDetails({ ingredient }) {
       </ul>
     </div>
   );
-};
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientPropTypes.isRequired,
 };
