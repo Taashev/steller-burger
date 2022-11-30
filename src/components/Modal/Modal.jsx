@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import stylesModal from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ModalOverlay } from '../Modal-overlay/Modal-overlay';
+import { ModalOverlay } from './Modal-overlay/Modal-overlay';
 
 export function Modal({ children, title='', onClose }) {
 	const modalContainer = document.querySelector('#modal');

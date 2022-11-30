@@ -2,7 +2,7 @@ import stylesIngredients from './Ingredient-category.module.css';
 import PropTypes from 'prop-types';
 
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
-import { ingredientPropTypes } from '../../utils/template-prop-types';
+import { ingredientPropTypes } from '../../../utils/template-prop-types';
 
 export function IngredientCategory({ title, ingredients, id, refCatefory }) {
 	return (

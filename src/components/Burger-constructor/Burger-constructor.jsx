@@ -12,7 +12,7 @@ import { OrderDetails } from '../OrderDetails/Order-details';
 import { CurrencyIcon, Button } 
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerConstructorElement } 
-	from '../Burger-constructor-element/Burger-constructor-element';
+	from './Burger-constructor-element/Burger-constructor-element';
 
 export function BurgerConstructor() {
 	// dispatch

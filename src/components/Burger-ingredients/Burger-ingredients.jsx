@@ -6,8 +6,8 @@ import stylesBurgerIngredients from './Burger-ingredients.module.css';
 import { removeIngredientDetails } from '../../services/actions/ingredientDetails';
 import { Tabs } from '../Tabs/Tabs';
 import { Modal } from '../Modal/Modal';
-import { IngredientDetails } from '../IngredientDetails/Ingredient-details';
-import { IngredientCategory } from '../Ingredient-category/Ingredient-category';
+import { IngredientDetails } from './IngredientDetails/Ingredient-details';
+import { IngredientCategory } from './Ingredient-category/Ingredient-category';
 
 export function BurgerIngredients() {
 	const simpleBarRef = useRef();

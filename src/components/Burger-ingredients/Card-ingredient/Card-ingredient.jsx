@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 import stylesCard from './Card-ingredient.module.css';
 
-import { getIngredientDetails } from '../../services/actions/ingredientDetails';
-import { ingredientPropTypes } from '../../utils/template-prop-types';
+import { getIngredientDetails } from '../../../services/actions/ingredientDetails';
+import { ingredientPropTypes } from '../../../utils/template-prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export function CardIngredient({ ingredient }) {
