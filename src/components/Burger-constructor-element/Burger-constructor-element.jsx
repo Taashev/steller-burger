@@ -4,8 +4,8 @@ import { useDrag, useDrop } from 'react-dnd/dist/hooks';
 import PropTypes from 'prop-types';
 import styles from './Burger-constructor-element.module.css';
 
-import { SET, REMOVE } from '../../services/actions/totalPrice';
-import { REMOVE_CONSTRUCTOR_INGREDIENT } from '../../services/actions/constructorIngredients';
+import { setTotalPrice, removeTotalPrice } from '../../services/actions/totalPrice';
+import { removeConstructorIngredient } from '../../services/actions/constructorIngredients';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -21,9 +21,9 @@ export function BurgerConstructorElement({ ingredient, type, id, index, onUpdate
 
 	// component did update price
 	useEffect(() => {
-		dispatch({ type: SET, payload: price });
+		dispatch(setTotalPrice(price));
 
-		return () => dispatch({ type: REMOVE, payload: price });
+		return () => dispatch(removeTotalPrice(price));
 	}, [dispatch, price]);
 
 	// drag
@@ -76,10 +76,7 @@ export function BurgerConstructorElement({ ingredient, type, id, index, onUpdate
 
 	// remove ingredient
 	function removeIngredient() {
-		dispatch({
-			type: REMOVE_CONSTRUCTOR_INGREDIENT,
-			id: id,
-		});
+		dispatch(removeConstructorIngredient(id));
 	};
 
 	return (

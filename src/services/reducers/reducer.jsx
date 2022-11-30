@@ -16,8 +16,8 @@ import {
 
 // import ingredient details actions
 import {
-	GET_INGREDIENT,
-	REMOVE_INGREDIENT,
+	GET_INGREDIENT_DETAILS,
+	REMOVE_INGREDIENT_DETAILS,
 } from '../actions/ingredientDetails';
 
 // import order details actions
@@ -30,9 +30,8 @@ import {
 
 // import total price action
 import {
-	SET,
-	REMOVE,
-	RESET,
+	SET_TOTAL_PRICE,
+	REMOVE_TOTAL_PRICE,
 }	from '../actions/totalPrice';
 
 
@@ -137,11 +136,11 @@ export function ingredientDetailsReducer(
 	action
 ) {
 	switch (action.type) {
-		case GET_INGREDIENT:
+		case GET_INGREDIENT_DETAILS:
 			return {
 				ingredientDetails: action.ingredientDetails,
 			};
-		case REMOVE_INGREDIENT:
+		case REMOVE_INGREDIENT_DETAILS:
 			return {
 				ingredientDetails: null,
 			};
@@ -209,17 +208,13 @@ export function totalPriceReducer(
 	action
 ) {
 	switch (action.type) {
-		case SET:
+		case SET_TOTAL_PRICE:
 			return {
 				totalPrice: state.totalPrice + action.payload,
 			};
-		case REMOVE:
+		case REMOVE_TOTAL_PRICE:
 			return {
 				totalPrice: state.totalPrice - action.payload,
-			};
-		case RESET:
-			return {
-				totalPrice: 0,
 			};
 		default:
 			return state;

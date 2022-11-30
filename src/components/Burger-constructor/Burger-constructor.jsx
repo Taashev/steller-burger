@@ -1,13 +1,12 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useDrop } from 'react-dnd/dist/hooks';
-import { v1 } from 'uuid';
 import SimpleBar from 'simplebar-react';
 import styles from './Burger-constructor.module.css';
 
-import { ADD_CONSTRUCTOR_BUN, ADD_CONSTRUCTOR_INGREDIENT, UPDATE_CONSTRUCTOR_INGREDIENT } 
+import { addConstructorBun, addConstructorIngredient, updateConstructorIngredient }
 	from '../../services/actions/constructorIngredients';
-import { setOrder, CLEAR_ORDER_DETAILS } from '../../services/actions/orderDetails';
+import { setOrder, clearOrderDetails } from '../../services/actions/orderDetails';
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/Order-details';
 import { CurrencyIcon, Button } 
@@ -32,8 +31,8 @@ export function BurgerConstructor() {
 		accept: 'ingredient',
 		drop(ingredient) {
 			ingredient.type === 'bun'
-				? dispatch({ type: ADD_CONSTRUCTOR_BUN, bun: ingredient })
-				: dispatch({ type: ADD_CONSTRUCTOR_INGREDIENT, ingredient: { ingredient, id: v1() } });
+				? dispatch(addConstructorBun(ingredient))
+				: dispatch(addConstructorIngredient(ingredient));
 		},
 	});
 
@@ -43,15 +42,13 @@ export function BurgerConstructor() {
       newCards.splice(dragIndex, 1);
       newCards.splice(hoverIndex, 0, dragCard);
 
-      dispatch({ type: UPDATE_CONSTRUCTOR_INGREDIENT, constructorIngredients: newCards });
+      dispatch(updateConstructorIngredient(newCards));
     }, [constructorIngredients, dispatch]);
 
 
 	// close order modal
 	function closeOrderModal() {
-		dispatch({
-			type: CLEAR_ORDER_DETAILS,
-		});
+		dispatch(clearOrderDetails());
 	};
 	
 	// handle order

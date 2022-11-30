@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux/es/exports';
 import SimpleBar from 'simplebar-react';
 import stylesBurgerIngredients from './Burger-ingredients.module.css';
 
-import { REMOVE_INGREDIENT } from '../../services/actions/ingredientDetails';
+import { removeIngredientDetails } from '../../services/actions/ingredientDetails';
 import { Tabs } from '../Tabs/Tabs';
 import { Modal } from '../Modal/Modal';
 import { IngredientDetails } from '../IngredientDetails/Ingredient-details';
@@ -38,9 +38,7 @@ export function BurgerIngredients() {
 	
 	// close details modal
 	function closeDetailsModal() {
-		dispatch({
-			type: REMOVE_INGREDIENT,
-		});
+		dispatch(removeIngredientDetails());
 	};
 
 	// on scroll

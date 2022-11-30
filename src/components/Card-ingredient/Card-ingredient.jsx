@@ -2,7 +2,8 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 import stylesCard from './Card-ingredient.module.css';
-import { GET_INGREDIENT } from '../../services/actions/ingredientDetails';
+
+import { getIngredientDetails } from '../../services/actions/ingredientDetails';
 import { ingredientPropTypes } from '../../utils/template-prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -33,10 +34,7 @@ export function CardIngredient({ ingredient }) {
 
 	// handle ingredient
 	function handleIngredient() {
-		dispatch({
-			type: GET_INGREDIENT,
-			ingredientDetails: ingredient,
-		});
+		dispatch(getIngredientDetails(ingredient));
 	};
 
 	return (
