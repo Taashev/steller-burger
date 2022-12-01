@@ -9,6 +9,8 @@ import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
 import { Login } from '../pages/Login/Login';
 import { Register } from '../pages/Register/Register';
+import { ForgotPassword } from '../pages/forgotPassword/ForgotPassword';
+import { ResetPassword } from '../pages/ResetPassword/ResetPassword';
 
 function App() {
 	const dispatch = useDispatch();
@@ -29,14 +31,20 @@ function App() {
 					: <>
 							<AppHeader />
 							<Switch>
-								<Route path="/" exact>
-									<Main />
-								</Route>
 								<Route path="/register" exact>
 									<Register />
 								</Route>
-								<Route patch="/login" exact>
+								<Route path="/login" exact>
 									<Login />
+								</Route>
+								<Route path="/forgot-password" exact>
+									<ForgotPassword />
+								</Route>
+								<Route path="/reset-password" exact>
+									<ResetPassword />
+								</Route>
+								<Route path="/" exact>
+									<Main />
 								</Route>
 							</Switch>
 						</>

@@ -53,11 +53,10 @@ export function Login() {
 				<div className={styles.footer}>
 					<p className={`${styles.footer__text}`}>
 						Вы — новый пользователь?
-						<span className={`${styles.signin}`}>Зарегистрироваться</span>
+						<span className={`${styles.link}`}> Зарегистрироваться</span>
 					</p>
 					<p className={styles.footer__text}>
-						Забыли пароль?
-						<span className={`${styles.signin}`}>Восстановить пароль</span>
+						Забыли пароль?<span className={`${styles.link}`}> Восстановить пароль</span>
 					</p>
 				</div>
 			</div>
