@@ -50,6 +50,7 @@
 
 .link {
 	color: var(--colors-interface-accent);
+	text-decoration: none;
 	cursor: pointer;
 	transition: var(--common-transition);
 }

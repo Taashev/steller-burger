@@ -23,6 +23,15 @@ export function setOrder(order) {
 		body: JSON.stringify({
 			"ingredients": order
 		}),
-	})
-		.then(checkResponse)
+	}).then(checkResponse)
+};
+
+export function setResetPassword(email) {
+	return fetch(`${BASE_URL}/api/password-reset`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email })
+	}).then(checkResponse)
 };

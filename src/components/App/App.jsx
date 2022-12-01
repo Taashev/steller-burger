@@ -11,6 +11,7 @@ import { Login } from '../pages/Login/Login';
 import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/forgotPassword/ForgotPassword';
 import { ResetPassword } from '../pages/ResetPassword/ResetPassword';
+import { Profile } from '../pages/Profile/Profile';
 
 function App() {
 	const dispatch = useDispatch();
@@ -45,6 +46,9 @@ function App() {
 								</Route>
 								<Route path="/" exact>
 									<Main />
+								</Route>
+								<Route path="/profile" exact>
+									<Profile />
 								</Route>
 							</Switch>
 						</>

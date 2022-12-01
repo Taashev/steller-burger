@@ -1,33 +1,16 @@
-import { useState } from 'react';
 import styles from './ResetPassword.module.css';
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link } from 'react-router-dom';
+import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export function ResetPassword() {
-	const [showPassword, setShowPassword] = useState(false);
-
-	function onIconClickPassword() {
-		setShowPassword(!showPassword);
-	};
-
 	return (
 		<section className={`${styles["reset-password"]}`}>
 			<div className={`${styles.container}`}>
 				<h1 className={`text_type_main-medium ${styles.title}`}>Восстановление пароля</h1>
 				<form className={styles.form}>
 					<label className={styles.group}>
-						<Input
-							type={`${showPassword ? 'text' : 'password'}`}
-							placeholder={'Пароль'}
-							icon={`${showPassword ? 'HideIcon' : 'ShowIcon'}`}
-							// onChange={e => setValue(e.target.value)}
-							// value={value}
+						<PasswordInput
 							name={'password'}
-							error={false}
-							// ref={inputRef}
-							// onIconClick={onIconClick}
-							errorText={'Ошибка'}
-							size={'default'}
-							onIconClick={onIconClickPassword}
 							extraClass={`${styles.input}`}
 						/>
 					</label>
@@ -35,12 +18,8 @@ export function ResetPassword() {
 						<Input
 							type={'text'}
 							placeholder={'Введите код из письма'}
-							// onChange={e => setValue(e.target.value)}
-							// value={value}
 							name={'message'}
 							error={false}
-							// ref={inputRef}
-							// onIconClick={onIconClick}
 							errorText={'Ошибка'}
 							size={'default'}
 							extraClass={`${styles.input}`}
@@ -53,7 +32,7 @@ export function ResetPassword() {
 				<div className={styles.footer}>
 					<p className={`${styles.footer__text}`}>
 						Вспомнили пароль?
-						<span className={`${styles.link}`}> Войти</span>
+						<Link className={`${styles.link}`} to="/login"> Войти</Link>
 					</p>
 				</div>
 			</div>
