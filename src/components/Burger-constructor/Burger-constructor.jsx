@@ -27,13 +27,18 @@ export function BurgerConstructor() {
 	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
 
 	// dnd drop ingredient
-	const [, dropIngredientRef] = useDrop({
+	const [{ isHoverBun, isHoverIngredient }, dropIngredientRef] = useDrop({
 		accept: 'ingredient',
 		drop(ingredient) {
 			ingredient.type === 'bun'
 				? dispatch(addConstructorBun(ingredient))
 				: dispatch(addConstructorIngredient(ingredient));
 		},
+		collect: (monitor) => {
+			return monitor.getItem()?.type === 'bun'
+				? { isHoverBun: monitor.isOver() }
+				: { isHoverIngredient: monitor.isOver() }
+		}
 	});
 
 	const handlerUpdateConstructor = useCallback((dragIndex, hoverIndex) => {
@@ -43,7 +48,7 @@ export function BurgerConstructor() {
       newCards.splice(hoverIndex, 0, dragCard);
 
       dispatch(updateConstructorIngredient(newCards));
-    }, [constructorIngredients, dispatch]);
+	}, [constructorIngredients, dispatch]);
 
 
 	// close order modal
@@ -65,40 +70,60 @@ export function BurgerConstructor() {
 		}
 	};
 
-	// handle bun component
-	function handleBunComponent(position) {
-		return constructorBun
-			? <BurgerConstructorElement type={position} ingredient={constructorBun} />
-			: 'Выберите булочку';
-	};
-
-	// handle ingredients component
-	const handleIngredientsComponent = constructorIngredients.length > 0
-		? constructorIngredients.map(({id, ingredient}, index) => {
-				return <BurgerConstructorElement
-					key={id}
-					id={id}
-					index={index}
-					ingredient={ingredient}
-					onUpdateConstructor={handlerUpdateConstructor} />
-			})
-		: 'Выберите инредиенты';
-		//!TODO: заглушки "Выберите ингредиенты это временное решение..."
-
 	return (
 		<>
 			<section className={`pt-25 pl-4 ${styles.constructor}`}>
 				<div className={`${styles.constructor__wrapper}`} ref={dropIngredientRef}>
 					<div className={`pr-4 ${styles.constructor__element_top}`}>
-						{ handleBunComponent('top') }
+						{
+							constructorBun 
+								? <BurgerConstructorElement type='top' ingredient={constructorBun} />
+								: <div 
+										className={`
+											${styles.constructor__element_default}
+											${styles.constructor__element_default_top}
+											${isHoverBun && styles.hover}
+										`}
+									>
+										Выберите булочку
+									</div>
+						}
 					</div>
-					<SimpleBar className={styles.simplebar}>
+					<SimpleBar className={`${styles.simplebar}`}>
 						<ul className={`${styles.constructor__list}`}>
-							{ handleIngredientsComponent }
+							{
+								constructorIngredients.length > 0
+									? constructorIngredients.map(({id, ingredient}, index) => {
+											return <BurgerConstructorElement
+												key={id}
+												id={id}
+												index={index}
+												ingredient={ingredient}
+												onUpdateConstructor={handlerUpdateConstructor} />
+										})
+									: <div className={`
+												${styles.constructor__element_default}
+												${isHoverIngredient && styles.hover}
+											`}
+										>
+											Выберите булочку
+										</div>
+							}
 						</ul>
 					</SimpleBar>
 					<div className={`pr-4 ${styles.constructor__element_bottom}`}>
-						{ handleBunComponent('bottom') }
+						{
+							constructorBun
+								? <BurgerConstructorElement type='bottom' ingredient={constructorBun} />
+								: <div className={`
+											${styles.constructor__element_default}
+											${styles.constructor__element_default_bottom}
+											${isHoverBun && styles.hover}
+										`}
+									>
+										Выберите булочку
+									</div>
+						}
 					</div>
 				</div>
 				<div className={`mt-10 pr-4 ${styles.footer}`}>

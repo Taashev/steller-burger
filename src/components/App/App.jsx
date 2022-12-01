@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import stylesApp from './App.module.css';
 
@@ -6,6 +7,8 @@ import { getIngredients } from '../../services/actions/ingredients';
 import { Main } from '../Main/Main';
 import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
+import { Login } from '../pages/Login/Login';
+import { Register } from '../pages/Register/Register';
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,7 +28,17 @@ function App() {
 					? <Preloader width={50} height={50} />
 					: <>
 							<AppHeader />
-							<Main />
+							<Switch>
+								<Route path="/" exact>
+									<Main />
+								</Route>
+								<Route path="/register" exact>
+									<Register />
+								</Route>
+								<Route patch="/login" exact>
+									<Login />
+								</Route>
+							</Switch>
 						</>
 			}
 		</div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -29,11 +30,13 @@ const root = ReactDOM.createRoot(
 
 // render
 root.render(
-  <React.StrictMode>
-		<Provider store={store}>
-    	<App />
-		</Provider>
-  </React.StrictMode>
+  <BrowserRouter>
+  	<React.StrictMode>
+			<Provider store={store}>
+	    	<App />
+			</Provider>
+	  </React.StrictMode>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
