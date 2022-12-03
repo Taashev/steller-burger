@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { NavLink, useRouteMatch, useLocation } from 'react-router-dom';
 import stylesHeader from './App-header.module.css';
 import {
 	BurgerIcon,
@@ -8,22 +9,25 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export const AppHeader = memo(_ => {
+	const { path } = useRouteMatch();
+	const { pathname } = useLocation();
+
 	return (
 		<header className={`p-4 ${ stylesHeader.header }`}>
 			<div className={ stylesHeader.container }>
 				<nav>
 					<ul className={ stylesHeader.nav__list }>
 						<li className={`pt-4 pr-5 pb-4 pl-5 mr-2`}>
-							<a className={`${stylesHeader.nav__link} ${ stylesHeader.active }`} href='#'>
-								<BurgerIcon type="secondary" />
+							<NavLink className={`${stylesHeader.nav__link}`} to={path} exact activeClassName={stylesHeader.active}>
+								<BurgerIcon type={path === pathname ? 'primary' : 'secondary'} />
 								Конструктор
-							</a>
+							</NavLink>
 						</li>
 						<li className={`pt-4 pr-5 pb-4 pl-5`}>
-							<a className={`${stylesHeader.nav__link}`} href='#'>
-								<ListIcon type="secondary" />
+							<NavLink className={`${stylesHeader.nav__link}`} to={`${path}orders`} activeClassName={stylesHeader.active}>
+								<ListIcon type={`${path}orders` === pathname ? 'primary' : 'secondary'} />
 								Лента заказов
-							</a>
+							</NavLink>
 						</li>
 					</ul>
 				</nav>
@@ -31,10 +35,10 @@ export const AppHeader = memo(_ => {
 					<Logo />
 				</div>
 				<div className={`pt-4 pr-5 pb-4 pl-5`}>
-					<a className={`${stylesHeader.nav__link}`} href='#'>
-						<ProfileIcon type="secondary" />
+					<NavLink className={`${stylesHeader.nav__link}`} to={`${path}profile`} activeClassName={stylesHeader.active}>
+						<ProfileIcon type={`${path}profile` === pathname ? 'primary' : 'secondary'} />
 						Личный кабинет
-					</a>
+					</NavLink>
 				</div>
 			</div>
 		</header>

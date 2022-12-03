@@ -1,4 +1,4 @@
-.profile {
+.personal-area {
 	flex-grow: 1;
 }
 
@@ -26,7 +26,6 @@
 }
 
 .navbar__item {
-
 }
 
 .navbar__link {
@@ -50,22 +49,4 @@
 	margin: calc(var(--offset-base-size) * 28) 0 0;
 	color: var(--text-inactive-color);
 	opacity: .4;
-}
-
-.form {
-	display: flex;
-	flex-direction: column;
-}
-
-.group {
-	margin-bottom: calc(var(--offset-base-size) * 6);
-}
-
-.input label {
-	top: 8px;
-}
-
-.form__footer {
-	display: flex;
-	justify-content: flex-end;
 }

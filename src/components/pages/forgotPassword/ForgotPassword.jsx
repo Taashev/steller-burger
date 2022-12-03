@@ -27,7 +27,7 @@ export function ForgotPassword() {
 
 			try {
 				const response = await setForgotPassword(values.email);
-				response?.success && history.push('/reset-password')
+				response?.success && history.push('/reset-password');
 			} catch(err) {
 				console.error(err);
 			} finally {

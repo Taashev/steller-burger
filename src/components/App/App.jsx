@@ -11,7 +11,7 @@ import { Login } from '../pages/Login/Login';
 import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/forgotPassword/ForgotPassword';
 import { ResetPassword } from '../pages/ResetPassword/ResetPassword';
-import { Profile } from '../pages/Profile/Profile';
+import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
 
 function App() {
 	const dispatch = useDispatch();
@@ -32,23 +32,23 @@ function App() {
 					: <>
 							<AppHeader />
 							<Switch>
-								<Route path="/register" exact>
-									<Register />
-								</Route>
 								<Route path="/login" exact>
 									<Login />
 								</Route>
-								<Route path="/forgot-password" exact>
-									<ForgotPassword />
+								<Route path="/register" exact>
+									<Register />
 								</Route>
 								<Route path="/reset-password" exact>
 									<ResetPassword />
 								</Route>
+								<Route path="/forgot-password" exact>
+									<ForgotPassword />
+								</Route>
+								<Route path="/profile">
+									<PersanalArea />
+								</Route>
 								<Route path="/" exact>
 									<Main />
-								</Route>
-								<Route path="/profile" exact>
-									<Profile />
 								</Route>
 							</Switch>
 						</>
