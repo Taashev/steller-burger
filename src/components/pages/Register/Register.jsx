@@ -33,10 +33,7 @@ export function Register() {
 
 		if (formValidity) {
 			await dispatch(signUp(email, password, name));
-	
-			if (registerSuccess) {
-				history.push('/login')
-			}
+			registerSuccess && history.push('/login');
 		}
 	};
 

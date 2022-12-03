@@ -16,7 +16,7 @@ export function Login() {
 		e.preventDefault();
 		
 		if (formValidity) {
-			
+
 		}
 	};
 
@@ -44,6 +44,7 @@ export function Login() {
 						<PasswordInput
 							name={'password'}
 							required
+							minLength={6}
 							onChange={onChangeInput}
 							onBlurCapture={onBlurInput}
 							value={values.password}

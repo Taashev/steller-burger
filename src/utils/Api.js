@@ -28,6 +28,17 @@ export function setOrder(order) {
 	}).then(checkResponse)
 };
 
+// sign in
+export function signIn(email, password) {
+	fetch(`${BASE_URL}/api/auth/login`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email, password })
+	}).then(checkResponse)
+};
+
 // sing up
 export function signUp(email, password, name) {
 	return fetch(`${BASE_URL}/api/auth/register`, {
@@ -44,7 +55,7 @@ export function signUp(email, password, name) {
 };
 
 // email reset password
-export function setEmailResetPassword(email) {
+export function setForgotPassword(email) {
 	return fetch(`${BASE_URL}/api/password-reset`, {
 		method: 'POST',
 		headers: {
