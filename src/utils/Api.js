@@ -1,3 +1,5 @@
+import { getCookie } from "./cookie";
+
 const BASE_URL = 'https://norma.nomoreparties.space';
 
 function checkResponse(res) {
@@ -23,19 +25,31 @@ export function setOrder(order) {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			"ingredients": order
+			"ingredients": order,
 		}),
 	}).then(checkResponse)
 };
 
 // sign in
 export function signIn(email, password) {
-	fetch(`${BASE_URL}/api/auth/login`, {
+	return fetch(`${BASE_URL}/api/auth/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ email, password })
+		body: JSON.stringify({ email, password }),
+	}).then(checkResponse)
+};
+
+// sign out
+export function signOut() {
+	return fetch(`${BASE_URL}/api/auth/logout`, {
+		method: 'POST',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ token: getCookie('refreshToken') }),
 	}).then(checkResponse)
 };
 
@@ -51,6 +65,60 @@ export function signUp(email, password, name) {
 			password,
 			name,
 		}),
+	}).then(checkResponse)
+};
+
+// refresh token
+export function refreshToken() {
+	return fetch(`${BASE_URL}/api/auth/token`, {
+		method: 'POST',
+		mode: 'cors',
+    cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ token: getCookie('refreshToken') }),
+		redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+	}).then(checkResponse)
+};
+
+// get user
+export function getUser() {
+	return fetch(`${BASE_URL}/api/auth/user`, {
+		method: 'GET',
+		mode: 'cors',
+    cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${getCookie('accessToken')}`,
+		},
+		redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+	})
+		.then(checkResponse)
+};
+
+// update user
+export function updateUser(name, email, password) {
+	return fetch(`${BASE_URL}/api/auth/user`, {
+		method: 'PATCH',
+		mode: 'cors',
+    cache: 'no-cache',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${getCookie('accessToken')}`,
+		},
+		redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+		body: JSON.stringify({
+			name,
+			email,
+			password,
+		})
 	}).then(checkResponse)
 };
 

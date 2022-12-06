@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { setForgotPassword } from '../../../utils/Api';
-import { useFormValidation } from '../../../customHooks/useFormValidation';
+import { setForgotPassword } from '../../../../utils/Api';
+import { useFormValidation } from '../../../../customHooks/useFormValidation';
 import styles from './ForgotPassword.module.css';
 import { Link } from 'react-router-dom';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Preloader } from '../../Preloader/Preloader';
+import { Preloader } from '../../../Preloader/Preloader';
 
 export function ForgotPassword() {
 	const history = useHistory();

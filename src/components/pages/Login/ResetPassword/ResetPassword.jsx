@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useFormValidation } from '../../../customHooks/useFormValidation';
-import { setResetPassword } from '../../../utils/Api';
+import { useFormValidation } from '../../../../customHooks/useFormValidation';
+import { setResetPassword } from '../../../../utils/Api';
 import styles from './ResetPassword.module.css';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Preloader } from '../../Preloader/Preloader';
+import { Preloader } from '../../../Preloader/Preloader';
 
 export function ResetPassword() {
 	const [load, setLoad] = useState(false);

@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
 import styles from './Profile.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export function Profile() {
 	const [activeName, setActiveName] = useState(false);
+	
+	const { user } = useSelector((store) => store.loginReducer);
 
 	const {
 		formValidity,

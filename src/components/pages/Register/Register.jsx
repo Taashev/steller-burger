@@ -1,13 +1,15 @@
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
 import styles from './Register.module.css';
-import { signUp } from '../../../services/actions/register';
+import { signUp } from '../../../utils/Api'; 
 import { Link } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Preloader } from '../../Preloader/Preloader';
 
 export function Register() {
+	const [load, setLoad] = useState(false);
+	
 	// use form validation
 	const {
 		formValidity,
@@ -20,20 +22,23 @@ export function Register() {
 	// history
 	const history = useHistory();
 
-	// dispatch
-	const dispatch = useDispatch();
-
-	// store
-	const { registerRequest, registerSuccess } = useSelector((store) => store.registerReducer);
-
 	// on sumbit
 	async function onSubmit(e) {
 		e.preventDefault();
 		const {email, password, name} = values;
-
+		
 		if (formValidity) {
-			await dispatch(signUp(email, password, name));
-			registerSuccess && history.push('/login');
+			setLoad(true);
+
+			try {
+				const response = await signUp(email, password, name);
+				response?.success && history.push('/login');
+			} catch(err) {
+				alert('Email уже занят');
+				console.error(err);
+			} finally {
+				setLoad(false);
+			}
 		}
 	};
 
@@ -86,7 +91,7 @@ export function Register() {
 					</label>
 					<Button htmlType="submit" extraClass={styles.button} type="primary" size="medium">
 						{
-							registerRequest
+							load
 								? <Preloader width={20} height={20} />
 								: 'Зарегистрироваться'
 						}

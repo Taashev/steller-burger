@@ -1,9 +1,22 @@
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../../../services/actions/login';
 import styles from './Login.module.css';
 import { Link } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Preloader } from '../../Preloader/Preloader';
 
 export function Login() {
+	const history = useHistory();
+	const dispatch = useDispatch();
+
+	const {
+		user,
+		loginRequest
+	} = useSelector((store) => store.loginReducer);
+
 	const {
 		formValidity,
 		values,
@@ -16,9 +29,13 @@ export function Login() {
 		e.preventDefault();
 		
 		if (formValidity) {
-
+			dispatch(signIn(values.email, values.password));
 		}
 	};
+
+	useEffect(() => {
+
+	}, [user]);
 
 	return (
 		<section className={styles.login}>
@@ -54,7 +71,11 @@ export function Login() {
 						/>
 					</label>
 					<Button extraClass={styles.button} htmlType="submit" type="primary" size="medium">
-						Войти
+						{
+							loginRequest
+								? <Preloader width={20} height={20} />
+								: 'Войти'
+						}
 					</Button>
 				</form>
 				<div className={styles.footer}>

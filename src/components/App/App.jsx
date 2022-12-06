@@ -9,9 +9,10 @@ import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
 import { Login } from '../pages/Login/Login';
 import { Register } from '../pages/Register/Register';
-import { ForgotPassword } from '../pages/forgotPassword/ForgotPassword';
-import { ResetPassword } from '../pages/ResetPassword/ResetPassword';
+import { ForgotPassword } from '../pages/Login/forgotPassword/ForgotPassword';
+import { ResetPassword } from '../pages/Login/ResetPassword/ResetPassword';
 import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
+import { refreshToken } from '../../utils/Api';
 
 function App() {
 	const dispatch = useDispatch();

@@ -6,6 +6,7 @@ export function PersanalArea() {
 	const { path } = useRouteMatch();
 	const { pathname } = useLocation();
 
+
 	return (
 		<section className={`${styles['personal-area']}`}>
 			<div className={`${styles.container}`}>

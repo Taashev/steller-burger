@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { NavLink, useRouteMatch, useLocation } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 import stylesHeader from './App-header.module.css';
 import {
 	BurgerIcon,
@@ -9,8 +9,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export const AppHeader = memo(_ => {
-	const { path } = useRouteMatch();
-	const { pathname } = useLocation();
+	const { path, isExact } = useRouteMatch();
+	const isPathNameOrders = useRouteMatch(`${path}orders`);
+	const isPathNameProfile = useRouteMatch(`${path}profile`);
 
 	return (
 		<header className={`p-4 ${ stylesHeader.header }`}>
@@ -19,13 +20,13 @@ export const AppHeader = memo(_ => {
 					<ul className={ stylesHeader.nav__list }>
 						<li className={`pt-4 pr-5 pb-4 pl-5 mr-2`}>
 							<NavLink className={`${stylesHeader.nav__link}`} to={path} exact activeClassName={stylesHeader.active}>
-								<BurgerIcon type={path === pathname ? 'primary' : 'secondary'} />
+								<BurgerIcon type={isExact ? 'primary' : 'secondary'} />
 								Конструктор
 							</NavLink>
 						</li>
 						<li className={`pt-4 pr-5 pb-4 pl-5`}>
 							<NavLink className={`${stylesHeader.nav__link}`} to={`${path}orders`} activeClassName={stylesHeader.active}>
-								<ListIcon type={`${path}orders` === pathname ? 'primary' : 'secondary'} />
+								<ListIcon type={isPathNameOrders ? 'primary' : 'secondary'} />
 								Лента заказов
 							</NavLink>
 						</li>
@@ -36,7 +37,7 @@ export const AppHeader = memo(_ => {
 				</div>
 				<div className={`pt-4 pr-5 pb-4 pl-5`}>
 					<NavLink className={`${stylesHeader.nav__link}`} to={`${path}profile`} activeClassName={stylesHeader.active}>
-						<ProfileIcon type={`${path}profile` === pathname ? 'primary' : 'secondary'} />
+						<ProfileIcon type={isPathNameProfile ? 'primary' : 'secondary'} />
 						Личный кабинет
 					</NavLink>
 				</div>
