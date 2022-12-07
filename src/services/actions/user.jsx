@@ -22,7 +22,7 @@ export function getUser() {
 	};
 };
 
-export function deleteUserAction() {
+export function deleteUser() {
 	return function(dispatch) {
 		dispatch({ type: USER_DELETE });
 	};

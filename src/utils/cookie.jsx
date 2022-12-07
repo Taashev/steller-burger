@@ -29,3 +29,8 @@ export function setCookie(name, value, props={}) {
 	}
 	document.cookie = updateCookie;
 };
+
+// delete cookie
+export function deleteCookie(name) {
+	setCookie(name, '', { expires: -1 });
+};

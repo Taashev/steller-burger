@@ -1,11 +1,25 @@
 import { NavLink, Switch, Route, useRouteMatch, useLocation } from 'react-router-dom';
-import { Profile } from './Profile/Profile';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../services/actions/logout';
 
+import { Profile } from './Profile/Profile';
 import styles from './PersanalArea.module.css';
 
 export function PersanalArea() {
 	const { path } = useRouteMatch();
 	const { pathname } = useLocation();
+
+	const dispatch = useDispatch();
+
+	async function onClickLogout() {
+		dispatch(logout())
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	};
 
 	return (
 		<section className={`${styles['personal-area']}`}>
@@ -35,9 +49,9 @@ export function PersanalArea() {
 							</NavLink>
 						</li>
 						<li className={`text_type_main-medium ${styles.navbar__item}`}>
-							<NavLink className={styles.navbar__link} to="/login">
+							<button className={`${styles.navbar__button}`} onClick={onClickLogout}>
 								Выход
-							</NavLink>
+							</button>
 						</li>
 					</ul>
 				</nav>

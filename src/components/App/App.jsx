@@ -16,8 +16,8 @@ import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
 
 function App() {
 	const dispatch = useDispatch();
-	const ingredientsRequest = useSelector((store) => store.burgerIngredientsReducer.ingredientsRequest);
 	const user = useSelector((store) => store.userReducer.user);
+	const ingredientsRequest = useSelector((store) => store.burgerIngredientsReducer.ingredientsRequest);
 
 	// component did update user
 	useEffect(() => {

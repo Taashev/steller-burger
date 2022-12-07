@@ -36,6 +36,18 @@
 	transition: var(--common-transition);
 }
 
+.navbar__button {
+	composes: navbar__link;
+	width: 100%;
+	text-align: start;
+	background: transparent;
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+}
+
 .navbar__link:hover:not(.navbar__link_active) {
 	opacity: .4;
 }
