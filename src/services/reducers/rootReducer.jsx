@@ -6,6 +6,7 @@ import { orderDetailsReducer } from './orderDetails';
 import { totalPriceReducer } from './totalPrice';
 //! import { registerReducer } from './register';
 import { loginReducer } from './login';
+import { userReducer } from './user';
 
 // root reducer
 export const rootReducer = combineReducers({
@@ -16,4 +17,5 @@ export const rootReducer = combineReducers({
 	totalPriceReducer,
 	// registerReducer,
 	loginReducer,
+	userReducer,
 });

@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
-import styles from './Profile.module.css';
+
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import styles from './Profile.module.css';
+
 export function Profile() {
+	const user = useSelector((store) => store.userReducer.user);
+	
 	const [activeName, setActiveName] = useState(false);
 	
-	const { user } = useSelector((store) => store.loginReducer);
-
 	const {
 		formValidity,
 		values,
+		setValues,
 		errorMessages,
 		onChangeInput,
 		onBlurInput,
@@ -33,6 +36,17 @@ export function Profile() {
 
 		}
 	};
+
+	// component update user
+	useEffect(() => {
+		if (user) {
+			setValues({
+				name: user.name || '',
+				email: user.email || '',
+				password: user.password || '',
+			})
+		}
+	}, [setValues, user])
 
 	return (
 		<form className={`${styles.form}`} name="profile" onSubmit={onSubmit} noValidate>

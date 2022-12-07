@@ -1,5 +1,6 @@
 import { signIn as ApiSignIn } from '../../utils/Api';
 import { setCookie } from '../../utils/cookie';
+import { getUser } from './user';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -18,6 +19,7 @@ export function signIn(email, password) {
 				setCookie('accessToken', accessToken, { expires: 1200 }); // 20min
 				setCookie('refreshToken', refreshToken, { expires: 86_400 }); // 24h
 
+				dispatch(getUser());
 				dispatch({ type: LOGIN_SUCCESS });
 			}
 		} catch(err) {

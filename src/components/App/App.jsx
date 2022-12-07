@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import stylesApp from './App.module.css';
 
+import { getUser } from '../../services/actions/user';
 import { getIngredients } from '../../services/actions/ingredients';
 import { Main } from '../Main/Main';
 import { Preloader } from '../Preloader/Preloader';
@@ -12,11 +13,18 @@ import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/Login/forgotPassword/ForgotPassword';
 import { ResetPassword } from '../pages/Login/ResetPassword/ResetPassword';
 import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
-import { refreshToken } from '../../utils/Api';
 
 function App() {
 	const dispatch = useDispatch();
 	const ingredientsRequest = useSelector((store) => store.burgerIngredientsReducer.ingredientsRequest);
+	const user = useSelector((store) => store.userReducer.user);
+
+	// component did update user
+	useEffect(() => {
+		if (!user) {
+			dispatch(getUser());
+		}
+	}, [dispatch, user]);
 
 	// component did mount
 	useEffect(() => {

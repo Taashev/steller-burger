@@ -1,21 +1,19 @@
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useFormValidation } from '../../../customHooks/useFormValidation';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signIn } from '../../../services/actions/login';
-import styles from './Login.module.css';
-import { Link } from 'react-router-dom';
-import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useFormValidation } from '../../../customHooks/useFormValidation';
+
 import { Preloader } from '../../Preloader/Preloader';
+import { signIn } from '../../../services/actions/login';
+import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './Login.module.css';
 
 export function Login() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	const {
-		user,
-		loginRequest
-	} = useSelector((store) => store.loginReducer);
+	const user = useSelector((store) => store.userReducer.user);
+	const loginRequest = useSelector((store) => store.loginReducer.loginRequest);
 
 	const {
 		formValidity,
@@ -34,8 +32,10 @@ export function Login() {
 	};
 
 	useEffect(() => {
-
-	}, [user]);
+		if (user) {
+			history.push('/');
+		}
+	}, [history, user]);
 
 	return (
 		<section className={styles.login}>

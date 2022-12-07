@@ -1,11 +1,11 @@
 import { NavLink, Switch, Route, useRouteMatch, useLocation } from 'react-router-dom';
 import { Profile } from './Profile/Profile';
+
 import styles from './PersanalArea.module.css';
 
 export function PersanalArea() {
 	const { path } = useRouteMatch();
 	const { pathname } = useLocation();
-
 
 	return (
 		<section className={`${styles['personal-area']}`}>

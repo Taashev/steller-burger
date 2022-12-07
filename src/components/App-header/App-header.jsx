@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import stylesHeader from './App-header.module.css';
+import { useSelector } from 'react-redux';
+
 import {
 	BurgerIcon,
 	ListIcon,
@@ -8,10 +9,14 @@ import {
 	ProfileIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import stylesHeader from './App-header.module.css';
+
 export const AppHeader = memo(_ => {
 	const { path, isExact } = useRouteMatch();
 	const isPathNameOrders = useRouteMatch(`${path}orders`);
 	const isPathNameProfile = useRouteMatch(`${path}profile`);
+
+	const user = useSelector((store) => store.userReducer.user);
 
 	return (
 		<header className={`p-4 ${ stylesHeader.header }`}>
@@ -38,7 +43,11 @@ export const AppHeader = memo(_ => {
 				<div className={`pt-4 pr-5 pb-4 pl-5`}>
 					<NavLink className={`${stylesHeader.nav__link}`} to={`${path}profile`} activeClassName={stylesHeader.active}>
 						<ProfileIcon type={isPathNameProfile ? 'primary' : 'secondary'} />
-						Личный кабинет
+						{
+							user?.name
+								? user.name
+								: 'Личный кабинет'
+						}
 					</NavLink>
 				</div>
 			</div>

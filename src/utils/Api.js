@@ -1,4 +1,4 @@
-import { getCookie } from "./cookie";
+import { getCookie, setCookie } from "./cookie";
 
 const BASE_URL = 'https://norma.nomoreparties.space';
 
@@ -7,8 +7,7 @@ function checkResponse(res) {
 		return res.json();
 	}
 
-	return res.json()
-		.then((res) => { throw new Error(res) })
+	return res.json().then((res) => { throw res.message })
 };
 
 // get ingredients
@@ -84,8 +83,49 @@ export function refreshToken() {
 	}).then(checkResponse)
 };
 
+//! white refresh token
+//! async function whiteRefreshToken(request, options) {
+// 	return fetch(request, options)
+// 			.then(checkResponse)
+// 			.catch((err) => {
+// 				return refreshToken()
+// 					.then((res) => {
+// 						if (res && res.success) {
+// 							const accessToken = res.accessToken.split('Bearer ')[1];
+// 							const refreshToken = res.refreshToken;
+		
+// 							setCookie('accessToken', accessToken, { expires: 1200 }); // 20min
+// 							setCookie('refreshToken', refreshToken, { expires: 86_400 }); // 24h
+		
+// 							return fetch(request, options)
+// 								.then(checkResponse)
+// 						} else {
+// 							console.log(err);
+// 						}
+// 					})
+// 					.catch((err) => console.log(err))
+// 			})
+//! };
+
 // get user
 export function getUser() {
+
+	//! return whiteRefreshToken(
+	// 	`${BASE_URL}/api/auth/user`,
+	// 	{
+	// 		method: 'GET',
+	// 		mode: 'cors',
+	// 		cache: 'no-cache',
+	// 		credentials: 'same-origin',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 			'Authorization': `Bearer ${getCookie('accessToken')}`,
+	// 		},
+	// 		redirect: 'follow',
+	// 		referrerPolicy: 'no-referrer',
+	// 	}
+	//! )
+
 	return fetch(`${BASE_URL}/api/auth/user`, {
 		method: 'GET',
 		mode: 'cors',
@@ -97,8 +137,7 @@ export function getUser() {
 		},
 		redirect: 'follow',
     referrerPolicy: 'no-referrer',
-	})
-		.then(checkResponse)
+	}).then(checkResponse)
 };
 
 // update user
