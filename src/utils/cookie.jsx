@@ -8,26 +8,36 @@ export function getCookie(name) {
 
 // set cookie
 export function setCookie(name, value, props={}) {
-	let { expires } = props;
+  props = props = {
+    path: '/',
+    ...props
+  };
 
-	if (typeof expires === 'number' && expires) {
-		const d = new Date();
-		d.setTime(d.getTime() + expires * 1000);
-		expires = d;
-	}
-	if (expires && expires.toUTCString) {
-		props.expires = expires.toUTCString();
-	}
-	value = encodeURIComponent(value);
-	let updateCookie = `${name}=${value}`;
-	for (const propName in props) {
-		updateCookie += `; ${propName}`;
-		const propValue = props[propName];
-		if (propValue !== true) {
-			updateCookie += `=${propValue}`;
-		}
-	}
-	document.cookie = updateCookie;
+  let exp = props.expires;
+
+  if (typeof exp == 'number' && exp) {
+    const d = new Date();
+    d.setTime(d.getTime() + exp * 1000);
+    exp = props.expires = d;
+  }
+
+  if (exp && exp.toUTCString) {
+    props.expires = exp.toUTCString();
+  }
+	
+  value = encodeURIComponent(value);
+  let updatedCookie = name + '=' + value;
+
+  for (const propName in props) {
+    updatedCookie += '; ' + propName;
+    const propValue = props[propName];
+		
+    if (propValue !== true) {
+      updatedCookie += '=' + propValue;
+    }
+  };
+
+  document.cookie = updatedCookie;
 };
 
 // delete cookie

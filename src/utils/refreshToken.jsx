@@ -1,27 +1,27 @@
 import { refreshToken as ApiRefreshToken } from "./Api";
 import { setCookie } from "./cookie";
 
-export async function whiteRefreshToken(request) {
+export async function withRefreshToken(request, props={}) {
 	try {
-		return await request();
+		return await request(props);
 	} catch(err) {
-		try {
+		console.log(err)
+		if (err === 'jwt expired') {
 			const refreshTokenResponse = await ApiRefreshToken();
 	
-			if (refreshTokenResponse && refreshTokenResponse.success) {
-				const accessToken = refreshTokenResponse.accessToken.split('Bearer ')[1];
-				const refreshToken = refreshTokenResponse.refreshToken;
-	
-				setCookie('accessToken', accessToken, { expires: 1200 }); // 20min
-				setCookie('refreshToken', refreshToken, { expires: 86_400 }); // 24h
-	
-				return request();
-			} else {
-				console.log(err);
+			if (!refreshTokenResponse.success) {
+				return Promise.rejects(refreshTokenResponse);
 			}
-	
-		} catch(err) {
-			console.log(err)
+
+			const accessToken = refreshTokenResponse.accessToken.split('Bearer ')[1];
+			const refreshToken = refreshTokenResponse.refreshToken;
+
+			setCookie('accessToken', accessToken);
+			setCookie('refreshToken', refreshToken);
+
+			return request(props);
+		} else {
+			return Promise.reject(err);
 		}
 	}
 };

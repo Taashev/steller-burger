@@ -1,5 +1,5 @@
 import { getUser as ApiGetUser } from "../../utils/Api";
-import { whiteRefreshToken } from "../../utils/refreshToken";
+import { withRefreshToken } from "../../utils/refreshToken";
 
 export const USER_REQUEST = 'USER_REQUEST';
 export const USER_SUCCESS = 'USER_SUCCESS';
@@ -11,7 +11,8 @@ export function getUser() {
 		dispatch({ type: USER_REQUEST });
 
 		try {
-			const getUserResponse = await whiteRefreshToken(ApiGetUser);
+			const getUserResponse = await withRefreshToken(ApiGetUser);
+			// const getUserResponse = await ApiGetUser();
 
 			if (getUserResponse.success && getUserResponse) {
 				dispatch({ type: USER_SUCCESS, user: getUserResponse.user });

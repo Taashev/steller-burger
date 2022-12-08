@@ -13,11 +13,11 @@ export function signIn(email, password) {
 		try {
 			const response = await ApiSignIn(email, password);
 
-			if (response && response?.success) {
+			if (response.success) {
 				const accessToken = response.accessToken.split('Bearer ')[1];
 				const refreshToken = response.refreshToken;
-				setCookie('accessToken', accessToken, { expires: 1200 }); // 20min
-				setCookie('refreshToken', refreshToken, { expires: 86_400 }); // 24h
+				setCookie('accessToken', accessToken);
+				setCookie('refreshToken', refreshToken);
 
 				dispatch(getUser());
 				dispatch({ type: LOGIN_SUCCESS });

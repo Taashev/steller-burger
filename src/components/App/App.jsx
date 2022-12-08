@@ -16,18 +16,11 @@ import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
 
 function App() {
 	const dispatch = useDispatch();
-	const user = useSelector((store) => store.userReducer.user);
 	const ingredientsRequest = useSelector((store) => store.burgerIngredientsReducer.ingredientsRequest);
-
-	// component did update user
-	useEffect(() => {
-		if (!user) {
-			dispatch(getUser());
-		}
-	}, [dispatch, user]);
-
+	
 	// component did mount
 	useEffect(() => {
+		dispatch(getUser());
 		dispatch(getIngredients());
 	// TODO: dependencies array.length === 0
 	// eslint-disable-next-line react-hooks/exhaustive-deps

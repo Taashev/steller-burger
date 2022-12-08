@@ -3,7 +3,7 @@ import { useState } from 'react';
 export function useFormValidation(initialValues=null) {
 	const [values, setValues] = useState(initialValues);
 	const [formValidity, setFormValidity] = useState(false);
-	const [errorMessages, setErrorMessages] = useState(initialValues);
+	const [errorMessages, setErrorMessages] = useState({});
 	
 	function onChangeInput(e) {
 		const { name, value, validationMessage } = e.target;
@@ -23,6 +23,12 @@ export function useFormValidation(initialValues=null) {
 		setErrorMessages({ ...errorMessages, [name]: validationMessage });
 	};
 
+	function resetValidation(validation, initialValues) {
+		setValues(initialValues);
+		setErrorMessages({});
+		setFormValidity(validation);
+	};
+
 	return {
 		values,
 		setValues,
@@ -31,5 +37,6 @@ export function useFormValidation(initialValues=null) {
 		formValidity,
 		onChangeInput,
 		onBlurInput,
+		resetValidation,
 	};
 };
