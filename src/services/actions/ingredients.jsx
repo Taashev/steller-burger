@@ -11,10 +11,11 @@ export function getIngredients() {
 
 		try {
 			const response = await ApiGetIngredients();
+
 			dispatch({
 				type: GET_INGREDIENTS_SUCCESS,
 				data: response.data,
-			})
+			});
 		} catch(err) {
 			dispatch({ type: SET_ORDER_DETAILS_FAILED });
 		}

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getUser } from '../../services/actions/user';
 import { getIngredients } from '../../services/actions/ingredients';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 import { Main } from '../Main/Main';
 import { Preloader } from '../Preloader/Preloader';
@@ -13,13 +14,25 @@ import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/Login/forgotPassword/ForgotPassword';
 import { ResetPassword } from '../pages/Login/ResetPassword/ResetPassword';
 import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
+import { Modal } from '../Modal/Modal';
+import { IngredientDetails } 
+	from '../Burger-ingredients/IngredientDetails/Ingredient-details';
+import { TargetIngredient } from '../pages/TargetIngredient/TargetIngredient';
 
 import stylesApp from './App.module.css';
-import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
+
 
 function App() {
+	const location = useLocation();
+	const history = useHistory();
+	const background = location.state?.background;
+
 	const dispatch = useDispatch();
 	const ingredientsRequest = useSelector((store) => store.burgerIngredientsReducer.ingredientsRequest);
+
+	function handleModalClose() {
+		history.goBack();
+	};
 	
 	// component did mount
 	useEffect(() => {
@@ -36,7 +49,7 @@ function App() {
 					? <Preloader width={50} height={50} />
 					: <>
 							<AppHeader />
-							<Switch>
+							<Switch path={ background || location }>
 								<Route path="/login" exact>
 									<Login />
 								</Route>
@@ -55,7 +68,30 @@ function App() {
 								<Route path="/" exact>
 									<Main />
 								</Route>
+								<Route path="/ingredients/:ingredientId" exact>
+									<TargetIngredient />
+								</Route>
+								<Route path="*">
+									404 Not Found
+								</Route>
 							</Switch>
+							
+							{
+								background &&
+								(
+									<Route
+										path="/ingredients/:ingredientId"
+										children={
+											<Modal
+												title={"Детали ингредиента"}
+												onClose={handleModalClose}
+											>
+												<IngredientDetails />
+											</Modal>
+										}
+									/>
+								)
+							}
 						</>
 			}
 		</div>
