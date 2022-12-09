@@ -5,7 +5,7 @@ import stylesModal from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from './Modal-overlay/Modal-overlay';
 
-export function Modal({ children, title='', onClose }) {
+export function Modal({ children, title, onClose }) {
 	const modalContainer = document.querySelector('#modal');
 
 	function closeEscModale(e) {
@@ -27,9 +27,12 @@ export function Modal({ children, title='', onClose }) {
 					<h2 className={`text_type_main-large ${stylesModal.title}`}>
 						{title}
 					</h2>
-					<button className={`${stylesModal.close}`} onClick={onClose}>
-						<CloseIcon type="primary" />
-					</button>
+					{
+						onClose &&
+							<button className={`${stylesModal.close}`} onClick={onClose}>
+								<CloseIcon type="primary" />
+							</button>
+					}
 				</header>
 				{children}
 			</div>
@@ -40,6 +43,5 @@ export function Modal({ children, title='', onClose }) {
 };
 
 Modal.propTypes = {
-	children: PropTypes.element.isRequired,
-	title: PropTypes.string,
+	children: PropTypes.any,
 };

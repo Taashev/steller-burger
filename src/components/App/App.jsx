@@ -49,7 +49,7 @@ function App() {
 					? <Preloader width={50} height={50} />
 					: <>
 							<AppHeader />
-							<Switch path={ background || location }>
+							<Switch location={ background || location }>
 								<Route path="/login" exact>
 									<Login />
 								</Route>

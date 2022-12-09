@@ -15,6 +15,7 @@ import { BurgerConstructorElement }
 	from './Burger-constructor-element/Burger-constructor-element';
 
 import styles from './Burger-constructor.module.css';
+import { Preloader } from '../Preloader/Preloader';
 
 export function BurgerConstructor() {
 	// dispatch
@@ -29,6 +30,7 @@ export function BurgerConstructor() {
 		constructorIngredients,
 	} = useSelector((store) => store.constructorReducer);
 	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
+	const setOrderDetailsRequest = useSelector((store) => store.orderDetailsReducer.setOrderDetailsRequest);
 	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
 	const user = useSelector((store) => store.userReducer.user);
 
@@ -148,6 +150,15 @@ export function BurgerConstructor() {
 					</Button>
 				</div>
 			</section>
+			{
+				setOrderDetailsRequest &&
+					<Modal>
+						<Preloader width={50} height={50} />
+						<p style={{ textAlign: 'center', fontSize: 32 }}>
+							Оформляем заказ...
+						</p>
+					</Modal>
+			}
 			{
 				orderId &&
 					<Modal onClose={closeOrderModal}>
