@@ -1,14 +1,19 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
-import styles from './Register.module.css';
+
 import { signUp } from '../../../utils/Api'; 
-import { Link } from 'react-router-dom';
-import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
 import { Preloader } from '../../Preloader/Preloader';
+import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
+import styles from './Register.module.css';
 
 export function Register() {
 	const [load, setLoad] = useState(false);
+
+	const user = useSelector((store) => store.userReducer.user);
 	
 	// use form validation
 	const {
@@ -41,6 +46,10 @@ export function Register() {
 			}
 		}
 	};
+
+	if (user) {
+		return <Redirect to="/" />
+	}
 
 	return (
 		<section className={styles.register}>

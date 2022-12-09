@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import stylesApp from './App.module.css';
 
 import { getUser } from '../../services/actions/user';
 import { getIngredients } from '../../services/actions/ingredients';
+
 import { Main } from '../Main/Main';
 import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
@@ -13,6 +13,9 @@ import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/Login/forgotPassword/ForgotPassword';
 import { ResetPassword } from '../pages/Login/ResetPassword/ResetPassword';
 import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
+
+import stylesApp from './App.module.css';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
 	const dispatch = useDispatch();
@@ -46,9 +49,9 @@ function App() {
 								<Route path="/forgot-password" exact>
 									<ForgotPassword />
 								</Route>
-								<Route path="/profile">
+								<ProtectedRoute path="/profile">
 									<PersanalArea />
-								</Route>
+								</ProtectedRoute>
 								<Route path="/" exact>
 									<Main />
 								</Route>

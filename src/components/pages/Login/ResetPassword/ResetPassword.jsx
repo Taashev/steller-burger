@@ -1,15 +1,22 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
+
 import { setResetPassword } from '../../../../utils/Api';
-import styles from './ResetPassword.module.css';
-import { Link } from 'react-router-dom';
-import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
 import { Preloader } from '../../../Preloader/Preloader';
+import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
+import styles from './ResetPassword.module.css';
 
 export function ResetPassword() {
 	const [load, setLoad] = useState(false);
 	const history = useHistory();
+
+	const forgotPasswordSuccess = useSelector((store) =>
+		store.forgotPasswordReducer.forgotPasswordSuccess
+	);
 
 	const {
 		formValidity,
@@ -35,6 +42,10 @@ export function ResetPassword() {
 			}
 		}
 	};
+
+	if (!forgotPasswordSuccess) {
+		return <Redirect to="/forgot-password" />
+	}
 
 	return (
 		<section className={`${styles["reset-password"]}`}>

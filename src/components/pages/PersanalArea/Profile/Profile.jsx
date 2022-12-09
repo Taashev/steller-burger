@@ -39,7 +39,7 @@ export function Profile() {
 		}
 	};
 
-	function onClickCancellation(e) {
+	function onClickCancellation() {
 		resetValidation(true, {
 			name: user?.name || '',
 			email: user?.email || '',

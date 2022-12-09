@@ -1,15 +1,21 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { setForgotPassword } from '../../../../utils/Api';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
-import styles from './ForgotPassword.module.css';
-import { Link } from 'react-router-dom';
-import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
+import { forgotPassword } from '../../../../services/actions/forgotPassword';
+
 import { Preloader } from '../../../Preloader/Preloader';
+import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
+import styles from './ForgotPassword.module.css';
 
 export function ForgotPassword() {
-	const history = useHistory();
 	const [load, setLoad] = useState(false);
+
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const user = useSelector((store) => store.userReducer.user);
 
 	const {
 		formValidity,
@@ -25,16 +31,15 @@ export function ForgotPassword() {
 		if (formValidity) {
 			setLoad(true);
 
-			try {
-				const response = await setForgotPassword(values.email);
-				response?.success && history.push('/reset-password');
-			} catch(err) {
-				console.error(err);
-			} finally {
-				setLoad(false);
-			}
+			dispatch(forgotPassword(values.email))
+				.then(_ => history.push('/reset-password'))
+				.finally(_ => setLoad(false))
 		}
 	};
+
+	if (user) {
+		return <Redirect to="/" />
+	}
 
 	return (
 		<section className={`${styles["forgot-password"]}`}>

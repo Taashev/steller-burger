@@ -1,4 +1,4 @@
-import { NavLink, Switch, Route, useRouteMatch, useLocation } from 'react-router-dom';
+import { NavLink, Switch, Route, useRouteMatch, useLocation, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../services/actions/logout';
 
@@ -8,17 +8,12 @@ import styles from './PersanalArea.module.css';
 export function PersanalArea() {
 	const { path } = useRouteMatch();
 	const { pathname } = useLocation();
+	const history = useHistory();
 
 	const dispatch = useDispatch();
 
 	async function onClickLogout() {
 		dispatch(logout())
-			.then((res) => {
-				console.log(res)
-			})
-			.catch((err) => {
-				console.log(err)
-			})
 	};
 
 	return (

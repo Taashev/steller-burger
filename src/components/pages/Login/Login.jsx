@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useLocation, Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
 
@@ -9,7 +8,7 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import styles from './Login.module.css';
 
 export function Login() {
-	const history = useHistory();
+	const { state } = useLocation();
 	const dispatch = useDispatch();
 
 	const user = useSelector((store) => store.userReducer.user);
@@ -31,11 +30,11 @@ export function Login() {
 		}
 	};
 
-	useEffect(() => {
-		if (user) {
-			history.push('/');
-		}
-	}, [history, user]);
+	if (user) {
+		return <Redirect
+			to={ state?.from || '/' }
+		/>
+	}
 
 	return (
 		<section className={styles.login}>

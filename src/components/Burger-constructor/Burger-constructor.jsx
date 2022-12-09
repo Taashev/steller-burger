@@ -1,22 +1,27 @@
 import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useDrop } from 'react-dnd/dist/hooks';
 import SimpleBar from 'simplebar-react';
-import styles from './Burger-constructor.module.css';
 
+import { Modal } from '../Modal/Modal';
 import { addConstructorBun, addConstructorIngredient, updateConstructorIngredient }
 	from '../../services/actions/constructorIngredients';
 import { setOrder, clearOrderDetails } from '../../services/actions/orderDetails';
-import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/Order-details';
 import { CurrencyIcon, Button } 
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerConstructorElement } 
 	from './Burger-constructor-element/Burger-constructor-element';
 
+import styles from './Burger-constructor.module.css';
+
 export function BurgerConstructor() {
 	// dispatch
 	const dispatch = useDispatch();
+	
+	// history
+	const history = useHistory();
 
 	// store
 	const {
@@ -25,6 +30,7 @@ export function BurgerConstructor() {
 	} = useSelector((store) => store.constructorReducer);
 	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
 	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
+	const user = useSelector((store) => store.userReducer.user);
 
 	// dnd drop ingredient
 	const [{ isHoverBun, isHoverIngredient }, dropIngredientRef] = useDrop({
@@ -58,6 +64,10 @@ export function BurgerConstructor() {
 	
 	// handle order
 	function handleOrder() {
+		if (!user) {
+			return history.push('/login');
+		}
+
 		const ingredients = [];
 
 		if (constructorBun) {
