@@ -113,4 +113,10 @@ export function BurgerConstructorElement({ ingredient, type, id, index, onUpdate
 BurgerConstructorElement.propTypes = {
 	ingredient: ingredientPropTypes.isRequired,
 	type: PropTypes.string,
+	id: PropTypes.oneOfType([
+		PropTypes.number,
+		PropTypes.string,
+	]),
+	index: PropTypes.number,
+	onUpdateConstructor: PropTypes.func,
 };

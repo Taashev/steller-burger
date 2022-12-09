@@ -51,7 +51,6 @@ export function BurgerIngredients() {
 				Соберите бургер
 			</h1>
 			<Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
-			{  }
 			<SimpleBar
 				className={`${stylesBurgerIngredients.simplebar}`}
 				scrollableNodeProps={{ ref: simpleBarRef }}

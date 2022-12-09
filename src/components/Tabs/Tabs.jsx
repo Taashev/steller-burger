@@ -1,5 +1,6 @@
-import stylesTabs from './Tabs.module.css';
+import PropTypes from 'prop-types';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
+import stylesTabs from './Tabs.module.css';
 
 export function Tabs({ currentTab, setCurrentTab }) {
 	const setTab = (tab) => {
@@ -22,4 +23,9 @@ export function Tabs({ currentTab, setCurrentTab }) {
 			</Tab>
 		</div>
 	);
+};
+
+Tabs.propTypes = {
+	currentTab: PropTypes.string,
+	setCurrentTab: PropTypes.func,
 };

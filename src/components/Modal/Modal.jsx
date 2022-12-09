@@ -44,4 +44,6 @@ export function Modal({ children, title, onClose }) {
 
 Modal.propTypes = {
 	children: PropTypes.any,
+	title: PropTypes.string,
+	onClose: PropTypes.func,
 };
