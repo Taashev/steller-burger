@@ -1,23 +1,28 @@
 import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useDrop } from 'react-dnd/dist/hooks';
-import { v1 } from 'uuid';
 import SimpleBar from 'simplebar-react';
-import styles from './Burger-constructor.module.css';
 
-import { ADD_CONSTRUCTOR_BUN, ADD_CONSTRUCTOR_INGREDIENT, UPDATE_CONSTRUCTOR_INGREDIENT } 
-	from '../../services/actions/constructorIngredients';
-import { setOrder, CLEAR_ORDER_DETAILS } from '../../services/actions/orderDetails';
 import { Modal } from '../Modal/Modal';
+import { addConstructorBun, addConstructorIngredient, updateConstructorIngredient }
+	from '../../services/actions/constructorIngredients';
+import { setOrder, clearOrderDetails } from '../../services/actions/orderDetails';
 import { OrderDetails } from '../OrderDetails/Order-details';
 import { CurrencyIcon, Button } 
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerConstructorElement } 
-	from '../Burger-constructor-element/Burger-constructor-element';
+	from './Burger-constructor-element/Burger-constructor-element';
+
+import styles from './Burger-constructor.module.css';
+import { Preloader } from '../Preloader/Preloader';
 
 export function BurgerConstructor() {
 	// dispatch
 	const dispatch = useDispatch();
+	
+	// history
+	const history = useHistory();
 
 	// store
 	const {
@@ -25,16 +30,23 @@ export function BurgerConstructor() {
 		constructorIngredients,
 	} = useSelector((store) => store.constructorReducer);
 	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
+	const setOrderDetailsRequest = useSelector((store) => store.orderDetailsReducer.setOrderDetailsRequest);
 	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
+	const user = useSelector((store) => store.userReducer.user);
 
 	// dnd drop ingredient
-	const [, dropIngredientRef] = useDrop({
+	const [{ isHoverBun, isHoverIngredient }, dropIngredientRef] = useDrop({
 		accept: 'ingredient',
 		drop(ingredient) {
 			ingredient.type === 'bun'
-				? dispatch({ type: ADD_CONSTRUCTOR_BUN, bun: ingredient })
-				: dispatch({ type: ADD_CONSTRUCTOR_INGREDIENT, ingredient: { ingredient, id: v1() } });
+				? dispatch(addConstructorBun(ingredient))
+				: dispatch(addConstructorIngredient(ingredient));
 		},
+		collect: (monitor) => {
+			return monitor.getItem()?.type === 'bun'
+				? { isHoverBun: monitor.isOver() }
+				: { isHoverIngredient: monitor.isOver() }
+		}
 	});
 
 	const handlerUpdateConstructor = useCallback((dragIndex, hoverIndex) => {
@@ -43,19 +55,21 @@ export function BurgerConstructor() {
       newCards.splice(dragIndex, 1);
       newCards.splice(hoverIndex, 0, dragCard);
 
-      dispatch({ type: UPDATE_CONSTRUCTOR_INGREDIENT, constructorIngredients: newCards });
-    }, [constructorIngredients, dispatch]);
+      dispatch(updateConstructorIngredient(newCards));
+	}, [constructorIngredients, dispatch]);
 
 
 	// close order modal
 	function closeOrderModal() {
-		dispatch({
-			type: CLEAR_ORDER_DETAILS,
-		});
+		dispatch(clearOrderDetails());
 	};
 	
 	// handle order
 	function handleOrder() {
+		if (!user) {
+			return history.push('/login');
+		}
+
 		const ingredients = [];
 
 		if (constructorBun) {
@@ -68,40 +82,60 @@ export function BurgerConstructor() {
 		}
 	};
 
-	// handle bun component
-	function handleBunComponent(position) {
-		return constructorBun
-			? <BurgerConstructorElement type={position} ingredient={constructorBun} />
-			: 'Выберите булочку';
-	};
-
-	// handle ingredients component
-	const handleIngredientsComponent = constructorIngredients.length > 0
-		? constructorIngredients.map(({id, ingredient}, index) => {
-				return <BurgerConstructorElement
-					key={id}
-					id={id}
-					index={index}
-					ingredient={ingredient}
-					onUpdateConstructor={handlerUpdateConstructor} />
-			})
-		: 'Выберите инредиенты';
-		//!TODO: заглушки "Выберите ингредиенты это временное решение..."
-
 	return (
 		<>
 			<section className={`pt-25 pl-4 ${styles.constructor}`}>
 				<div className={`${styles.constructor__wrapper}`} ref={dropIngredientRef}>
 					<div className={`pr-4 ${styles.constructor__element_top}`}>
-						{ handleBunComponent('top') }
+						{
+							constructorBun 
+								? <BurgerConstructorElement type='top' ingredient={constructorBun} />
+								: <div 
+										className={`
+											${styles.constructor__element_default}
+											${styles.constructor__element_default_top}
+											${isHoverBun && styles.hover}
+										`}
+									>
+										Выберите булочку
+									</div>
+						}
 					</div>
-					<SimpleBar className={styles.simplebar}>
+					<SimpleBar className={`${styles.simplebar}`}>
 						<ul className={`${styles.constructor__list}`}>
-							{ handleIngredientsComponent }
+							{
+								constructorIngredients.length > 0
+									? constructorIngredients.map(({id, ingredient}, index) => {
+											return <BurgerConstructorElement
+												key={id}
+												id={id}
+												index={index}
+												ingredient={ingredient}
+												onUpdateConstructor={handlerUpdateConstructor} />
+										})
+									: <div className={`
+												${styles.constructor__element_default}
+												${isHoverIngredient && styles.hover}
+											`}
+										>
+											Выберите булочку
+										</div>
+							}
 						</ul>
 					</SimpleBar>
 					<div className={`pr-4 ${styles.constructor__element_bottom}`}>
-						{ handleBunComponent('bottom') }
+						{
+							constructorBun
+								? <BurgerConstructorElement type='bottom' ingredient={constructorBun} />
+								: <div className={`
+											${styles.constructor__element_default}
+											${styles.constructor__element_default_bottom}
+											${isHoverBun && styles.hover}
+										`}
+									>
+										Выберите булочку
+									</div>
+						}
 					</div>
 				</div>
 				<div className={`mt-10 pr-4 ${styles.footer}`}>
@@ -116,6 +150,15 @@ export function BurgerConstructor() {
 					</Button>
 				</div>
 			</section>
+			{
+				setOrderDetailsRequest &&
+					<Modal>
+						<Preloader width={50} height={50} />
+						<p style={{ textAlign: 'center', fontSize: 32 }}>
+							Оформляем заказ...
+						</p>
+					</Modal>
+			}
 			{
 				orderId &&
 					<Modal onClose={closeOrderModal}>

@@ -1,13 +1,12 @@
 import { useMemo, useRef, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { useSelector } from 'react-redux/es/exports';
 import SimpleBar from 'simplebar-react';
+
+import { Tabs } from '../Tabs/Tabs';
+import { IngredientCategory } from './Ingredient-category/Ingredient-category';
+
 import stylesBurgerIngredients from './Burger-ingredients.module.css';
 
-import { REMOVE_INGREDIENT } from '../../services/actions/ingredientDetails';
-import { Tabs } from '../Tabs/Tabs';
-import { Modal } from '../Modal/Modal';
-import { IngredientDetails } from '../IngredientDetails/Ingredient-details';
-import { IngredientCategory } from '../Ingredient-category/Ingredient-category';
 
 export function BurgerIngredients() {
 	const simpleBarRef = useRef();
@@ -17,9 +16,7 @@ export function BurgerIngredients() {
 
 	const [ currentTab, setCurrentTab ] = useState('bun');
 
-	const dispatch = useDispatch();
 	const ingredients = useSelector((store) => store.burgerIngredientsReducer.ingredients);
-	const ingredientDetails = useSelector((store) => store.ingredientDetailsReducer.ingredientDetails);
 
 	const bun = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'bun'), [ingredients]);
 	const main = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'main'), [ingredients]);
@@ -35,13 +32,6 @@ export function BurgerIngredients() {
 
 		return () => simpleBar.removeEventListener('scroll', onScroll);
 	}, []);
-	
-	// close details modal
-	function closeDetailsModal() {
-		dispatch({
-			type: REMOVE_INGREDIENT,
-		});
-	};
 
 	// on scroll
 	function onScroll() {
@@ -56,40 +46,31 @@ export function BurgerIngredients() {
 	};
 
 	return (
-		<>
-			<section className={`pt-10 ${stylesBurgerIngredients.burgerIngredients}`}>
-				<h1 className="text text_type_main-large mb-5">
-					Соберите бургер
-				</h1>
-				<Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
-				{  }
-				<SimpleBar
-					className={`${stylesBurgerIngredients.simplebar}`}
-					scrollableNodeProps={{ ref: simpleBarRef }}
-				>
-					<IngredientCategory 
-						id="bun"
-						title="Булки"
-						ingredients={bun}
-						refCatefory={bunCategoryRef} />
-					<IngredientCategory 
-						id="sauce"
-						title="Соусы"
-						ingredients={sauce}
-						refCatefory={sauceCategoryRef} />
-					<IngredientCategory 
-						id="main"
-						title="Начинки"
-						ingredients={main}
-						refCatefory={mainCategoryRef} />
-				</SimpleBar>
-			</section>
-			{
-				ingredientDetails &&
-					<Modal title={"Детали ингредиента"} onClose={closeDetailsModal}>
-						<IngredientDetails />
-					</Modal>
-			}
-		</>
+		<section className={`pt-10 ${stylesBurgerIngredients.burgerIngredients}`}>
+			<h1 className="text text_type_main-large mb-5">
+				Соберите бургер
+			</h1>
+			<Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
+			<SimpleBar
+				className={`${stylesBurgerIngredients.simplebar}`}
+				scrollableNodeProps={{ ref: simpleBarRef }}
+			>
+				<IngredientCategory 
+					id="bun"
+					title="Булки"
+					ingredients={bun}
+					refCatefory={bunCategoryRef} />
+				<IngredientCategory 
+					id="sauce"
+					title="Соусы"
+					ingredients={sauce}
+					refCatefory={sauceCategoryRef} />
+				<IngredientCategory 
+					id="main"
+					title="Начинки"
+					ingredients={main}
+					refCatefory={mainCategoryRef} />
+			</SimpleBar>
+		</section>
 	);
 };

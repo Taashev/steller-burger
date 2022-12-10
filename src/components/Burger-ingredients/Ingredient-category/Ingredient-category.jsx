@@ -1,8 +1,8 @@
-import stylesIngredients from './Ingredient-category.module.css';
 import PropTypes from 'prop-types';
 
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
-import { ingredientPropTypes } from '../../utils/template-prop-types';
+import { ingredientPropTypes } from '../../../utils/template-prop-types';
+import stylesIngredients from './Ingredient-category.module.css';
 
 export function IngredientCategory({ title, ingredients, id, refCatefory }) {
 	return (
@@ -28,4 +28,5 @@ IngredientCategory.propTypes = {
 		ingredientPropTypes.isRequired
 	).isRequired,
 	id: PropTypes.string,
+	refCatefory: PropTypes.object,
 };

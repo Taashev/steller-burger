@@ -18,6 +18,38 @@
 	list-style: none;
 }
 
+.constructor__element_default {
+	margin-left: auto;
+	padding: 16px 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: var(--common-border-radius-s);
+	background: var(--background-element);
+	max-width: 536px;
+	width: 100%;
+	min-height: 80px;
+	font-family: 'Jet Brains Mono';
+	font-size: 16px;
+	line-height: 24px;
+	color: #F2F2F3;
+	flex-grow: 1;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.constructor__element_default_top {
+	border-radius: var(--top-constructor-item-border-radius);
+}
+
+.constructor__element_default_bottom {
+	border-radius: var(--bottom-constructor-item-border-radius);
+}
+
+.hover {
+	border: 2px solid var(--text-inactive-color);
+}
+
 .constructor__element_top,
 .constructor__element_bottom {
 	width: 100%;

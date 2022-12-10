@@ -1,26 +1,23 @@
 import { getIngredients as ApiGetIngredients } from '../../utils/Api';
+import { SET_ORDER_DETAILS_FAILED } from './orderDetails';
 
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
 
 export function getIngredients() {
-	return function(dispatch) {
+	return async function(dispatch) {
 		dispatch({ type: GET_INGREDIENTS });
-		
-		ApiGetIngredients()
-			.then((res) => {
-				if (res && res.success) {
-					dispatch({
-						type: GET_INGREDIENTS_SUCCESS,
-						data: res.data,
-					});
-				}
-			})
-			.catch((err) => {
-				dispatch({
-					type: GET_INGREDIENTS_FAILED
-				});
-			})
+
+		try {
+			const response = await ApiGetIngredients();
+
+			dispatch({
+				type: GET_INGREDIENTS_SUCCESS,
+				data: response.data,
+			});
+		} catch(err) {
+			dispatch({ type: SET_ORDER_DETAILS_FAILED });
+		}
 	};
 };

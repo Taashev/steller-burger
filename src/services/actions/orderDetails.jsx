@@ -1,5 +1,5 @@
 import { setOrder as ApiSetOrder } from '../../utils/Api';
-import { CLEAR_CONSTRUCTOR } from './constructorIngredients';
+import { clearConstructor } from './constructorIngredients';
 
 export const SET_ORDER_DETAILS_REQUEST = 'SET_ORDER_DETAILS_REQUEST';
 export const SET_ORDER_DETAILS_SUCCESS = 'SET_ORDER_DETAILS_SUCCESS';
@@ -18,7 +18,7 @@ export function setOrder(ingredients) {
 				});
 			})
 			.then(_ => {
-				dispatch({ type: CLEAR_CONSTRUCTOR })
+				dispatch(clearConstructor())
 			})
 			.catch((err) => {
 				console.log(err)
@@ -27,4 +27,8 @@ export function setOrder(ingredients) {
 				});
 			})
 	};
+};
+
+export function clearOrderDetails() {
+	return{ type: CLEAR_ORDER_DETAILS };
 };

@@ -1,0 +1,21 @@
+.form {
+	max-width: 480px;
+	display: flex;
+	flex-direction: column;
+}
+
+.group {
+	margin-bottom: calc(var(--offset-base-size) * 6);
+}
+
+.input label {
+	top: 8px;
+}
+.input p {
+	margin: 0 0 0 calc(var(--offset-base-size) * 6);
+}
+
+.form__footer {
+	display: flex;
+	justify-content: flex-end;
+}
