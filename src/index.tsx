@@ -10,9 +10,9 @@ import App from './components/App/App';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import { rootReducer } from './services/reducers/rootReducer'
 
-import reportWebVitals from './reportWebVitals';
-import 'simplebar-react/dist/simplebar.min.css';
 import './index.css';
+import 'simplebar-react/dist/simplebar.min.css';
+import reportWebVitals from './reportWebVitals';
 
 
 // compose enhancers

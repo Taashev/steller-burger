@@ -21,16 +21,24 @@ import { TargetIngredient } from '../pages/TargetIngredient/TargetIngredient';
 
 import stylesApp from './App.module.css';
 
+interface ILocationState {
+	hash: string;
+	key: string | undefined;
+	pathname: string;
+	search: string;
+	state: ILocationState | null;
+	background?: ILocationState | undefined;
+};
 
 function App() {
-	const location = useLocation();
-	const history = useHistory();
-	const background = location.state?.background;
+	const history = useHistory<any>();
+	const location = useLocation<ILocationState>();
+	const background: ILocationState | undefined = location.state?.background;
 
-	const dispatch = useDispatch();
-	const ingredientsRequest = useSelector((store) => store.burgerIngredientsReducer.ingredientsRequest);
+	const dispatch = useDispatch<any>();
+	const ingredientsRequest = useSelector((store: any) => store.burgerIngredientsReducer.ingredientsRequest);
 
-	function handleModalClose() {
+	function handleModalClose(): void {
 		history.goBack();
 	};
 	
@@ -46,7 +54,7 @@ function App() {
 		<div className={`text text_type_main-default ${stylesApp.app}`}>
 			{
 				ingredientsRequest
-					? <Preloader width={50} height={50} />
+					? <Preloader width="50px" height="50px" />
 					: <>
 							<AppHeader />
 							<Switch location={ background || location }>
