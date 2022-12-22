@@ -6,6 +6,8 @@ import { getUser } from '../../services/actions/user';
 import { getIngredients } from '../../services/actions/ingredients';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
+import { ILocationState } from '../../services/types/locationState';
+
 import { Main } from '../Main/Main';
 import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
@@ -21,22 +23,13 @@ import { TargetIngredient } from '../pages/TargetIngredient/TargetIngredient';
 
 import stylesApp from './App.module.css';
 
-interface ILocationState {
-	hash: string;
-	key: string | undefined;
-	pathname: string;
-	search: string;
-	state: ILocationState | null;
-	background?: ILocationState | undefined;
-};
-
-function App() {
-	const history = useHistory<any>();
+function App(): JSX.Element {
+	const history = useHistory();
 	const location = useLocation<ILocationState>();
 	const background: ILocationState | undefined = location.state?.background;
 
 	const dispatch = useDispatch<any>();
-	const ingredientsRequest = useSelector<any>((store) => store.burgerIngredientsReducer.ingredientsRequest);
+	const ingredientsRequest = useSelector((store: any): boolean => store.burgerIngredientsReducer.ingredientsRequest);
 
 	function handleModalClose(): void {
 		history.goBack();

@@ -1,9 +1,14 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import stylesTabs from './Tabs.module.css';
 
-export function Tabs({ currentTab, setCurrentTab }) {
-	const setTab = (tab) => {
+interface ITabsState {
+	currentTab: string;
+	setCurrentTab: any;
+};
+
+export function Tabs({ currentTab, setCurrentTab }: ITabsState): JSX.Element {
+	const setTab = (tab: string): void => {
 		setCurrentTab(tab);
 		const element = document.querySelector(`#${tab}`);
 
@@ -23,9 +28,4 @@ export function Tabs({ currentTab, setCurrentTab }) {
 			</Tab>
 		</div>
 	);
-};
-
-Tabs.propTypes = {
-	currentTab: PropTypes.string,
-	setCurrentTab: PropTypes.func,
 };
