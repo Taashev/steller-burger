@@ -36,7 +36,7 @@ function App() {
 	const background: ILocationState | undefined = location.state?.background;
 
 	const dispatch = useDispatch<any>();
-	const ingredientsRequest = useSelector((store: any) => store.burgerIngredientsReducer.ingredientsRequest);
+	const ingredientsRequest = useSelector<any>((store) => store.burgerIngredientsReducer.ingredientsRequest);
 
 	function handleModalClose(): void {
 		history.goBack();
