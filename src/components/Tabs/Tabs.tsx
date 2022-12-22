@@ -2,12 +2,12 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components"
 import stylesTabs from './Tabs.module.css';
 
-interface ITabsState {
+interface ITabsProps {
 	currentTab: string;
 	setCurrentTab: any;
 };
 
-export function Tabs({ currentTab, setCurrentTab }: ITabsState): JSX.Element {
+export function Tabs({ currentTab, setCurrentTab }: ITabsProps): JSX.Element {
 	const setTab = (tab: string): void => {
 		setCurrentTab(tab);
 		const element = document.querySelector(`#${tab}`);

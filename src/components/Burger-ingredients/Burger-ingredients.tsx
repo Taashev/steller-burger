@@ -66,17 +66,17 @@ export function BurgerIngredients(): JSX.Element {
 					id="bun"
 					title="Булки"
 					ingredients={bun}
-					refCatefory={bunCategoryRef} />
+					refCategory={bunCategoryRef} />
 				<IngredientCategory 
 					id="sauce"
 					title="Соусы"
 					ingredients={sauce}
-					refCatefory={sauceCategoryRef} />
+					refCategory={sauceCategoryRef} />
 				<IngredientCategory 
 					id="main"
 					title="Начинки"
 					ingredients={main}
-					refCatefory={mainCategoryRef} />
+					refCategory={mainCategoryRef} />
 			</SimpleBar>
 		</section>
 	);
