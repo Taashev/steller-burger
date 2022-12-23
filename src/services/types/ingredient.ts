@@ -11,5 +11,4 @@ export interface IIngredient {
 	type: string;
 	__v?: number;
 	_id: string;
-	id?: string | number;
 };
