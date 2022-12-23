@@ -1,26 +1,32 @@
-import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useDrop } from 'react-dnd/dist/hooks';
 import SimpleBar from 'simplebar-react';
 
+import {
+	addConstructorBun,
+	addConstructorIngredient,
+} from '../../services/actions/constructorIngredients';
+import {
+	setOrder,
+	clearOrderDetails
+} from '../../services/actions/orderDetails';
+import { IIngredient } from '../../services/types/ingredient';
+
 import { Modal } from '../Modal/Modal';
-import { addConstructorBun, addConstructorIngredient, updateConstructorIngredient }
-	from '../../services/actions/constructorIngredients';
-import { setOrder, clearOrderDetails } from '../../services/actions/orderDetails';
 import { OrderDetails } from '../OrderDetails/Order-details';
-import { CurrencyIcon, Button } 
+import { Preloader } from '../Preloader/Preloader';
+import { BurgerConstructorElement }
+from './Burger-constructor-element/Burger-constructor-element';
+import { CurrencyIcon, Button }
 	from '@ya.praktikum/react-developer-burger-ui-components';
-import { BurgerConstructorElement } 
-	from './Burger-constructor-element/Burger-constructor-element';
 
 import styles from './Burger-constructor.module.css';
-import { Preloader } from '../Preloader/Preloader';
 
-export function BurgerConstructor() {
+export function BurgerConstructor(): JSX.Element {
 	// dispatch
 	const dispatch = useDispatch();
-	
+
 	// history
 	const history = useHistory();
 
@@ -28,16 +34,19 @@ export function BurgerConstructor() {
 	const {
 		constructorBun,
 		constructorIngredients,
-	} = useSelector((store) => store.constructorReducer);
-	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
-	const setOrderDetailsRequest = useSelector((store) => store.orderDetailsReducer.setOrderDetailsRequest);
-	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
-	const user = useSelector((store) => store.userReducer.user);
+	} = useSelector((store: any): {
+		constructorBun: IIngredient;
+		constructorIngredients: [{ id: string; ingredient: IIngredient }];
+	} => store.constructorReducer);
+	const orderId = useSelector((store: any) => store.orderDetailsReducer.orderId);
+	const setOrderDetailsRequest = useSelector((store: any) => store.orderDetailsReducer.setOrderDetailsRequest);
+	const totalPrice = useSelector((store: any) => store.totalPriceReducer.totalPrice);
+	const user = useSelector((store: any) => store.userReducer.user);
 
 	// dnd drop ingredient
 	const [{ isHoverBun, isHoverIngredient }, dropIngredientRef] = useDrop({
 		accept: 'ingredient',
-		drop(ingredient) {
+		drop(ingredient: IIngredient) {
 			ingredient.type === 'bun'
 				? dispatch(addConstructorBun(ingredient))
 				: dispatch(addConstructorIngredient(ingredient));
@@ -49,23 +58,13 @@ export function BurgerConstructor() {
 		}
 	});
 
-	const handlerUpdateConstructor = useCallback((dragIndex, hoverIndex) => {
-      const dragCard = constructorIngredients[dragIndex];
-      const newCards = [...constructorIngredients];
-      newCards.splice(dragIndex, 1);
-      newCards.splice(hoverIndex, 0, dragCard);
-
-      dispatch(updateConstructorIngredient(newCards));
-	}, [constructorIngredients, dispatch]);
-
-
 	// close order modal
-	function closeOrderModal() {
+	function closeOrderModal(): void {
 		dispatch(clearOrderDetails());
 	};
-	
+
 	// handle order
-	function handleOrder() {
+	function handleOrder(): void {
 		if (!user) {
 			return history.push('/login');
 		}
@@ -76,7 +75,7 @@ export function BurgerConstructor() {
 			ingredients.push(constructorBun._id);
 			constructorIngredients.forEach(({ingredient}) => ingredients.push(ingredient._id));
 	
-			dispatch(setOrder(ingredients));
+			dispatch<any>(setOrder(ingredients));
 		} else {
 			alert('Выберите булочку')
 		}
@@ -111,7 +110,7 @@ export function BurgerConstructor() {
 												id={id}
 												index={index}
 												ingredient={ingredient}
-												onUpdateConstructor={handlerUpdateConstructor} />
+											/>
 										})
 									: <div className={`
 												${styles.constructor__element_default}

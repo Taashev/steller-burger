@@ -1,23 +1,52 @@
-import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useRef, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd/dist/hooks';
-import PropTypes from 'prop-types';
+
+import {
+	setTotalPrice,
+	removeTotalPrice
+} from '../../../services/actions/totalPrice';
+import {
+	removeConstructorIngredient,
+	updateConstructorIngredient
+} from '../../../services/actions/constructorIngredients';
+import { IIngredient } from '../../../services/types/ingredient';
+
+import {
+	ConstructorElement,
+	DragIcon
+} from '@ya.praktikum/react-developer-burger-ui-components';
+
 import styles from './Burger-constructor-element.module.css';
 
-import { setTotalPrice, removeTotalPrice } from '../../../services/actions/totalPrice';
-import { removeConstructorIngredient } from '../../../services/actions/constructorIngredients';
-import { ingredientPropTypes } from '../../../utils/template-prop-types';
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+interface BurgerConstructorElementProps {
+	ingredient: IIngredient;
+	id?: string;
+	type?: 'top' | 'bottom';
+	index?: number;
+};
 
-export function BurgerConstructorElement({ ingredient, type, id, index, onUpdateConstructor }) {
+export function BurgerConstructorElement({
+	ingredient,
+	type,
+	id,
+	index
+}: BurgerConstructorElementProps): JSX.Element {
 	// props
 	const { name, price, image } = ingredient;
 
 	// ref
-	const ref = useRef();
+	const ref = useRef<HTMLLIElement | null>(null);
 
 	// dispatch
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<any>();
+
+	// store
+	const {
+		constructorIngredients,
+	} = useSelector((store: any): {
+		constructorIngredients: [{ ingredient: IIngredient; id: string; }];
+	} => store.constructorReducer);
 
 	// component did update price
 	useEffect(() => {
@@ -41,13 +70,13 @@ export function BurgerConstructorElement({ ingredient, type, id, index, onUpdate
     collect: monitor => ({
       handlerId: monitor.getHandlerId(),
     }),
-    hover(item, monitor) {
+    hover(item: any, monitor: any) {
       if (!ref.current) {
         return
       }
 
-      const dragIndex = item.index;
-      const hoverIndex = index;
+      const dragIndex: number = item.index;
+      const hoverIndex: number | undefined = index;
       if (dragIndex === hoverIndex) {
         return
       }
@@ -57,25 +86,37 @@ export function BurgerConstructorElement({ ingredient, type, id, index, onUpdate
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-      if (dragIndex < hoverIndex && hoverClientY > hoverMiddleY) {
+      if (dragIndex < hoverIndex! && hoverClientY > hoverMiddleY) {
         return
       }
 
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+      if (dragIndex > hoverIndex! && hoverClientY > hoverMiddleY) {
         return
       }
 
-      onUpdateConstructor(dragIndex, hoverIndex);
+      // onUpdateConstructor(dragIndex, hoverIndex);
+      handlerUpdateConstructor(dragIndex, hoverIndex);
       item.index = hoverIndex;
     }
-  })
+  });
 
-	const opacity = isDragging ? 0 : 1
+	const opacity: 0 | 1 = isDragging ? 0 : 1
+
+	// handle update constructor
+	const handlerUpdateConstructor = useCallback(
+		(dragIndex: number, hoverIndex: number | undefined): void => {
+			const dragCard = constructorIngredients[dragIndex];
+			const newCards = [...constructorIngredients];
+			newCards.splice(dragIndex, 1);
+			newCards.splice(hoverIndex!, 0, dragCard);
+
+			dispatch(updateConstructorIngredient(newCards));
+}, [constructorIngredients, dispatch]);
 
 	if (ingredient.type !== 'bun') drag(drop(ref));
 
 	// remove ingredient
-	function removeIngredient() {
+	function removeIngredient(): void {
 		dispatch(removeConstructorIngredient(id));
 	};
 
@@ -108,15 +149,4 @@ export function BurgerConstructorElement({ ingredient, type, id, index, onUpdate
 				}
 		</>
 	);
-};
-
-BurgerConstructorElement.propTypes = {
-	ingredient: ingredientPropTypes.isRequired,
-	type: PropTypes.string,
-	id: PropTypes.oneOfType([
-		PropTypes.number,
-		PropTypes.string,
-	]),
-	index: PropTypes.number,
-	onUpdateConstructor: PropTypes.func,
 };

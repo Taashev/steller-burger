@@ -28,7 +28,7 @@ export function CardIngredient({ ingredient }: ICardIngredient): JSX.Element {
 	// store
 	const {
 		constructorBun,
-		constructorIngredients 
+		constructorIngredients,
 	} = useSelector((store: any): {
 		constructorBun: IIngredient;
 		constructorIngredients: [{ ingredient: IIngredient; id: string; }];
@@ -42,7 +42,6 @@ export function CardIngredient({ ingredient }: ICardIngredient): JSX.Element {
 
 	// counter
   const counter = useMemo(() => {
-		console.log(constructorIngredients)
 		return ingredient.type !== 'bun'
 			? constructorIngredients.filter(({ ingredient: i }) => i._id === ingredient._id).length
 			: constructorBun?._id === ingredient._id
