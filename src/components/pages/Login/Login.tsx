@@ -2,17 +2,23 @@ import { useLocation, Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
 
-import { Preloader } from '../../Preloader/Preloader';
 import { signIn } from '../../../services/actions/login';
-import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ILocationState } from '../../../services/types/locationState';
+
+import { Preloader } from '../../Preloader/Preloader';
+import {
+	Input,
+	PasswordInput,
+	Button
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './Login.module.css';
 
 export function Login() {
-	const { state } = useLocation();
-	const dispatch = useDispatch();
+	const { state } = useLocation<ILocationState>();
+	const dispatch = useDispatch<any>();
 
-	const user = useSelector((store) => store.userReducer.user);
-	const loginRequest = useSelector((store) => store.loginReducer.loginRequest);
+	const user = useSelector((store: any) => store.userReducer.user);
+	const loginRequest = useSelector((store: any) => store.loginReducer.loginRequest);
 
 	const {
 		formValidity,
@@ -22,7 +28,7 @@ export function Login() {
 		onBlurInput,
 	} = useFormValidation({ email: '', password: '' });
 
-	function onSubmit(e) {
+	function onSubmit(e: any): void {
 		e.preventDefault();
 		
 		if (formValidity) {
@@ -64,8 +70,6 @@ export function Login() {
 							onChange={onChangeInput}
 							onBlurCapture={onBlurInput}
 							value={values.password}
-							error={errorMessages.password ? true : false}
-							errorText={errorMessages.password}
 							extraClass={`${styles.input}`}
 						/>
 					</label>

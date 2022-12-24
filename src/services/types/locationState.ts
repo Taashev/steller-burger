@@ -5,4 +5,5 @@ export interface ILocationState {
 	search: string;
 	state: ILocationState | null;
 	background?: ILocationState | undefined;
+	from?: ILocationState | undefined;
 };

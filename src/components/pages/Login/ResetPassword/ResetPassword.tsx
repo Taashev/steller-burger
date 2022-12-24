@@ -7,26 +7,24 @@ import { setResetPassword } from '../../../../utils/Api';
 
 import { Preloader } from '../../../Preloader/Preloader';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './ResetPassword.module.css';
 
 export function ResetPassword() {
-	const [load, setLoad] = useState(false);
+	const [load, setLoad] = useState<boolean>(false);
 	const history = useHistory();
 
-	const forgotPasswordSuccess = useSelector((store) =>
+	const forgotPasswordSuccess = useSelector((store: any) =>
 		store.forgotPasswordReducer.forgotPasswordSuccess
 	);
 
 	const {
 		formValidity,
 		values,
-		errorMessages,
 		onChangeInput,
 		onBlurInput,
 	} = useFormValidation({ password: '', message: '' });
 
-	async function onSubmit(e) {
+	async function onSubmit(e: any) {
 		e.preventDefault();
 
 		if (formValidity) {
@@ -60,8 +58,6 @@ export function ResetPassword() {
 							onChange={onChangeInput}
 							onBlurCapture={onBlurInput}
 							value={values.password}
-							error={errorMessages.password ? true : false}
-							errorText={errorMessages.password}
 							extraClass={`${styles.input}`}
 						/>
 					</label>
