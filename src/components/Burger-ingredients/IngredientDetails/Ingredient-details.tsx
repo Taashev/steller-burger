@@ -1,16 +1,18 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { IIngredient } from '../../../services/types/ingredient';
 import styles from './Ingredient-details.module.css';
 
-export function IngredientDetails() {
-	const { ingredientId } = useParams();
-	const ingredients = useSelector((store) => store.burgerIngredientsReducer.ingredients);
-	const ingredinet = ingredients.find((item) => item._id === ingredientId);
+export function IngredientDetails(): JSX.Element {
+	const { ingredientId } = useParams<any>();
+	const ingredients = useSelector(
+		(store: any): Array<IIngredient> => store.burgerIngredientsReducer.ingredients);
+	const ingredinet = ingredients.find((item: IIngredient) => item._id === ingredientId);
 
   return (
     <div className={`${styles.details}`}>
       <picture>
-        <source srcSet={ingredinet?.image__mobile} media="(max-width: 769px)" />
+        <source srcSet={ingredinet?.image_mobile} media="(max-width: 769px)" />
         <img className={`mb-4 ${styles.details__img}`} src={ingredinet?.image} alt={ingredinet?.name} />
       </picture>
       <span className={`text_type_main-medium mb-8`}>{ingredinet?.name}</span>
