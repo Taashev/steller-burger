@@ -29,7 +29,7 @@ export function Login() {
     e.preventDefault();
 
     if (formValidity) {
-      dispatch(signIn(values.email, values.password));
+      dispatch(signIn({ email: values.email, password: values.password }));
     }
   }
 

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 
-import { IIngredient } from '../../../services/types/ingredient';
+import { IIngredient } from '../../../services/types';
 import { ILocationState } from '../../../services/types/locationState';
 import { getIngredientDetails } from '../../../services/actions/ingredientDetails';
 

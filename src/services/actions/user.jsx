@@ -12,7 +12,6 @@ export function getUser() {
 
 		try {
 			const getUserResponse = await withRefreshToken(ApiGetUser);
-			// const getUserResponse = await ApiGetUser();
 
 			if (getUserResponse.success && getUserResponse) {
 				dispatch({ type: USER_SUCCESS, user: getUserResponse.user });

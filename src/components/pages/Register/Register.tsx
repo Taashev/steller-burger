@@ -37,7 +37,7 @@ export function Register() {
       setLoad(true);
 
       try {
-        const response = await signUp(email, password, name);
+        const response = await signUp({ email, password, name });
         response?.success && history.push('/login');
       } catch (err) {
         alert('Email уже занят');

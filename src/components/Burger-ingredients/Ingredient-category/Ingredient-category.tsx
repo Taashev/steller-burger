@@ -1,4 +1,4 @@
-import { IIngredient } from '../../../services/types/ingredient';
+import { IIngredient } from '../../../services/types';
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
 import stylesIngredients from './Ingredient-category.module.css';
 

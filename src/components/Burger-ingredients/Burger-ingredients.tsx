@@ -2,7 +2,7 @@ import { useMemo, useRef, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux/es/exports';
 import SimpleBar from 'simplebar-react';
 
-import { IIngredient } from '../../services/types/ingredient';
+import { IIngredient } from '../../services/types';
 
 import { Tabs } from '../Tabs/Tabs';
 import { IngredientCategory } from './Ingredient-category/Ingredient-category';

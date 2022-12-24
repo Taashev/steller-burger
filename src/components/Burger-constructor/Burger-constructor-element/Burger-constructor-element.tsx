@@ -10,7 +10,7 @@ import {
 	removeConstructorIngredient,
 	updateConstructorIngredient
 } from '../../../services/actions/constructorIngredients';
-import { IIngredient } from '../../../services/types/ingredient';
+import { IIngredient } from '../../../services/types';
 
 import {
 	ConstructorElement,

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { IIngredient } from '../../../services/types/ingredient';
+import { IIngredient } from '../../../services/types';
 import styles from './Ingredient-details.module.css';
 
 export function IngredientDetails(): JSX.Element {

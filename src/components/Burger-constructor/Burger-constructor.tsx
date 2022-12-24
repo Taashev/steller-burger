@@ -11,7 +11,7 @@ import {
 	setOrder,
 	clearOrderDetails
 } from '../../services/actions/orderDetails';
-import { IIngredient } from '../../services/types/ingredient';
+import { IIngredient } from '../../services/types';
 
 import { Modal } from '../Modal/Modal';
 import { OrderDetails } from '../OrderDetails/Order-details';
@@ -69,7 +69,7 @@ export function BurgerConstructor(): JSX.Element {
 			return history.push('/login');
 		}
 
-		const ingredients = [];
+		const ingredients: Array<string> = [];
 
 		if (constructorBun) {
 			ingredients.push(constructorBun._id);
