@@ -3,7 +3,7 @@ import styles from './Order-details.module.css';
 import img from '../../images/svg/graphics.svg';
 
 export function OrderDetails() {
-	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
+	const orderId = useSelector((store: any) => store.orderDetailsReducer.orderId);
 
 	return (
 		<div className={`pt-4 pb-15 ${styles['order-details']}`}>
