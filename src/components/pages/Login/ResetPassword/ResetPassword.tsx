@@ -31,7 +31,7 @@ export function ResetPassword() {
       setLoad(true);
 
       try {
-        const response = await setResetPassword({
+        const response: any = await setResetPassword({
           password: values.password,
           token: values.message,
         });

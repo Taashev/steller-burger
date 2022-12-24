@@ -19,12 +19,12 @@ function checkResponse(res: any): any {
 }
 
 // get ingredients
-export function getIngredients() {
+export function getIngredients<T>(): Promise<T> {
   return fetch(`${BASE_URL}/api/ingredients`).then(checkResponse);
 }
 
 // set order
-export function setOrder(order: Array<string>) {
+export function setOrder<T>(order: Array<string>): Promise<T> {
   return fetch(`${BASE_URL}/api/orders`, {
     method: 'POST',
     headers: {
@@ -38,7 +38,7 @@ export function setOrder(order: Array<string>) {
 }
 
 // sign in
-export function signIn(data: TSignIn) {
+export function signIn<T>(data: TSignIn): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/login`, {
     method: 'POST',
     headers: {
@@ -49,7 +49,7 @@ export function signIn(data: TSignIn) {
 }
 
 // sign out
-export function signOut() {
+export function signOut<T>(): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/logout`, {
     method: 'POST',
     credentials: 'same-origin',
@@ -61,18 +61,18 @@ export function signOut() {
 }
 
 // sing up
-export function signUp(data: TSignUp) {
+export function signUp<T>(data: TSignUp): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ data }),
+    body: JSON.stringify(data),
   }).then(checkResponse);
 }
 
 // refresh token
-export function refreshToken() {
+export function refreshToken<T>(): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/token`, {
     method: 'POST',
     mode: 'cors',
@@ -88,7 +88,7 @@ export function refreshToken() {
 }
 
 // get user
-export function getUser() {
+export function getUser<T>(): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/user`, {
     method: 'GET',
     mode: 'cors',
@@ -104,7 +104,7 @@ export function getUser() {
 }
 
 // update user
-export function updateUser(data: { [name: string]: string }) {
+export function updateUser<T>(data: { [name: string]: string }): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/user`, {
     method: 'PATCH',
     mode: 'cors',
@@ -121,7 +121,7 @@ export function updateUser(data: { [name: string]: string }) {
 }
 
 // email reset password
-export function setForgotPassword(email: TForgotPassword) {
+export function setForgotPassword<T>(email: TForgotPassword): Promise<T> {
   return fetch(`${BASE_URL}/api/password-reset`, {
     method: 'POST',
     headers: {
@@ -132,7 +132,7 @@ export function setForgotPassword(email: TForgotPassword) {
 }
 
 // reset password
-export function setResetPassword(data: TResetPassword) {
+export function setResetPassword<T>(data: TResetPassword): Promise<T> {
   return fetch(`${BASE_URL}/api/password-reset/reset`, {
     method: 'POST',
     headers: {

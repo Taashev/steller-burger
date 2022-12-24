@@ -6,7 +6,7 @@ export async function withRefreshToken<T>(request: any, props?: {}): Promise<T> 
     return await request(props);
   } catch (err) {
     if (err === 'jwt expired') {
-      const refreshTokenResponse = await ApiRefreshToken();
+      const refreshTokenResponse: any = await ApiRefreshToken();
 
       if (!refreshTokenResponse.success) {
         return Promise.reject(refreshTokenResponse);
