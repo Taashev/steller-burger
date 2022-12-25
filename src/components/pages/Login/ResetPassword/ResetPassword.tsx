@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useHistory, Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
@@ -24,7 +24,7 @@ export function ResetPassword() {
   const { formValidity, values, onChangeInput, onBlurInput } =
     useFormValidation({ password: '', message: '' });
 
-  async function onSubmit(e: any) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
 
     if (formValidity) {

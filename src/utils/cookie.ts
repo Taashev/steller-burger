@@ -15,7 +15,11 @@ export function getCookie(name: string): string | undefined {
 export function setCookie(
   name: string,
   value: string,
-  props?: { [name: string]: any; path?: string; expires?: any }
+  props?: {
+    [name: string]: any;
+    path?: string;
+    expires?: Date | string | number;
+  }
 ): void {
   props = {
     path: '/',
@@ -30,7 +34,7 @@ export function setCookie(
     exp = props.expires = d;
   }
 
-  if (exp && exp.toUTCString) {
+  if (exp instanceof Date && exp.toUTCString) {
     props.expires = exp.toUTCString();
   }
 

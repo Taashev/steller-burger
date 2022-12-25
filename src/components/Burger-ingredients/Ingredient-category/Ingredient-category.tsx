@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react';
 import { IIngredient } from '../../../services/types';
 import { CardIngredient } from '../Card-ingredient/Card-ingredient';
 import stylesIngredients from './Ingredient-category.module.css';
@@ -6,7 +7,7 @@ interface IIngredientCategoryProps {
   title: string;
   ingredients: Array<IIngredient>;
   id: string;
-  refCategory: any;
+  refCategory: MutableRefObject<HTMLDivElement | null>;
 }
 
 export function IngredientCategory({

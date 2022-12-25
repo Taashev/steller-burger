@@ -6,7 +6,8 @@ import {
   TResetPassword,
 } from '../services/types';
 
-const BASE_URL: string = 'https://norma.nomoreparties.space';
+const BASE_URL: 'https://norma.nomoreparties.space' =
+  'https://norma.nomoreparties.space';
 
 function checkResponse(res: any): any {
   if (res.ok) {

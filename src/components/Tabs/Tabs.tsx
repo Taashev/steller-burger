@@ -4,7 +4,7 @@ import stylesTabs from './Tabs.module.css';
 
 interface ITabsProps {
 	currentTab: string;
-	setCurrentTab: any;
+	setCurrentTab: (tab: string) => void;
 };
 
 export function Tabs({ currentTab, setCurrentTab }: ITabsProps): JSX.Element {

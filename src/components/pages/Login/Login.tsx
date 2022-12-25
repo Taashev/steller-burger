@@ -1,3 +1,4 @@
+import { FormEvent } from 'react';
 import { useLocation, Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
@@ -25,7 +26,7 @@ export function Login() {
   const { formValidity, values, errorMessages, onChangeInput, onBlurInput } =
     useFormValidation({ email: '', password: '' });
 
-  function onSubmit(e: any): void {
+  function onSubmit(e: FormEvent): void {
     e.preventDefault();
 
     if (formValidity) {

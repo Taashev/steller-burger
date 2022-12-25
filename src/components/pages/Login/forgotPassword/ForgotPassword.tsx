@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
@@ -24,7 +24,7 @@ export function ForgotPassword() {
 		values,
 	} = useFormValidation({ email: '' });
 
-	async function onSubmit(e: any) {
+	async function onSubmit(e: FormEvent) {
 		e.preventDefault();
 		
 		if (formValidity) {

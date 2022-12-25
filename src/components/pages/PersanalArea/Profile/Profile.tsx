@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
 
@@ -36,7 +36,7 @@ export function Profile() {
     onBlurInput(e);
   }
 
-  function onSubmit(e: any): void {
+  function onSubmit(e: FormEvent): void {
     e.preventDefault();
 
     if (formValidity) {

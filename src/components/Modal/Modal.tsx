@@ -13,7 +13,7 @@ interface ModalProps {
 export function Modal({ children, title, onClose }: ModalProps): JSX.Element {
 	const modalContainer: HTMLElement | null = document.querySelector('#modal');
 
-	function closeEscModale(e: any): void {
+	function closeEscModale(e: KeyboardEvent): void {
 		if (e.key === 'Escape') onClose!();
 	};
 
