@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
@@ -11,29 +11,28 @@ import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-comp
 import styles from './ForgotPassword.module.css';
 
 export function ForgotPassword() {
-	const [load, setLoad] = useState(false);
+	const [load, setLoad] = useState<boolean>(false);
 
 	const history = useHistory();
-	const dispatch = useDispatch();
-	const user = useSelector((store) => store.userReducer.user);
+	const dispatch = useDispatch<any>();
+	const user = useSelector((store: any) => store.userReducer.user);
 
 	const {
 		formValidity,
 		onChangeInput,
 		onBlurInput,
 		values,
-		errorMessages
 	} = useFormValidation({ email: '' });
 
-	async function onSubmit(e) {
+	async function onSubmit(e: FormEvent) {
 		e.preventDefault();
 		
 		if (formValidity) {
 			setLoad(true);
 
 			dispatch(forgotPassword(values.email))
-				.then(_ => history.push('/reset-password'))
-				.finally(_ => setLoad(false))
+				.then(() => history.push('/reset-password'))
+				.finally(() => setLoad(false))
 		}
 	};
 
@@ -53,8 +52,6 @@ export function ForgotPassword() {
 							onChange={onChangeInput}
 							onBlur={onBlurInput}
 							value={values.email}
-							error={errorMessages.email ? true : false}
-							errorText={errorMessages.email}
 							isIcon={false}
 							extraClass={`${styles.input}`}
 						/>

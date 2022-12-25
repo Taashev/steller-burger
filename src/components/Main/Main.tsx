@@ -6,8 +6,7 @@ import { BurgerConstructor } from '../Burger-constructor/Burger-constructor';
 
 import stylesMain from './Main.module.css';
 
-
-export function Main() {
+export function Main(): JSX.Element {
 	return (
 		<main className={stylesMain.main}>
 			<div className={stylesMain.container}>

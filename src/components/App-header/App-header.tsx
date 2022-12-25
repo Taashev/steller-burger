@@ -17,7 +17,7 @@ export const AppHeader = memo(_ => {
 	const isPathNameOrders = useRouteMatch(`${path}orders`);
 	const isPathNameProfile = useRouteMatch(`${path}profile`);
 
-	const user = useSelector((store) => store.userReducer.user);
+	const user: any = useSelector<any>((store) => store.userReducer.user);
 
 	return (
 		<header className={`p-4 ${ stylesHeader.header }`}>
@@ -44,11 +44,7 @@ export const AppHeader = memo(_ => {
 				<div className={`pt-4 pr-5 pb-4 pl-5`}>
 					<NavLink className={`${stylesHeader.nav__link}`} to={`${path}profile`} activeClassName={stylesHeader.active}>
 						<ProfileIcon type={isPathNameProfile ? 'primary' : 'secondary'} />
-						{
-							user?.name
-								? user.name
-								: 'Личный кабинет'
-						}
+						{ user?.name || 'Личный кабинет' }
 					</NavLink>
 				</div>
 			</div>

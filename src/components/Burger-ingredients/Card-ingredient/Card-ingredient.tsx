@@ -3,26 +3,36 @@ import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd/dist/hooks';
 
+import { IIngredient } from '../../../services/types';
+import { ILocationState } from '../../../services/types/locationState';
 import { getIngredientDetails } from '../../../services/actions/ingredientDetails';
-import { ingredientPropTypes } from '../../../utils/template-prop-types';
 
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import stylesCard from './Card-ingredient.module.css';
 
+interface ICardIngredient {
+	ingredient: IIngredient;
+};
 
-export function CardIngredient({ ingredient }) {
+export function CardIngredient({ ingredient }: ICardIngredient): JSX.Element {
 	// props
 	const { name, image, image_mobile, price, _id } = ingredient;
 
 	// location
-	const location = useLocation();
+	const location = useLocation<ILocationState>();
 
 	// dispatch
 	const dispatch = useDispatch();
 
 	// store
-	const { constructorBun, constructorIngredients } = useSelector((store) => store.constructorReducer);
+	const {
+		constructorBun,
+		constructorIngredients,
+	} = useSelector((store: any): {
+		constructorBun: IIngredient;
+		constructorIngredients: [{ ingredient: IIngredient; id: string; }];
+	} => store.constructorReducer);
 
 	// dnd drag
 	const [, dragRef] = useDrag({
@@ -33,14 +43,14 @@ export function CardIngredient({ ingredient }) {
 	// counter
   const counter = useMemo(() => {
 		return ingredient.type !== 'bun'
-			? constructorIngredients.filter(({ingredient: i}) => i._id === ingredient._id).length
+			? constructorIngredients.filter(({ ingredient: i }) => i._id === ingredient._id).length
 			: constructorBun?._id === ingredient._id
 			? 2
 			: 0
-	}, [constructorBun, constructorIngredients, ingredient])
+	}, [constructorBun, constructorIngredients, ingredient]);
 
 	// handle ingredient
-	function handleIngredient() {
+	function handleIngredient(): void {
 		dispatch(getIngredientDetails(ingredient));
 	};
 
@@ -67,8 +77,4 @@ export function CardIngredient({ ingredient }) {
 			</article>
 		</Link>
 	);
-};
-
-CardIngredient.propTypes = {
-	ingredient: ingredientPropTypes.isRequired,
 };
