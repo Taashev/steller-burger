@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useHistory, Link, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../../services/types/hooks';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
 
 import { setResetPassword } from '../../../../utils/Api';
@@ -18,7 +18,7 @@ export function ResetPassword() {
   const history = useHistory();
 
   const forgotPasswordSuccess = useSelector(
-    (store: any) => store.forgotPasswordReducer.forgotPasswordSuccess
+    (store) => store.forgotPasswordReducer.forgotPasswordSuccess
   );
 
   const { formValidity, values, onChangeInput, onBlurInput } =

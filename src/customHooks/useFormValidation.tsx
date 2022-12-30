@@ -1,26 +1,23 @@
 import { useState } from 'react';
-
-interface valueState {
-  [name: string]: string;
-}
+import { IValuesState } from '../services/types';
 
 interface useFormValidationReturn {
-  values: valueState;
+  values: IValuesState;
   setValues: any;
-  errorMessages: valueState;
+  errorMessages: IValuesState;
   setErrorMessages: any;
   formValidity: boolean;
   onChangeInput: (e: any) => void;
   onBlurInput: (e: any) => void;
-  resetValidation: (validation: boolean, initialValues: valueState) => void;
+  resetValidation: (validation: boolean, initialValues: IValuesState) => void;
 }
 
 export function useFormValidation(
-  initialValues: valueState
+  initialValues: IValuesState
 ): useFormValidationReturn {
-  const [values, setValues] = useState<valueState>(initialValues);
+  const [values, setValues] = useState<IValuesState>(initialValues);
   const [formValidity, setFormValidity] = useState<boolean>(false);
-  const [errorMessages, setErrorMessages] = useState<valueState>({});
+  const [errorMessages, setErrorMessages] = useState<IValuesState>({});
 
   function onChangeInput(e: any): void {
     const { name, value, validationMessage } = e.target;
@@ -42,7 +39,7 @@ export function useFormValidation(
 
   function resetValidation(
     validation: boolean,
-    initialValues: valueState
+    initialValues: IValuesState
   ): void {
     setValues(initialValues);
     setErrorMessages({});

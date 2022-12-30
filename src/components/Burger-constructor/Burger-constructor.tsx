@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from '../../services/types/hooks';
 import { useDrop } from 'react-dnd/dist/hooks';
 import SimpleBar from 'simplebar-react';
 
@@ -34,14 +34,11 @@ export function BurgerConstructor(): JSX.Element {
 	const {
 		constructorBun,
 		constructorIngredients,
-	} = useSelector((store: any): {
-		constructorBun: IIngredient;
-		constructorIngredients: [{ id: string; ingredient: IIngredient }];
-	} => store.constructorReducer);
-	const orderId = useSelector((store: any) => store.orderDetailsReducer.orderId);
-	const setOrderDetailsRequest = useSelector((store: any) => store.orderDetailsReducer.setOrderDetailsRequest);
-	const totalPrice = useSelector((store: any) => store.totalPriceReducer.totalPrice);
-	const user = useSelector((store: any) => store.userReducer.user);
+	} = useSelector((store)=> store.constructorReducer);
+	const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
+	const setOrderDetailsRequest = useSelector((store) => store.orderDetailsReducer.setOrderDetailsRequest);
+	const totalPrice = useSelector((store) => store.totalPriceReducer.totalPrice);
+	const user = useSelector((store) => store.userReducer.user);
 
 	// dnd drop ingredient
 	const [{ isHoverBun, isHoverIngredient }, dropIngredientRef] = useDrop({

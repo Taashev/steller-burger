@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/types/hooks';
 
 import { getUser } from '../../services/actions/user';
 import { getIngredients } from '../../services/actions/ingredients';
@@ -27,9 +27,9 @@ function App(): JSX.Element {
   const location = useLocation<ILocationState>();
   const background: ILocationState | undefined = location.state?.background;
 
-  const dispatch = useDispatch<any>();
+  const dispatch: any = useDispatch();
   const ingredientsRequest = useSelector(
-    (store: any): boolean => store.burgerIngredientsReducer.ingredientsRequest
+    (store) => store.burgerIngredientsReducer.ingredientsRequest
   );
 
   function handleModalClose(): void {

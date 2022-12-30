@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { useLocation, Link, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../../services/types/hooks';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
 
 import { signIn } from '../../../services/actions/login';
@@ -16,12 +16,10 @@ import styles from './Login.module.css';
 
 export function Login() {
   const { state } = useLocation<ILocationState>();
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
 
-  const user = useSelector((store: any) => store.userReducer.user);
-  const loginRequest = useSelector(
-    (store: any) => store.loginReducer.loginRequest
-  );
+  const user = useSelector((store) => store.userReducer.user);
+  const loginRequest = useSelector((store) => store.loginReducer.loginRequest);
 
   const { formValidity, values, errorMessages, onChangeInput, onBlurInput } =
     useFormValidation({ email: '', password: '' });

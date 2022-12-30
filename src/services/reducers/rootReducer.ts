@@ -11,13 +11,13 @@ import { forgotPasswordReducer } from './forgotPassword';
 
 // root reducer
 export const rootReducer = combineReducers({
-	burgerIngredientsReducer,
-	constructorReducer,
-	ingredientDetailsReducer,
-	orderDetailsReducer,
-	totalPriceReducer,
-	loginReducer,
-	userReducer,
-	updateUserReducer,
-	forgotPasswordReducer,
+  burgerIngredientsReducer,
+  constructorReducer,
+  ingredientDetailsReducer,
+  orderDetailsReducer,
+  totalPriceReducer,
+  loginReducer,
+  userReducer,
+  updateUserReducer,
+  forgotPasswordReducer,
 });

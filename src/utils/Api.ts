@@ -1,9 +1,9 @@
 import { getCookie } from './cookie';
 import {
-  TSignUp,
-  TSignIn,
-  TForgotPassword,
-  TResetPassword,
+  TSignUpParams,
+  TSignInParams,
+  TForgotPasswordParams,
+  TResetPasswordParams,
 } from '../services/types';
 
 const BASE_URL: 'https://norma.nomoreparties.space' =
@@ -39,7 +39,7 @@ export function setOrder<T>(order: Array<string>): Promise<T> {
 }
 
 // sign in
-export function signIn<T>(data: TSignIn): Promise<T> {
+export function signIn<T>(data: TSignInParams): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/login`, {
     method: 'POST',
     headers: {
@@ -62,7 +62,7 @@ export function signOut<T>(): Promise<T> {
 }
 
 // sing up
-export function signUp<T>(data: TSignUp): Promise<T> {
+export function signUp<T>(data: TSignUpParams): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/register`, {
     method: 'POST',
     headers: {
@@ -122,7 +122,7 @@ export function updateUser<T>(data: { [name: string]: string }): Promise<T> {
 }
 
 // email reset password
-export function setForgotPassword<T>(email: TForgotPassword): Promise<T> {
+export function setForgotPassword<T>(email: TForgotPasswordParams): Promise<T> {
   return fetch(`${BASE_URL}/api/password-reset`, {
     method: 'POST',
     headers: {
@@ -133,7 +133,7 @@ export function setForgotPassword<T>(email: TForgotPassword): Promise<T> {
 }
 
 // reset password
-export function setResetPassword<T>(data: TResetPassword): Promise<T> {
+export function setResetPassword<T>(data: TResetPasswordParams): Promise<T> {
   return fetch(`${BASE_URL}/api/password-reset/reset`, {
     method: 'POST',
     headers: {

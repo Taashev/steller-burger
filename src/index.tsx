@@ -8,21 +8,20 @@ import thunk from 'redux-thunk';
 
 import App from './components/App/App';
 import '@ya.praktikum/react-developer-burger-ui-components';
-import { rootReducer } from './services/reducers/rootReducer'
+import { rootReducer } from './services/reducers/rootReducer';
 
 import './index.css';
 import 'simplebar-react/dist/simplebar.min.css';
 import reportWebVitals from './reportWebVitals';
 
-
 // compose enhancers
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // enhancer
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 // store
-const store = createStore(rootReducer, enhancer);
+export const store = createStore(rootReducer, enhancer);
 
 // root
 const root = ReactDOM.createRoot(
@@ -32,11 +31,11 @@ const root = ReactDOM.createRoot(
 // render
 root.render(
   <BrowserRouter>
-  	<React.StrictMode>
-			<Provider store={store}>
-	    	<App />
-			</Provider>
-	  </React.StrictMode>
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
   </BrowserRouter>
 );
 
