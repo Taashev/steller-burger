@@ -1,16 +1,26 @@
 /* simple bar */
 .simplebar-track {
-	background: var(--background-element);
+  background: var(--background-element);
 }
 
 .simplebar-track.simplebar-vertical {
-	width: 8px!important;
+  width: 8px !important;
 }
 
 .simplebar-scrollbar {
-	background: var(--text-inactive-color);
+  background: var(--text-inactive-color);
 }
 
 .simplebar-scrollbar::before {
-	display: none;
+  display: none;
+}
+
+/* simpleBar order */
+#order_scroll .simplebar-scrollbar {
+  height: 100%;
+	background: linear-gradient(to right, #801ab2, #4c4cff);
+}
+#order_scroll .simplebar-track {
+  height: 4px;
+	background-color: transparent;
 }

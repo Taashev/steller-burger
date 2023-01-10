@@ -13,7 +13,7 @@ import stylesHeader from './App-header.module.css';
 
 export const AppHeader = memo((_) => {
   const { path, isExact } = useRouteMatch();
-  const isPathNameOrders = useRouteMatch(`${path}orders`);
+  const isPathNameOrders = useRouteMatch(`${path}feed`);
   const isPathNameProfile = useRouteMatch(`${path}profile`);
 
   const user = useSelector((store) => store.userReducer.user);
@@ -37,7 +37,7 @@ export const AppHeader = memo((_) => {
             <li className={`pt-4 pr-5 pb-4 pl-5`}>
               <NavLink
                 className={`${stylesHeader.nav__link}`}
-                to={`${path}orders`}
+                to={`${path}feed`}
                 activeClassName={stylesHeader.active}
               >
                 <ListIcon type={isPathNameOrders ? 'primary' : 'secondary'} />

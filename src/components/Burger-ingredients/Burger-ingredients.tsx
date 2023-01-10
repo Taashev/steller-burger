@@ -62,8 +62,7 @@ export function BurgerIngredients(): JSX.Element {
   }
 
   return (
-    <section className={`pt-10 ${stylesBurgerIngredients.burgerIngredients}`}>
-      <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
+    <>
       <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <SimpleBar
         className={`${stylesBurgerIngredients.simplebar}`}
@@ -88,6 +87,36 @@ export function BurgerIngredients(): JSX.Element {
           refCategory={mainCategoryRef}
         />
       </SimpleBar>
-    </section>
+    </>
   );
+
+  //! return (
+  //   <section className={`pt-10 ${stylesBurgerIngredients.burgerIngredients}`}>
+  //     <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
+  //     <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
+  //     <SimpleBar
+  //       className={`${stylesBurgerIngredients.simplebar}`}
+  //       scrollableNodeProps={{ ref: simpleBarRef }}
+  //     >
+  //       <IngredientCategory
+  //         id="bun"
+  //         title="Булки"
+  //         ingredients={bun}
+  //         refCategory={bunCategoryRef}
+  //       />
+  //       <IngredientCategory
+  //         id="sauce"
+  //         title="Соусы"
+  //         ingredients={sauce}
+  //         refCategory={sauceCategoryRef}
+  //       />
+  //       <IngredientCategory
+  //         id="main"
+  //         title="Начинки"
+  //         ingredients={main}
+  //         refCategory={mainCategoryRef}
+  //       />
+  //     </SimpleBar>
+  //   </section>
+  // );
 }

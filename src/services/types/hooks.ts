@@ -1,4 +1,4 @@
-import { AppDispatch, AppThunk, RootState } from './index';
+import { AppDispatch, RootState } from './index';
 
 import {
   useSelector as selectorHook,

@@ -2,13 +2,18 @@ import { useEffect } from 'react';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/types/hooks';
 
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 import { getUser } from '../../services/actions/user';
 import { getIngredients } from '../../services/actions/ingredients';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 import { ILocationState } from '../../services/types/locationState';
 
-import { Main } from '../Main/Main';
+import { Main } from '../pages/Main/Main';
+import { Column } from '../pages/Column/Column';
+import { OrderFeed } from '../pages/Order-feed/Order-feed';
 import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
 import { Login } from '../pages/Login/Login';
@@ -19,6 +24,9 @@ import { PersanalArea } from '../pages/PersanalArea/PersanalArea';
 import { Modal } from '../Modal/Modal';
 import { IngredientDetails } from '../Burger-ingredients/IngredientDetails/Ingredient-details';
 import { TargetIngredient } from '../pages/TargetIngredient/TargetIngredient';
+
+import { BurgerIngredients } from '../Burger-ingredients/Burger-ingredients';
+import { BurgerConstructor } from '../Burger-constructor/Burger-constructor';
 
 import stylesApp from './App.module.css';
 
@@ -67,8 +75,27 @@ function App(): JSX.Element {
             <ProtectedRoute path="/profile">
               <PersanalArea />
             </ProtectedRoute>
+            <Route path="/feed">
+              <Main>
+								<Column title="Лента заказов">
+									<OrderFeed />
+								</Column>
+								<Column extraClass="pt-25 pl-15">
+									
+								</Column>
+              </Main>
+            </Route>
             <Route path="/" exact>
-              <Main />
+              <Main>
+                <DndProvider backend={HTML5Backend}>
+                  <Column title="Соберите бургер">
+                    <BurgerIngredients />
+                  </Column>
+                  <Column extraClass="pt-25 pl-4">
+                    <BurgerConstructor />
+                  </Column>
+                </DndProvider>
+              </Main>
             </Route>
             <Route path="/ingredients/:ingredientId" exact>
               <TargetIngredient />

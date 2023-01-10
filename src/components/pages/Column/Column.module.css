@@ -1,0 +1,7 @@
+.column {
+	width: 100%;
+	max-width: 600px;
+	display: flex;
+	flex-direction: column;
+	padding-top: calc(var(--offset-base-size) * 10);
+}
