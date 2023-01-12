@@ -14,7 +14,7 @@ import {
 import { IIngredient } from '../../services/types';
 
 import { Modal } from '../Modal/Modal';
-import { OrderDetails } from '../OrderDetails/Order-details';
+import { OrderCheckout } from '../Order-checkout/Order-checkout';
 import { Preloader } from '../Preloader/Preloader';
 import { BurgerConstructorElement } from './Burger-constructor-element/Burger-constructor-element';
 import {
@@ -163,7 +163,7 @@ export function BurgerConstructor(): JSX.Element {
       )}
       {orderId && (
         <Modal onClose={closeOrderModal}>
-          <OrderDetails />
+          <OrderCheckout />
         </Modal>
       )}
     </>

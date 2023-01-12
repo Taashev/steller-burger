@@ -32,7 +32,7 @@ export function PersanalArea(): JSX.Element {
           )}
           {pathname === `${path}/orders` && (
             <h2 className={`text_type_main-default ${styles.info}`}>
-              В этом разделе вы можете посмотреть историю заказов
+              В этом разделе вы можете посмотреть свою историю заказов
             </h2>
           )}
           <ul className={`${styles.navbar__list}`}>

@@ -1,8 +1,8 @@
 import { useSelector } from '../../services/types/hooks';
-import styles from './Order-details.module.css';
+import styles from './Order-checkout.module.css';
 import img from '../../images/svg/graphics.svg';
 
-export function OrderDetails() {
+export function OrderCheckout() {
   const orderId = useSelector((store) => store.orderDetailsReducer.orderId);
 
   return (
