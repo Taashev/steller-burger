@@ -13,15 +13,17 @@ import { TOrderDetailsActions } from '../actions/orderDetails';
 import { TTotalPriceActions } from '../actions/totalPrice';
 import { TUpdateUserActions } from '../actions/updateUser';
 import { TUserActions } from '../actions/user';
+import { TWSActions } from '../actions/wsAction';
+import { TGetOrderActions } from '../actions/getOrder';
 
 // RootState
 export type RootState = ReturnType<typeof store.getState>;
 
 // AppDispatch
-export type AppDispatch = Dispatch<TApplicationActions>;
+export type AppDispatch = Dispatch<AppActions>;
 
-// TApplicationActions
-export type TApplicationActions =
+// AppActions
+export type AppActions =
   | TConnstructorActions
   | TForgotPasswordActions
   | TIngredientDetailsActions
@@ -31,14 +33,16 @@ export type TApplicationActions =
   | TOrderDetailsActions
   | TTotalPriceActions
   | TUpdateUserActions
-  | TUserActions;
+  | TUserActions
+  | TWSActions
+  | TGetOrderActions;
 
 // AppThunk
 export type AppThunk<TReturn = Promise<void>> = ThunkAction<
   TReturn,
   Action,
   RootState,
-  TApplicationActions
+  AppActions
 >;
 
 // IIngredient
@@ -90,4 +94,21 @@ export type TSignInParams = Omit<TSignUpParams, 'name'>;
 export type TForgotPasswordParams = Omit<TSignUpParams, 'name' | 'password'>;
 export type TResetPasswordParams = Omit<TSignUpParams, 'name' | 'email'> & {
   token: string;
+};
+
+// orders
+export type TOrder = {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+export type TOrders = {
+  success: boolean;
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
 };

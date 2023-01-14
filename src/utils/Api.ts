@@ -38,6 +38,21 @@ export function setOrder<T>(order: Array<string>): Promise<T> {
   }).then(checkResponse);
 }
 
+// get order
+export function getOrder<T>(number: string): Promise<T> {
+  return fetch(`${BASE_URL}/api/orders/${number}`, {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+  }).then(checkResponse);
+}
+
 // sign in
 export function signIn<T>(data: TSignInParams): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/login`, {

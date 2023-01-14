@@ -8,6 +8,8 @@ import { loginReducer } from './login';
 import { userReducer } from './user';
 import { updateUserReducer } from './updateUser';
 import { forgotPasswordReducer } from './forgotPassword';
+import { WSReducer } from './wsReducer';
+import { getOrderReducer } from './getOrder';
 
 // root reducer
 export const rootReducer = combineReducers({
@@ -20,4 +22,6 @@ export const rootReducer = combineReducers({
   userReducer,
   updateUserReducer,
   forgotPasswordReducer,
+  WSReducer,
+  getOrderReducer,
 });

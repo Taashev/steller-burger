@@ -7,10 +7,23 @@
   color: #f2f2f3;
 }
 
+.order_page {
+	max-width: 600px;
+	margin: 100px auto 0;
+	background: transparent;
+}
+.order_page .order__number {
+	width: 100%;
+	position: static;
+	text-align: center;
+}
+
+
 .order__number {
 	position: absolute;
 	top: 60px;
 	left: 40px;
+	margin: 0;
 }
 
 .order__title {

@@ -13,8 +13,10 @@ import { ILocationState } from '../../services/types/locationState';
 
 import { Main } from '../pages/Main/Main';
 import { Column } from '../pages/Column/Column';
-import { OrderFeed } from '../pages/Order-feed/Order-feed';
+import { Orders } from '../pages/Orders/Orders';
 import { OrderDetails } from '../Order-details/Order-details';
+import { OrdersBoard } from '../pages/Orders-board/Orders-board';
+import { TargetOrderDetails } from '../pages/Target-order-details/Target-order-details';
 import { Preloader } from '../Preloader/Preloader';
 import { AppHeader } from '../App-header/App-header';
 import { Login } from '../pages/Login/Login';
@@ -76,14 +78,14 @@ function App(): JSX.Element {
             <ProtectedRoute path="/profile">
               <PersanalArea />
             </ProtectedRoute>
-            <Route path="/feed">
+            <Route path="/feed" exact>
               <Main>
                 <Column title="Лента заказов">
-                  <OrderFeed />
+                  <Orders />
                 </Column>
                 <Column extraClass="pt-25 pl-15">
-									
-								</Column>
+                  <OrdersBoard />
+                </Column>
               </Main>
             </Route>
             <Route path="/" exact>
@@ -101,8 +103,8 @@ function App(): JSX.Element {
             <Route path="/ingredients/:ingredientId" exact>
               <TargetIngredient />
             </Route>
-            <Route path="/feed/:feedId">
-              <OrderDetails />
+            <Route path="/feed/:feedNumber" exact>
+              <TargetOrderDetails />
             </Route>
             <Route path="*">404 Not Found</Route>
           </Switch>
@@ -119,7 +121,7 @@ function App(): JSX.Element {
           )}
           {background && (
             <Route
-              path="/feed/:feedId"
+              path="/feed/:feedNumber"
               children={
                 <Modal onClose={handleModalClose}>
                   <OrderDetails />

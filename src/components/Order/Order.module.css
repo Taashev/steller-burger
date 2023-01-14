@@ -1,7 +1,7 @@
 .link {
-	width: 100%;
-	color: transparent;
-	text-decoration: none;
+  width: 100%;
+  color: transparent;
+  text-decoration: none;
 }
 
 .order {
@@ -35,12 +35,12 @@
 }
 
 .simplebar {
-	width: 100%;
-	padding-bottom: calc(var(--offset-base-size) * 2);
+  width: 100%;
+  padding-bottom: calc(var(--offset-base-size) * 2);
 }
 
 .order__ingredients {
-	width: 100%;
+  width: 100%;
   min-height: 64px;
   display: flex;
   margin: 0;
@@ -49,27 +49,52 @@
 }
 
 .order__ingredient {
-	width: 64px;
+  position: relative;
+  width: 64px;
   height: 64px;
   display: flex;
-	flex-shrink: 0;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
-	padding: 4px;
-	box-sizing: border-box;
+  padding: 4px;
+  box-sizing: border-box;
   border-radius: 50%;
   background: linear-gradient(#131316, #131316) padding-box,
     linear-gradient(to right, #801ab2, #4c4cff) border-box;
   border: 2px solid transparent;
+  overflow: hidden;
 }
 .order__ingredient:not(:first-child) {
   margin-left: -15px;
 }
-.order__ingredient img {
+.order__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.order__count {
+  position: absolute;
+  top: 0;
+  left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
-  object-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	margin: 0;
+	z-index: 0;
+}
+.order__count::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #1c1c21;
+  opacity: 0.6;
+	z-index: -1;
 }
 
 .order__price {
