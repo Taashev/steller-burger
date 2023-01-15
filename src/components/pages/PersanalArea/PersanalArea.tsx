@@ -69,7 +69,7 @@ export function PersanalArea(): JSX.Element {
         </nav>
 
         <Switch>
-          <Route path={`${path}/orders`} exact>
+          <Route path={`${path}/orders`}>
             <HistoryOrders />
           </Route>
           <Route path={path} exact>

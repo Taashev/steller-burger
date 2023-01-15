@@ -75,11 +75,11 @@ function App(): JSX.Element {
             <Route path="/forgot-password" exact>
               <ForgotPassword />
             </Route>
-            <ProtectedRoute path="/profile" exact>
-              <PersanalArea />
-            </ProtectedRoute>
-            <ProtectedRoute path="/profile/orders/:feedNumber" exact>
+						<ProtectedRoute path="/profile/orders/:feedNumber" exact>
               <TargetOrderDetails />
+            </ProtectedRoute>
+            <ProtectedRoute path="/profile">
+              <PersanalArea />
             </ProtectedRoute>
             <Route path="/feed" exact>
               <Main>
