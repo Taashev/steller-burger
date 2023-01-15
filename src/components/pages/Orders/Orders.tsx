@@ -4,19 +4,19 @@ import { Order } from '../../Order/Order';
 
 import SimpleBar from 'simplebar-react';
 
-import { wsStart } from '../../../services/actions/wsAction';
+import { wsOrdersStart } from '../../../services/actions/wsOrdersAction';
 
 import styles from './Orders.module.css';
 import { useEffect } from 'react';
 import { Preloader } from '../../Preloader/Preloader';
 
 export function Orders(): JSX.Element {
-  const { message, wsConnected } = useSelector((store) => store.WSReducer);
+  const { message, wsConnected } = useSelector((store) => store.WSOrdersReducer);
   const orders = message?.orders;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(wsStart());
+    dispatch(wsOrdersStart());
   }, []);
 
   return (

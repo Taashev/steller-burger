@@ -5,19 +5,21 @@ import {
   useRouteMatch,
   useLocation,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../services/types/hooks';
+
 import { logout } from '../../../services/actions/logout';
+import { ILocationState } from '../../../services/types/locationState';
 
 import { Profile } from './Profile/Profile';
+import { HistoryOrders } from './History-orders/History-orders';
 import styles from './PersanalArea.module.css';
 
 export function PersanalArea(): JSX.Element {
   const { path } = useRouteMatch();
-  const { pathname } = useLocation();
+  const dispatch: any = useDispatch();
+  const location = useLocation<ILocationState>();
 
-  const dispatch = useDispatch<any>();
-
-  function onClickLogout(): void {
+  function onClickLogout() {
     dispatch(logout());
   }
 
@@ -25,12 +27,12 @@ export function PersanalArea(): JSX.Element {
     <section className={`${styles['personal-area']}`}>
       <div className={`${styles.container}`}>
         <nav className={`${styles.navbar}`}>
-          {pathname === path && (
+          {location.pathname === path && (
             <h2 className={`text_type_main-default ${styles.info}`}>
               В этом разделе вы можете изменить свои персональные данные
             </h2>
           )}
-          {pathname === `${path}/orders` && (
+          {location.pathname === `${path}/orders` && (
             <h2 className={`text_type_main-default ${styles.info}`}>
               В этом разделе вы можете посмотреть свою историю заказов
             </h2>
@@ -67,10 +69,12 @@ export function PersanalArea(): JSX.Element {
         </nav>
 
         <Switch>
+          <Route path={`${path}/orders`} exact>
+            <HistoryOrders />
+          </Route>
           <Route path={path} exact>
             <Profile />
           </Route>
-          <Route path={`${path}/orders`}>Orders</Route>
         </Switch>
       </div>
     </section>

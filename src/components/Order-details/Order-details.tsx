@@ -1,6 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { StatusOrder } from '../Status-order/Status-order';
 import { useDispatch, useSelector } from '../../services/types/hooks';
 import { getIngredientsStorage } from '../../utils/getIngredientsStorage';
 
@@ -35,19 +36,6 @@ export function OrderDetails({ page }: OrderDetailsProps): JSX.Element {
     ingredientsStore
   );
 
-  const status = useCallback((status: string | undefined): string => {
-    switch (status) {
-      case 'created':
-        return 'Готовим';
-      case 'pending':
-        return 'В ожидании';
-      case 'done':
-        return 'Выполнен';
-      default:
-        return `${status}`;
-    }
-  }, []);
-
   const price = currentIngredients.reduce((price, i) => {
     price += i.ingredient.price * i.count;
     return price;
@@ -80,7 +68,10 @@ export function OrderDetails({ page }: OrderDetailsProps): JSX.Element {
           <h2 className={`text_type_main-medium ${styles.order__title}`}>
             {order!?.name}
           </h2>
-          <p className={styles.order__status}>{status(order!?.status)}</p>
+          <StatusOrder
+            extraClass={styles.order__status}
+            status={order?.status}
+          />
           <div className={styles.order__composition}>
             <p className={`text_type_main-medium ${styles.order__subtitle}`}>
               Состав:

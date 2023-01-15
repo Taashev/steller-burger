@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 
 import { TOrder } from '../../services/types';
 import { useSelector } from '../../services/types/hooks';
@@ -12,14 +12,20 @@ import {
 
 import { getIngredientsStorage } from '../../utils/getIngredientsStorage';
 import styles from './Order.module.css';
+import { StatusOrder } from '../Status-order/Status-order';
 
 interface OrderProps {
   order: TOrder;
+  historyOrder?: boolean;
 }
 
-export function Order({ order }: OrderProps): JSX.Element {
-  const { number, name, ingredients, createdAt } = order;
+export function Order({
+  order,
+  historyOrder = false,
+}: OrderProps): JSX.Element {
+  const { number, name, ingredients, createdAt, status } = order;
   const location = useLocation<ILocationState>();
+  const { path } = useRouteMatch();
 
   const ingredientsStore = useSelector(
     (store) => store.burgerIngredientsReducer.ingredients
@@ -44,11 +50,15 @@ export function Order({ order }: OrderProps): JSX.Element {
     <Link
       className={styles.link}
       to={{
-        pathname: `/feed/${number}`,
+        pathname: `${path}/${number}`,
         state: { background: location },
       }}
     >
-      <div className={styles.order}>
+      <div
+        className={`${styles.order} ${
+          historyOrder ? styles.order_mod_history : ''
+        }`}
+      >
         <div className={styles.order__header}>
           <span className={`text_type_digits-default ${styles.order__number}`}>
             #{number}
@@ -56,6 +66,9 @@ export function Order({ order }: OrderProps): JSX.Element {
           <span className={styles.order__date}>{date()}</span>
         </div>
         <p className={`text_type_main-medium ${styles.order__title}`}>{name}</p>
+        {historyOrder && (
+          <StatusOrder status={status} extraClass={styles.order__status} />
+        )}
         <div className={styles.order__footer}>
           <SimpleBar className={styles.simplebar} id="order_scroll">
             <ul className={styles.order__ingredients}>

@@ -1,46 +1,46 @@
-import { TWSActions } from '../actions/wsAction';
+import { TWSOrdersActions } from '../actions/wsOrdersAction';
 import { TOrders } from '../types';
 
 import {
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE,
-} from '../actions/wsAction';
+  WS_ORDER_CONNECTION_SUCCESS,
+  WS_ORDER_CONNECTION_ERROR,
+  WS_ORDER_CONNECTION_CLOSED,
+  WS_ORDER_GET_MESSAGE,
+} from '../actions/wsOrdersAction';
 
-export type TWSState = {
+export type TWSOrdersState = {
   wsConnected: boolean;
   message: TOrders | null;
   error?: Event | undefined;
 };
 
-const initialState: TWSState = {
+const initialState: TWSOrdersState = {
   wsConnected: false,
   message: null,
   error: undefined,
 };
 
-export function WSReducer(state = initialState, action: TWSActions): TWSState {
+export function WSOrdersReducer(state = initialState, action: TWSOrdersActions): TWSOrdersState {
   switch (action.type) {
-    case WS_CONNECTION_SUCCESS:
+    case WS_ORDER_CONNECTION_SUCCESS:
       return {
         ...state,
         wsConnected: true,
         error: undefined,
       };
-    case WS_CONNECTION_ERROR:
+    case WS_ORDER_CONNECTION_ERROR:
       return {
         ...state,
         wsConnected: false,
         error: action.payload,
       };
-    case WS_CONNECTION_CLOSED:
+    case WS_ORDER_CONNECTION_CLOSED:
       return {
         ...state,
         wsConnected: false,
         error: undefined,
       };
-    case WS_GET_MESSAGE:
+    case WS_ORDER_GET_MESSAGE:
       return {
         ...state,
         message: action.payload,

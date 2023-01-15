@@ -14,6 +14,13 @@
   color: #f2f2f3;
 }
 
+.order_mod_history .order__title {
+	margin-bottom: calc(var(--offset-base-size) * 2);
+}
+.order_mod_history .order__status {
+	margin-bottom: calc(var(--offset-base-size) * 6);
+}
+
 .order__header {
   display: flex;
   justify-content: space-between;

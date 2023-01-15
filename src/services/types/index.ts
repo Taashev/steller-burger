@@ -13,7 +13,8 @@ import { TOrderDetailsActions } from '../actions/orderDetails';
 import { TTotalPriceActions } from '../actions/totalPrice';
 import { TUpdateUserActions } from '../actions/updateUser';
 import { TUserActions } from '../actions/user';
-import { TWSActions } from '../actions/wsAction';
+import { TWSOrdersActions } from '../actions/wsOrdersAction';
+import { TWSHistoryOrdersActions } from '../actions/wsHistoryOrdersAction';
 import { TGetOrderActions } from '../actions/getOrder';
 
 // RootState
@@ -34,7 +35,8 @@ export type AppActions =
   | TTotalPriceActions
   | TUpdateUserActions
   | TUserActions
-  | TWSActions
+  | TWSOrdersActions
+  | TWSHistoryOrdersActions
   | TGetOrderActions;
 
 // AppThunk

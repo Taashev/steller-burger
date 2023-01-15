@@ -75,8 +75,11 @@ function App(): JSX.Element {
             <Route path="/forgot-password" exact>
               <ForgotPassword />
             </Route>
-            <ProtectedRoute path="/profile">
+            <ProtectedRoute path="/profile" exact>
               <PersanalArea />
+            </ProtectedRoute>
+            <ProtectedRoute path="/profile/orders/:feedNumber" exact>
+              <TargetOrderDetails />
             </ProtectedRoute>
             <Route path="/feed" exact>
               <Main>
@@ -110,24 +113,32 @@ function App(): JSX.Element {
           </Switch>
 
           {background && (
-            <Route
-              path="/ingredients/:ingredientId"
-              children={
-                <Modal title="Детали ингредиента" onClose={handleModalClose}>
-                  <IngredientDetails />
-                </Modal>
-              }
-            />
-          )}
-          {background && (
-            <Route
-              path="/feed/:feedNumber"
-              children={
-                <Modal onClose={handleModalClose}>
-                  <OrderDetails />
-                </Modal>
-              }
-            />
+            <Switch>
+              <Route
+                path="/ingredients/:ingredientId"
+                children={
+                  <Modal title="Детали ингредиента" onClose={handleModalClose}>
+                    <IngredientDetails />
+                  </Modal>
+                }
+              />
+              <Route
+                path="/feed/:feedNumber"
+                children={
+                  <Modal onClose={handleModalClose}>
+                    <OrderDetails />
+                  </Modal>
+                }
+              />
+              <ProtectedRoute
+                path="/profile/orders/:feedNumber"
+                children={
+                  <Modal onClose={handleModalClose}>
+                    <OrderDetails />
+                  </Modal>
+                }
+              />
+            </Switch>
           )}
         </>
       )}

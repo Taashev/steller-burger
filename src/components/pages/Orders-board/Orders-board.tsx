@@ -5,7 +5,7 @@ import styles from './Orders-board.module.css';
 import { Preloader } from '../../Preloader/Preloader';
 
 export function OrdersBoard(): JSX.Element {
-  const { message, wsConnected } = useSelector((store) => store.WSReducer);
+  const { message, wsConnected } = useSelector((store) => store.WSOrdersReducer);
 
   const renderContent = useCallback(
     (node: any) =>

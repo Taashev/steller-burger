@@ -14,16 +14,65 @@ import reportWebVitals from './reportWebVitals';
 import 'simplebar-react/dist/simplebar.min.css';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import './index.css';
+import { getCookie } from './utils/cookie';
+
+import {
+  WS_ORDER_CONNECTION_START,
+  WS_ORDER_SEND_MESSAGE,
+  WS_ORDER_DISCONNECTED,
+  wsOrdersSuccess,
+  wsOrdersError,
+  wsOrdersClosed,
+  wsOrdersGetMessage,
+} from './services/actions/wsOrdersAction';
+
+import {
+  WS_HISTORY_ORDERS_CONNECTION_START,
+  WS_HISTORY_ORDERS_SEND_MESSAGE,
+  WS_HISTORY_ORDERS_DISCONNECTED,
+  wsHistoryOrdersSuccess,
+  wsHistoryOrdersError,
+  wsHistoryOrdersClosed,
+  wsHistoryOrdersGetMessage,
+} from './services/actions/wsHistoryOrdersAction';
+
+// token
+const token = getCookie('accessToken');
+
+// ws orders
+const wsOrders = socketMiddleware(
+  'wss://norma.nomoreparties.space/orders/all',
+  {
+    wsInit: WS_ORDER_CONNECTION_START,
+    wsSendMessage: WS_ORDER_SEND_MESSAGE,
+    wsDisconnected: WS_ORDER_DISCONNECTED,
+    onClose: wsOrdersClosed,
+    onOpen: wsOrdersSuccess,
+    onError: wsOrdersError,
+    onMessage: wsOrdersGetMessage,
+  }
+);
+
+// ws history orders
+const wsHistoryOrders = socketMiddleware(
+  `wss://norma.nomoreparties.space/orders?token=${token}`,
+  {
+    wsInit: WS_HISTORY_ORDERS_CONNECTION_START,
+    wsSendMessage: WS_HISTORY_ORDERS_SEND_MESSAGE,
+    wsDisconnected: WS_HISTORY_ORDERS_DISCONNECTED,
+    onClose: wsHistoryOrdersClosed,
+    onOpen: wsHistoryOrdersSuccess,
+    onError: wsHistoryOrdersError,
+    onMessage: wsHistoryOrdersGetMessage,
+  }
+);
 
 // compose enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // enhancer
 const enhancer = composeEnhancers(
-  applyMiddleware(
-    thunk,
-    socketMiddleware('wss://norma.nomoreparties.space/orders/all')
-  )
+  applyMiddleware(thunk, wsOrders, wsHistoryOrders)
 );
 
 // store
