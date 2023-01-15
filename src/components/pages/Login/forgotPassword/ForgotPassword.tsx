@@ -17,7 +17,7 @@ export function ForgotPassword() {
   const history = useHistory();
   const [load, setLoad] = useState<boolean>(false);
 
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.userReducer.user);
 
@@ -29,8 +29,9 @@ export function ForgotPassword() {
 
     if (formValidity) {
       setLoad(true);
-
-      dispatch(forgotPassword({ email: values.email }))
+      const res: any = dispatch(await forgotPassword({ email: values.email }));
+      console.log(res);
+      res
         .then(() => history.push('/reset-password'))
         .finally(() => setLoad(false));
     }

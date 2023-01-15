@@ -16,7 +16,7 @@ import styles from './PersanalArea.module.css';
 
 export function PersanalArea(): JSX.Element {
   const { path } = useRouteMatch();
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
   const location = useLocation<ILocationState>();
 
   function onClickLogout() {

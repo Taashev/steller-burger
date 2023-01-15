@@ -14,7 +14,7 @@ import {
 import styles from './Profile.module.css';
 
 export function Profile() {
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.userReducer.user);
 
@@ -33,7 +33,9 @@ export function Profile() {
     setActiveName(!activeName);
   }
 
-  function onBlurName(e: any): void {
+  function onBlurName(
+    e: React.FocusEvent<HTMLInputElement, Element> | undefined
+  ): void {
     setActiveName(false);
     onBlurInput(e);
   }

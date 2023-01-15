@@ -1,14 +1,16 @@
-import { useCallback } from 'react';
+import { useCallback, ReactNode } from 'react';
 import { useSelector } from '../../../services/types/hooks';
 import SimpleBar from 'simplebar-react';
 import styles from './Orders-board.module.css';
 import { Preloader } from '../../Preloader/Preloader';
 
 export function OrdersBoard(): JSX.Element {
-  const { message, wsConnected } = useSelector((store) => store.WSOrdersReducer);
+  const { message, wsConnected } = useSelector(
+    (store) => store.WSOrdersReducer
+  );
 
   const renderContent = useCallback(
-    (node: any) =>
+    (node: ReactNode) =>
       !wsConnected ? <Preloader width="30px" height="30px" /> : node,
     [wsConnected]
   );

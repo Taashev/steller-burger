@@ -143,7 +143,7 @@ export function setForgotPassword<T>(email: TForgotPasswordParams): Promise<T> {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify(email),
   }).then(checkResponse);
 }
 

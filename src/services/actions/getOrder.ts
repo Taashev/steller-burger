@@ -41,7 +41,7 @@ export function getOrderClear(): TGetOrderActions {
 }
 
 // thunk
-export function getOrder(number: string): any {
+export function getOrder(number: string): AppThunk {
   return async function (dispatch: AppDispatch) {
     dispatch(getOrderRequest());
 

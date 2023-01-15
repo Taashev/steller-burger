@@ -38,7 +38,7 @@ function App(): JSX.Element {
   const location = useLocation<ILocationState>();
   const background: ILocationState | undefined = location.state?.background;
 
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
   const ingredientsRequest = useSelector(
     (store) => store.burgerIngredientsReducer.ingredientsRequest
   );

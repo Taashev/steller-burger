@@ -1,6 +1,6 @@
 import { getUser as ApiGetUser } from '../../utils/Api';
 import { withRefreshToken } from '../../utils/refreshToken';
-import { AppDispatch, IUser } from '../types';
+import { AppDispatch, AppThunk, IUser } from '../types';
 
 // action types
 export const USER_REQUEST: 'USER_REQUEST' = 'USER_REQUEST';
@@ -43,7 +43,7 @@ export function userDelete(): TUserActions {
 }
 
 // action thunk
-export function getUser(): any {
+export function getUser(): AppThunk {
   return async function (dispatch: AppDispatch) {
     dispatch(userRequest());
 

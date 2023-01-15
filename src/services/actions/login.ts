@@ -1,6 +1,6 @@
 import { signIn as ApiSignIn } from '../../utils/Api';
 import { setCookie } from '../../utils/cookie';
-import { AppDispatch, TSignInParams } from '../types';
+import { AppDispatch, AppThunk, TSignInParams } from '../types';
 import { getUser } from './user';
 
 // action types
@@ -32,7 +32,7 @@ function loginFailed(): TLoginActions {
 }
 
 // action thunk
-export function signIn(data: TSignInParams): any {
+export function signIn(data: TSignInParams): AppThunk {
   return async function (dispatch: AppDispatch) {
     dispatch(loginRequred());
 

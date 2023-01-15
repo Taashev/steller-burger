@@ -76,7 +76,7 @@ export function BurgerConstructor(): JSX.Element {
         ingredients.push(ingredient._id)
       );
 
-      dispatch<any>(setOrder(ingredients));
+      dispatch(setOrder(ingredients));
     } else {
       alert('Выберите булочку');
     }

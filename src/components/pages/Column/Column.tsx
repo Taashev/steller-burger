@@ -1,7 +1,7 @@
 import styles from './Column.module.css';
 
 interface ColumnProps {
-  children: any;
+  children: JSX.Element;
   title?: string;
   extraClass?: string | undefined;
 }
@@ -9,7 +9,7 @@ interface ColumnProps {
 export function Column({
   title = '',
   extraClass,
-  children = undefined,
+  children,
 }: ColumnProps): JSX.Element {
   return (
     <section className={`${styles.column} ${extraClass}`}>

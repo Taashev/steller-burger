@@ -47,7 +47,7 @@ export function BurgerConstructorElement({
   );
 
   // component did update price
-  useEffect((): any => {
+  useEffect(() => {
     dispatch(setTotalPrice(price));
 
     return () => dispatch(removeTotalPrice(price));

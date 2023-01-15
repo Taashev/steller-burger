@@ -1,7 +1,20 @@
 import type { Middleware, MiddlewareAPI } from 'redux';
 import type { AppActions, AppDispatch, RootState } from '../types';
 
-export function socketMiddleware(wsUrl: string, wsActions: any): Middleware { //! any
+interface IWSActions {
+  wsInit: string;
+  wsSendMessage: string;
+  wsDisconnected: string;
+  onOpen: (e: Event) => AppActions;
+  onClose: (e: Event) => AppActions;
+  onError: (e: Event) => AppActions;
+  onMessage: (e: any) => AppActions;
+}
+
+export function socketMiddleware(
+  wsUrl: string,
+  wsActions: IWSActions
+): Middleware {
   return function (store: MiddlewareAPI<AppDispatch, RootState>) {
     const {
       wsInit,

@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../../../services/types/hooks';
-import { wsHistoryOrdersStart } from '../../../../services/actions/wsHistoryOrdersAction';
+import {
+  wsHistoryOrdersDisconnected,
+  wsHistoryOrdersStart,
+} from '../../../../services/actions/wsHistoryOrdersAction';
 
 import SimpleBar from 'simplebar-react';
 import { Order } from '../../../Order/Order';
@@ -16,6 +19,9 @@ export function HistoryOrders() {
 
   useEffect(() => {
     dispatch(wsHistoryOrdersStart());
+    return () => dispatch(wsHistoryOrdersDisconnected());
+    // TODO: dependencies array.length === 0
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

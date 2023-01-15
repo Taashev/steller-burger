@@ -16,7 +16,7 @@ import styles from './Order-details.module.css';
 import { getOrder, getOrderClear } from '../../services/actions/getOrder';
 
 interface OrderDetailsProps {
-  page?: any;
+  page?: boolean;
 }
 
 export function OrderDetails({ page }: OrderDetailsProps): JSX.Element {

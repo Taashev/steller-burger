@@ -1,6 +1,6 @@
+import type {} from 'redux-thunk/extend-redux';
 import { store } from '../..';
 import { ThunkAction } from 'redux-thunk';
-import { Action, Dispatch } from 'redux';
 
 // import actions
 import { TConnstructorActions } from '../actions/constructorIngredients';
@@ -21,7 +21,9 @@ import { TGetOrderActions } from '../actions/getOrder';
 export type RootState = ReturnType<typeof store.getState>;
 
 // AppDispatch
-export type AppDispatch = Dispatch<AppActions>;
+export type AppDispatch<TReturnType = void> = (
+  action: AppActions | AppThunk<TReturnType>
+) => TReturnType;
 
 // AppActions
 export type AppActions =
@@ -40,10 +42,10 @@ export type AppActions =
   | TGetOrderActions;
 
 // AppThunk
-export type AppThunk<TReturn = Promise<void>> = ThunkAction<
-  TReturn,
-  Action,
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
   RootState,
+  unknown,
   AppActions
 >;
 
