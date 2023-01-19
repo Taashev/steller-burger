@@ -1,6 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../../../services/types/hooks';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
+
+import { updateUser } from '../../../../services/actions/updateUser';
 
 import {
   Input,
@@ -10,11 +12,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './Profile.module.css';
-import { updateUser } from '../../../../services/actions/updateUser';
 
 export function Profile() {
-  const dispatch = useDispatch<any>();
-  const user = useSelector((store: any) => store.userReducer.user);
+  const dispatch = useDispatch();
+
+  const user = useSelector((store) => store.userReducer.user);
 
   const [activeName, setActiveName] = useState<boolean>(false);
 
@@ -31,7 +33,9 @@ export function Profile() {
     setActiveName(!activeName);
   }
 
-  function onBlurName(e: any): void {
+  function onBlurName(
+    e: React.FocusEvent<HTMLInputElement, Element> | undefined
+  ): void {
     setActiveName(false);
     onBlurInput(e);
   }

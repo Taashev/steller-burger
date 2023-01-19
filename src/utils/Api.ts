@@ -1,9 +1,9 @@
 import { getCookie } from './cookie';
 import {
-  TSignUp,
-  TSignIn,
-  TForgotPassword,
-  TResetPassword,
+  TSignUpParams,
+  TSignInParams,
+  TForgotPasswordParams,
+  TResetPasswordParams,
 } from '../services/types';
 
 const BASE_URL: 'https://norma.nomoreparties.space' =
@@ -38,8 +38,23 @@ export function setOrder<T>(order: Array<string>): Promise<T> {
   }).then(checkResponse);
 }
 
+// get order
+export function getOrder<T>(number: string): Promise<T> {
+  return fetch(`${BASE_URL}/api/orders/${number}`, {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+  }).then(checkResponse);
+}
+
 // sign in
-export function signIn<T>(data: TSignIn): Promise<T> {
+export function signIn<T>(data: TSignInParams): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/login`, {
     method: 'POST',
     headers: {
@@ -62,7 +77,7 @@ export function signOut<T>(): Promise<T> {
 }
 
 // sing up
-export function signUp<T>(data: TSignUp): Promise<T> {
+export function signUp<T>(data: TSignUpParams): Promise<T> {
   return fetch(`${BASE_URL}/api/auth/register`, {
     method: 'POST',
     headers: {
@@ -122,18 +137,18 @@ export function updateUser<T>(data: { [name: string]: string }): Promise<T> {
 }
 
 // email reset password
-export function setForgotPassword<T>(email: TForgotPassword): Promise<T> {
+export function setForgotPassword<T>(email: TForgotPasswordParams): Promise<T> {
   return fetch(`${BASE_URL}/api/password-reset`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify(email),
   }).then(checkResponse);
 }
 
 // reset password
-export function setResetPassword<T>(data: TResetPassword): Promise<T> {
+export function setResetPassword<T>(data: TResetPasswordParams): Promise<T> {
   return fetch(`${BASE_URL}/api/password-reset/reset`, {
     method: 'POST',
     headers: {

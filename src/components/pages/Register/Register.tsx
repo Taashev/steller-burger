@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useHistory, Link, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/types/hooks';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
 
 import { signUp } from '../../../utils/Api';
@@ -22,7 +22,7 @@ export function Register() {
   const history = useHistory();
 
   // store
-  const user = useSelector((store: any) => store.userReducer.user);
+  const user = useSelector((store) => store.userReducer.user);
 
   // use form validation
   const { formValidity, values, errorMessages, onChangeInput, onBlurInput } =

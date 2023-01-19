@@ -1,3 +1,55 @@
+import type {} from 'redux-thunk/extend-redux';
+import { store } from '../..';
+import { ThunkAction } from 'redux-thunk';
+
+// import actions
+import { TConnstructorActions } from '../actions/constructorIngredients';
+import { TForgotPasswordActions } from '../actions/forgotPassword';
+import { TIngredientDetailsActions } from '../actions/ingredientDetails';
+import { TIngredientsActions } from '../actions/ingredients';
+import { TLoginActions } from '../actions/login';
+import { TLogoutActions } from '../actions/logout';
+import { TOrderDetailsActions } from '../actions/orderDetails';
+import { TTotalPriceActions } from '../actions/totalPrice';
+import { TUpdateUserActions } from '../actions/updateUser';
+import { TUserActions } from '../actions/user';
+import { TWSOrdersActions } from '../actions/wsOrdersAction';
+import { TWSHistoryOrdersActions } from '../actions/wsHistoryOrdersAction';
+import { TGetOrderActions } from '../actions/getOrder';
+
+// RootState
+export type RootState = ReturnType<typeof store.getState>;
+
+// AppDispatch
+export type AppDispatch<TReturnType = void> = (
+  action: AppActions | AppThunk<TReturnType>
+) => TReturnType;
+
+// AppActions
+export type AppActions =
+  | TConnstructorActions
+  | TForgotPasswordActions
+  | TIngredientDetailsActions
+  | TIngredientsActions
+  | TLoginActions
+  | TLogoutActions
+  | TOrderDetailsActions
+  | TTotalPriceActions
+  | TUpdateUserActions
+  | TUserActions
+  | TWSOrdersActions
+  | TWSHistoryOrdersActions
+  | TGetOrderActions;
+
+// AppThunk
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  AppActions
+>;
+
+// IIngredient
 export interface IIngredient {
   calories: number;
   carbohydrates: number;
@@ -13,13 +65,54 @@ export interface IIngredient {
   _id: string;
 }
 
-export type TSignUp = {
+// IConstrucrotIngredients
+export interface IConstrucrotIngredients {
+  id: string;
+  ingredient: IIngredient;
+}
+
+export interface IUser {
+  email: string;
+  name: string;
+}
+
+// IValuesState
+export interface IValuesState {
+  [name: string]: string;
+}
+
+// IRefreshToken
+export interface IRefreshToken {
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+}
+
+// api params
+export type TSignUpParams = {
+  name: string;
   email: string;
   password: string;
-  name: string;
 };
-export type TSignIn = Omit<TSignUp, 'name'>;
-export type TForgotPassword = Omit<TSignUp, 'name' | 'password'>;
-export type TResetPassword = Omit<TSignUp, 'name' | 'email'> & {
+export type TSignInParams = Omit<TSignUpParams, 'name'>;
+export type TForgotPasswordParams = Omit<TSignUpParams, 'name' | 'password'>;
+export type TResetPasswordParams = Omit<TSignUpParams, 'name' | 'email'> & {
   token: string;
+};
+
+// orders
+export type TOrder = {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+export type TOrders = {
+  success: boolean;
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
 };

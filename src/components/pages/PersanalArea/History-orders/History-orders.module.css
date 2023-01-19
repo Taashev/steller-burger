@@ -1,0 +1,16 @@
+.simplebar {
+	width: 100%;
+	height: calc(100vh - 240px);
+	padding-right: calc(var(--offset-base-size) * 4);
+	box-sizing: border-box;
+}
+
+.history {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--offset-base-size) * 4);
+}
+
+.preloader {
+	height: 20%;
+}
