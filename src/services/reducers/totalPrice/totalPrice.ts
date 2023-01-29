@@ -10,7 +10,7 @@ interface ITotalPriceState {
 }
 
 // total price initial state
-const totalPriceInitialState: ITotalPriceState = {
+export const totalPriceInitialState: ITotalPriceState = {
   totalPrice: 0,
 };
 
