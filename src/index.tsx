@@ -24,7 +24,7 @@ import {
   wsOrdersError,
   wsOrdersClosed,
   wsOrdersGetMessage,
-} from './services/actions/wsOrdersAction';
+} from './services/actions/wsOrdersAction/wsOrdersAction';
 
 import {
   WS_HISTORY_ORDERS_CONNECTION_START,
@@ -34,7 +34,7 @@ import {
   wsHistoryOrdersError,
   wsHistoryOrdersClosed,
   wsHistoryOrdersGetMessage,
-} from './services/actions/wsHistoryOrdersAction';
+} from './services/actions/wsHistoryOrdersAction/wsHistoryOrdersAction';
 
 // token
 const token = getCookie('accessToken');

@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from '../../services/types/hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { getUser } from '../../services/actions/user';
-import { getIngredients } from '../../services/actions/ingredients';
+import { getUser } from '../../services/actions/user/user';
+import { getIngredients } from '../../services/actions/ingredients/ingredients';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 import { ILocationState } from '../../services/types/locationState';

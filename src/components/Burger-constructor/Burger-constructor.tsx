@@ -6,11 +6,11 @@ import SimpleBar from 'simplebar-react';
 import {
   addConstructorBun,
   addConstructorIngredient,
-} from '../../services/actions/constructorIngredients';
+} from '../../services/actions/constructorIngredients/constructorIngredients';
 import {
   setOrder,
   clearOrderDetails,
-} from '../../services/actions/orderDetails';
+} from '../../services/actions/orderDetails/orderDetails';
 import { IIngredient } from '../../services/types';
 
 import { Modal } from '../Modal/Modal';

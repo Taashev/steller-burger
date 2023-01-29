@@ -3,7 +3,7 @@ import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../../../services/types/hooks';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
 
-import { forgotPassword } from '../../../../services/actions/forgotPassword';
+import { forgotPassword } from '../../../../services/actions/forgotPassword/forgotPassword';
 
 import { Preloader } from '../../../Preloader/Preloader';
 import {

@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from '../../../../services/types/hooks';
 import { useFormValidation } from '../../../../customHooks/useFormValidation';
 
-import { updateUser } from '../../../../services/actions/updateUser';
+import { updateUser } from '../../../../services/actions/updateUser/updateUser';
 
 import {
   Input,
