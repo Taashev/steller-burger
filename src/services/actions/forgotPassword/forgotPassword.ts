@@ -25,13 +25,13 @@ export type TForgotPasswordActions =
   | IForgotPasswordFailed;
 
 // actions
-function forgotPasswordRequred(): TForgotPasswordActions {
+export function forgotPasswordRequred(): TForgotPasswordActions {
   return { type: FORGOT_PASSWORD_REQURED };
 }
-function forgotPasswordSuccess(): TForgotPasswordActions {
+export function forgotPasswordSuccess(): TForgotPasswordActions {
   return { type: FORGOT_PASSWORD_SUCCESS };
 }
-function forgotPasswordSFailed(): TForgotPasswordActions {
+export function forgotPasswordSFailed(): TForgotPasswordActions {
   return { type: FORGOT_PASSWORD_FAILED };
 }
 
