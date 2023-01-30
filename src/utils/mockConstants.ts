@@ -1,4 +1,4 @@
-import { IIngredient } from '../services/types';
+import { IIngredient, TOrder } from '../services/types';
 
 export const mockIngredient: IIngredient = {
   calories: 0,
@@ -13,4 +13,14 @@ export const mockIngredient: IIngredient = {
   type: 'string',
   __v: 0,
   _id: 'string',
+};
+
+export const mockOrder: TOrder = {
+  ingredients: ['1', '2', '3'],
+  _id: 'string',
+  status: 'string',
+  number: 1,
+  name: 'string',
+  createdAt: 'string',
+  updatedAt: 'string',
 };
