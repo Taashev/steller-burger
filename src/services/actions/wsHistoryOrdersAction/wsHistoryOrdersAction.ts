@@ -64,10 +64,14 @@ export function wsHistoryOrdersError(Event: Event): TWSHistoryOrdersActions {
 export function wsHistoryOrdersClosed(Event: Event): TWSHistoryOrdersActions {
   return { type: 'WS_HISTORY_ORDERS_CONNECTION_CLOSED', payload: Event };
 }
-export function wsHistoryOrdersGetMessage(message: TOrders): TWSHistoryOrdersActions {
+export function wsHistoryOrdersGetMessage(
+  message: TOrders
+): TWSHistoryOrdersActions {
   return { type: WS_HISTORY_ORDERS_GET_MESSAGE, payload: message };
 }
-export function wsHistoryOrdersSendMessage(payload: any): TWSHistoryOrdersActions {
+export function wsHistoryOrdersSendMessage(
+  payload: any
+): TWSHistoryOrdersActions {
   return { type: WS_HISTORY_ORDERS_SEND_MESSAGE, payload };
 }
 export function wsHistoryOrdersDisconnected(): TWSHistoryOrdersActions {

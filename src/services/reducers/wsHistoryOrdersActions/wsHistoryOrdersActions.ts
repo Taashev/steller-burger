@@ -14,7 +14,7 @@ export type TWSHistoryOrdersState = {
   error?: Event | undefined;
 };
 
-const initialState: TWSHistoryOrdersState = {
+export const initialState: TWSHistoryOrdersState = {
   wsConnected: false,
   message: null,
   error: undefined,

@@ -14,13 +14,16 @@ export type TWSOrdersState = {
   error?: Event | undefined;
 };
 
-const initialState: TWSOrdersState = {
+export const initialState: TWSOrdersState = {
   wsConnected: false,
   message: null,
   error: undefined,
 };
 
-export function WSOrdersReducer(state = initialState, action: TWSOrdersActions): TWSOrdersState {
+export function WSOrdersReducer(
+  state = initialState,
+  action: TWSOrdersActions
+): TWSOrdersState {
   switch (action.type) {
     case WS_ORDER_CONNECTION_SUCCESS:
       return {
