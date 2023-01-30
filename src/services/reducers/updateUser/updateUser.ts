@@ -11,7 +11,7 @@ interface updateUserState {
   updateUserFailed: boolean;
 }
 
-const initialState: updateUserState = {
+export const initialState: updateUserState = {
   updateUserRequest: false,
   updateUserSuccess: false,
   updateUserFailed: false,
