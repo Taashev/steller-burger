@@ -11,7 +11,7 @@ interface ILoginState {
   loginFailed: boolean;
 }
 
-const initialState: ILoginState = {
+export const initialState: ILoginState = {
   loginRequest: false,
   loginSuccess: false,
   loginFailed: false,

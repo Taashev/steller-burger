@@ -21,13 +21,13 @@ export interface ILoginFailed {
 export type TLoginActions = ILoginRequred | ILoginSuccess | ILoginFailed;
 
 // actions
-function loginRequred(): TLoginActions {
+export function loginRequred(): TLoginActions {
   return { type: LOGIN_REQUEST };
 }
-function loginSuccess(): TLoginActions {
+export function loginSuccess(): TLoginActions {
   return { type: LOGIN_SUCCESS };
 }
-function loginFailed(): TLoginActions {
+export function loginFailed(): TLoginActions {
   return { type: LOGIN_FAILED };
 }
 
