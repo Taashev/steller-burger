@@ -16,7 +16,7 @@ interface IUserState {
   user: IUser | null;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   userRequest: false,
   userSuccess: false,
   userFailed: false,
