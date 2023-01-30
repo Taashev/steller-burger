@@ -16,7 +16,7 @@ interface IIngredientsState {
 }
 
 // ingredients initial state
-const IngredientsInitialState: IIngredientsState = {
+export const IngredientsInitialState: IIngredientsState = {
   ingredientsRequest: false,
   ingredientsSuccess: false,
   ingredientsFailed: false,

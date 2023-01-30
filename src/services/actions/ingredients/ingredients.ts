@@ -26,16 +26,18 @@ export type TIngredientsActions =
   | IGetIngredientsFailed;
 
 // actions
-function getIngredientsRequred(): TIngredientsActions {
+export function getIngredientsRequred(): TIngredientsActions {
   return { type: GET_INGREDIENTS_REQURED };
 }
-function getIngredientsSuccess(data: IIngredient[]): TIngredientsActions {
+export function getIngredientsSuccess(
+  data: IIngredient[]
+): TIngredientsActions {
   return {
     type: GET_INGREDIENTS_SUCCESS,
     data,
   };
 }
-function getIngredientsFailed(): TIngredientsActions {
+export function getIngredientsFailed(): TIngredientsActions {
   return { type: GET_INGREDIENTS_FAILED };
 }
 
