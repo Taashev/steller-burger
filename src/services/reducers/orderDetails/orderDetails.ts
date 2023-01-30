@@ -16,7 +16,7 @@ interface IOrderDetailsState {
 }
 
 // order details initial state
-const orderDetailsInitialState: IOrderDetailsState = {
+export const orderDetailsInitialState: IOrderDetailsState = {
   setOrderDetailsRequest: false,
   setOrderDetailsSeuccess: false,
   setOrderDetailsFailed: false,
