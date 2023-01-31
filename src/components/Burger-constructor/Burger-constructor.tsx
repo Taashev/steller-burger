@@ -117,7 +117,7 @@ export function BurgerConstructor(): JSX.Element {
                   isHoverIngredient && styles.hover
                 }`}
               >
-                Выберите булочку
+                Выберите ингредиент
               </div>
             )}
           </ul>
