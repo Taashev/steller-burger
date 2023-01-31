@@ -13,7 +13,7 @@ import SimpleBar from 'simplebar-react';
 import { Preloader } from '../Preloader/Preloader';
 
 import styles from './Order-details.module.css';
-import { getOrder, getOrderClear } from '../../services/actions/getOrder';
+import { getOrder, getOrderClear } from '../../services/actions/getOrder/getOrder';
 
 interface OrderDetailsProps {
   page?: boolean;

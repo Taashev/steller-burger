@@ -3,7 +3,7 @@ import { useLocation, Link, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../../services/types/hooks';
 import { useFormValidation } from '../../../customHooks/useFormValidation';
 
-import { signIn } from '../../../services/actions/login';
+import { signIn } from '../../../services/actions/login/login';
 import { ILocationState } from '../../../services/types/locationState';
 
 import { Preloader } from '../../Preloader/Preloader';

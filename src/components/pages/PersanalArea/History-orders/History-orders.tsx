@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from '../../../../services/types/hooks';
 import {
   wsHistoryOrdersDisconnected,
   wsHistoryOrdersStart,
-} from '../../../../services/actions/wsHistoryOrdersAction';
+} from '../../../../services/actions/wsHistoryOrdersAction/wsHistoryOrdersAction';
 
 import SimpleBar from 'simplebar-react';
 import { Order } from '../../../Order/Order';

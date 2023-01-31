@@ -3,19 +3,19 @@ import { store } from '../..';
 import { ThunkAction } from 'redux-thunk';
 
 // import actions
-import { TConnstructorActions } from '../actions/constructorIngredients';
-import { TForgotPasswordActions } from '../actions/forgotPassword';
-import { TIngredientDetailsActions } from '../actions/ingredientDetails';
-import { TIngredientsActions } from '../actions/ingredients';
-import { TLoginActions } from '../actions/login';
-import { TLogoutActions } from '../actions/logout';
-import { TOrderDetailsActions } from '../actions/orderDetails';
-import { TTotalPriceActions } from '../actions/totalPrice';
-import { TUpdateUserActions } from '../actions/updateUser';
-import { TUserActions } from '../actions/user';
-import { TWSOrdersActions } from '../actions/wsOrdersAction';
-import { TWSHistoryOrdersActions } from '../actions/wsHistoryOrdersAction';
-import { TGetOrderActions } from '../actions/getOrder';
+import { TConnstructorActions } from '../actions/constructorIngredients/constructorIngredients';
+import { TForgotPasswordActions } from '../actions/forgotPassword/forgotPassword';
+import { TIngredientDetailsActions } from '../actions/ingredientDetails/ingredientDetails';
+import { TIngredientsActions } from '../actions/ingredients/ingredients';
+import { TLoginActions } from '../actions/login/login';
+import { TLogoutActions } from '../actions/logout/logout';
+import { TOrderDetailsActions } from '../actions/orderDetails/orderDetails';
+import { TTotalPriceActions } from '../actions/totalPrice/totalPrice';
+import { TUpdateUserActions } from '../actions/updateUser/updateUser';
+import { TUserActions } from '../actions/user/user';
+import { TWSOrdersActions } from '../actions/wsOrdersAction/wsOrdersAction';
+import { TWSHistoryOrdersActions } from '../actions/wsHistoryOrdersAction/wsHistoryOrdersAction';
+import { TGetOrderActions } from '../actions/getOrder/getOrder';
 
 // RootState
 export type RootState = ReturnType<typeof store.getState>;

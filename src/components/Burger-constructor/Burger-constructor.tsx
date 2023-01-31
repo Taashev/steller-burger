@@ -6,11 +6,11 @@ import SimpleBar from 'simplebar-react';
 import {
   addConstructorBun,
   addConstructorIngredient,
-} from '../../services/actions/constructorIngredients';
+} from '../../services/actions/constructorIngredients/constructorIngredients';
 import {
   setOrder,
   clearOrderDetails,
-} from '../../services/actions/orderDetails';
+} from '../../services/actions/orderDetails/orderDetails';
 import { IIngredient } from '../../services/types';
 
 import { Modal } from '../Modal/Modal';
@@ -99,7 +99,7 @@ export function BurgerConstructor(): JSX.Element {
           )}
         </div>
         <SimpleBar className={`${styles.simplebar}`}>
-          <ul className={`${styles.constructor__list}`}>
+          <ul className={`${styles.constructor__list}`} data-testid="constructor-ingredients">
             {constructorIngredients.length > 0 ? (
               constructorIngredients.map(({ id, ingredient }, index) => {
                 return (
@@ -117,7 +117,7 @@ export function BurgerConstructor(): JSX.Element {
                   isHoverIngredient && styles.hover
                 }`}
               >
-                Выберите булочку
+                Выберите ингредиент
               </div>
             )}
           </ul>

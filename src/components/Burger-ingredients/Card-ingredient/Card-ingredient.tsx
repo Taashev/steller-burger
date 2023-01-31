@@ -5,7 +5,7 @@ import { useDrag } from 'react-dnd/dist/hooks';
 
 import { ILocationState } from '../../../services/types/locationState';
 import { IIngredient } from '../../../services/types';
-import { getIngredientDetails } from '../../../services/actions/ingredientDetails';
+import { getIngredientDetails } from '../../../services/actions/ingredientDetails/ingredientDetails';
 
 import {
   Counter,

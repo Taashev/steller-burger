@@ -34,7 +34,7 @@ export function Modal({ children, title, onClose }: ModalProps): JSX.Element {
 					</h2>
 					{
 						onClose &&
-							<button className={`${stylesModal.close}`} onClick={onClose}>
+							<button className={`${stylesModal.close}`} onClick={onClose} data-testid="button-close">
 								<CloseIcon type="primary" />
 							</button>
 					}

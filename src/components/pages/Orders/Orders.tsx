@@ -7,7 +7,7 @@ import SimpleBar from 'simplebar-react';
 import {
   wsOrdersDisconnected,
   wsOrdersStart,
-} from '../../../services/actions/wsOrdersAction';
+} from '../../../services/actions/wsOrdersAction/wsOrdersAction';
 
 import styles from './Orders.module.css';
 import { useEffect } from 'react';

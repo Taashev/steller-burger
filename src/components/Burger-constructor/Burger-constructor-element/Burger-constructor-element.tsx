@@ -5,11 +5,11 @@ import { useDrag, useDrop } from 'react-dnd/dist/hooks';
 import {
   setTotalPrice,
   removeTotalPrice,
-} from '../../../services/actions/totalPrice';
+} from '../../../services/actions/totalPrice/totalPrice';
 import {
   removeConstructorIngredient,
   updateConstructorIngredient,
-} from '../../../services/actions/constructorIngredients';
+} from '../../../services/actions/constructorIngredients/constructorIngredients';
 import { IIngredient } from '../../../services/types';
 
 import {

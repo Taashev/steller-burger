@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from '../../../services/types/hooks';
 
-import { logout } from '../../../services/actions/logout';
+import { logout } from '../../../services/actions/logout/logout';
 import { ILocationState } from '../../../services/types/locationState';
 
 import { Profile } from './Profile/Profile';

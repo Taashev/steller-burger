@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -24,7 +24,7 @@ import {
   wsOrdersError,
   wsOrdersClosed,
   wsOrdersGetMessage,
-} from './services/actions/wsOrdersAction';
+} from './services/actions/wsOrdersAction/wsOrdersAction';
 
 import {
   WS_HISTORY_ORDERS_CONNECTION_START,
@@ -34,7 +34,7 @@ import {
   wsHistoryOrdersError,
   wsHistoryOrdersClosed,
   wsHistoryOrdersGetMessage,
-} from './services/actions/wsHistoryOrdersAction';
+} from './services/actions/wsHistoryOrdersAction/wsHistoryOrdersAction';
 
 // token
 const token = getCookie('accessToken');
@@ -85,13 +85,13 @@ const root = ReactDOM.createRoot(
 
 // render
 root.render(
-  <BrowserRouter>
+  <HashRouter>
     <React.StrictMode>
       <Provider store={store}>
         <App />
       </Provider>
     </React.StrictMode>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
