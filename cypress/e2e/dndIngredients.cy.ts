@@ -13,7 +13,7 @@ describe('dnd ingredients', () => {
 
   it('drag the ingredient into the constructor', () => {
     const dataTransfer = new DataTransfer();
-    cy.get('ul.Burger-constructor_constructor__list__BcCVo').as(
+    cy.get('[data-testid=constructor-ingredients]').as(
       'constructorIngredients'
     );
     cy.contains('Соус Spicy-X').trigger('dragstart', { dataTransfer });

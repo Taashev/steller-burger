@@ -99,7 +99,7 @@ export function BurgerConstructor(): JSX.Element {
           )}
         </div>
         <SimpleBar className={`${styles.simplebar}`}>
-          <ul className={`${styles.constructor__list}`}>
+          <ul className={`${styles.constructor__list}`} data-testid="constructor-ingredients">
             {constructorIngredients.length > 0 ? (
               constructorIngredients.map(({ id, ingredient }, index) => {
                 return (
